@@ -1,0 +1,472 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E7C66139-9765-46C0-B3C1-C7CF4D6DA5EA}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ETicaretWinApp</RootNamespace>
+    <AssemblyName>ETicaretWinApp</AssemblyName>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>true</IsWebBootstrapper>
+    <TargetFrameworkProfile />
+    <PublishUrl>D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiyeYonetim\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Web</InstallFrom>
+    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>true</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <InstallUrl>http://turkyilmazozkan.xyz/EKirtasiyeYonetim/</InstallUrl>
+    <ProductName>E Kirtasiye Yönetim Uygulaması</ProductName>
+    <PublisherName>E Kirtasiye</PublisherName>
+    <MinimumRequiredVersion>1.0.0.5</MinimumRequiredVersion>
+    <CreateWebPageOnPublish>true</CreateWebPageOnPublish>
+    <WebPage>index.htm</WebPage>
+    <ApplicationRevision>6</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <CreateDesktopShortcut>true</CreateDesktopShortcut>
+    <PublishWizardCompleted>true</PublishWizardCompleted>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Cryo64 Genesis 2 003.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestCertificateThumbprint>AE15B71AE3EDA2908F49837ACDE10B5A3F7EA02B</ManifestCertificateThumbprint>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ManifestKeyFile>ETicaretWinApp_TemporaryKey.pfx</ManifestKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateManifests>true</GenerateManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignManifests>true</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup>
+    <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="DevExpress.Data.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.DataAccess.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Office.v17.2.Core, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.Printing.v17.2.Core, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.Utils.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraBars.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraEditors.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraGrid.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="DevExpress.XtraLayout.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraPrinting.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+    <Reference Include="DevExpress.XtraTreeList.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="FluentFTP, Version=29.0.3.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentFTP.29.0.3\lib\net45\FluentFTP.dll</HintPath>
+    </Reference>
+    <Reference Include="GvS.Controls.HtmlTextbox">
+      <HintPath>..\Referans\GvS.Controls.HtmlTextbox.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack, Version=1.11.17.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.11.17\lib\Net40\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="InstagramApiSharp, Version=1.4.0.1, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\InstagramApiSharp.1.4.0.1\lib\net452\InstagramApiSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="LiteDB, Version=5.0.1.0, Culture=neutral, PublicKeyToken=4ee40123013c9f27, processorArchitecture=MSIL">
+      <HintPath>..\packages\LiteDB.5.0.1\lib\net45\LiteDB.dll</HintPath>
+    </Reference>
+    <Reference Include="ModelEditControl">
+      <HintPath>..\Referans\ModelEditControl.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net40\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Class\ApiHelper.cs" />
+    <Compile Include="Class\AppSetting.cs" />
+    <Compile Include="Class\CatalogImagePage.cs" />
+    <Compile Include="Class\CateogryResult.cs" />
+    <Compile Include="Class\CerenApi.cs" />
+    <Compile Include="Class\CerenProduct.cs" />
+    <Compile Include="Class\ExtentionMethods.cs" />
+    <Compile Include="Class\FTPHelper.cs" />
+    <Compile Include="Class\GoogleSearchHtmlExtractor.cs" />
+    <Compile Include="Class\HelperXmlRead.cs" />
+    <Compile Include="Class\LocalDBHelper.cs" />
+    <Compile Include="Class\MuhasebeData.cs" />
+    <Compile Include="Class\N11Helper.cs" />
+    <Compile Include="Class\ShareFileHelper.cs" />
+    <Compile Include="Class\TreeNodeWithCategory.cs" />
+    <Compile Include="Class\WebPageProduct.cs" />
+    <Compile Include="Controls\UCategoryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UCategoryView.Designer.cs">
+      <DependentUpon>UCategoryView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UGroupNameMatchs.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UGroupNameMatchs.Designer.cs">
+      <DependentUpon>UGroupNameMatchs.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UProductFilterCombo.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UProductFilterCombo.Designer.cs">
+      <DependentUpon>UProductFilterCombo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\UProductPictures.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UProductPictures.Designer.cs">
+      <DependentUpon>UProductPictures.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormCerenImport.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCerenImport.Designer.cs">
+      <DependentUpon>FormCerenImport.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEditCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditCategory.Designer.cs">
+      <DependentUpon>FormEditCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormEditSelectedProductGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEditSelectedProductGroup.Designer.cs">
+      <DependentUpon>FormEditSelectedProductGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormImageCatalogIndex.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormImageCatalogIndex.Designer.cs">
+      <DependentUpon>FormImageCatalogIndex.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormImportPreview.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormImportPreview.Designer.cs">
+      <DependentUpon>FormImportPreview.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormInstagramLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormInstagramLogin.Designer.cs">
+      <DependentUpon>FormInstagramLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormMain.Designer.cs">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormN11Export.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormN11Export.Designer.cs">
+      <DependentUpon>FormN11Export.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormN11ExportTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormN11ExportTemplate.Designer.cs">
+      <DependentUpon>FormN11ExportTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProductEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProductEdit.Designer.cs">
+      <DependentUpon>FormProductEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProductWebBrowser.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProductWebBrowser.Designer.cs">
+      <DependentUpon>FormProductWebBrowser.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormProperty.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProperty.Designer.cs">
+      <DependentUpon>FormProperty.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSelectProductSource.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelectProductSource.Designer.cs">
+      <DependentUpon>FormSelectProductSource.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormSelectTemplate.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormSelectTemplate.Designer.cs">
+      <DependentUpon>FormSelectTemplate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShareIntegramView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShareIntegramView.Designer.cs">
+      <DependentUpon>FormShareIntegramView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShopEntegrationCategory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShopEntegrationCategory.Designer.cs">
+      <DependentUpon>FormShopEntegrationCategory.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShopManagerN11.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShopManagerN11.Designer.cs">
+      <DependentUpon>FormShopManagerN11.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormShopSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormShopSetting.Designer.cs">
+      <DependentUpon>FormShopSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormTester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormTester.Designer.cs">
+      <DependentUpon>FormTester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormUpdateProductGroup.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormUpdateProductGroup.Designer.cs">
+      <DependentUpon>FormUpdateProductGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Controls\UCategoryView.resx">
+      <DependentUpon>UCategoryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UGroupNameMatchs.resx">
+      <DependentUpon>UGroupNameMatchs.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UProductFilterCombo.resx">
+      <DependentUpon>UProductFilterCombo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UProductPictures.resx">
+      <DependentUpon>UProductPictures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCerenImport.resx">
+      <DependentUpon>FormCerenImport.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditCategory.resx">
+      <DependentUpon>FormEditCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormEditSelectedProductGroup.resx">
+      <DependentUpon>FormEditSelectedProductGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormImageCatalogIndex.resx">
+      <DependentUpon>FormImageCatalogIndex.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormImportPreview.resx">
+      <DependentUpon>FormImportPreview.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormInstagramLogin.resx">
+      <DependentUpon>FormInstagramLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormMain.resx">
+      <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormN11Export.resx">
+      <DependentUpon>FormN11Export.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormN11ExportTemplate.resx">
+      <DependentUpon>FormN11ExportTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProductEdit.resx">
+      <DependentUpon>FormProductEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProductWebBrowser.resx">
+      <DependentUpon>FormProductWebBrowser.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProperty.resx">
+      <DependentUpon>FormProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelectProductSource.resx">
+      <DependentUpon>FormSelectProductSource.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormSelectTemplate.resx">
+      <DependentUpon>FormSelectTemplate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShareIntegramView.resx">
+      <DependentUpon>FormShareIntegramView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShopEntegrationCategory.resx">
+      <DependentUpon>FormShopEntegrationCategory.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShopManagerN11.resx">
+      <DependentUpon>FormShopManagerN11.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormShopSetting.resx">
+      <DependentUpon>FormShopSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTester.resx">
+      <DependentUpon>FormTester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormUpdateProductGroup.resx">
+      <DependentUpon>FormUpdateProductGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <None Include="ETicaretWinApp_TemporaryKey.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\app.manifest" />
+    <None Include="Properties\DataSources\EKirtasiye.DBLayer.IdeaCatalog.datasource" />
+    <None Include="Properties\DataSources\EKirtasiye.DBLayer.ProductCategory.datasource" />
+    <None Include="Properties\DataSources\IdeaCatalog.datasource" />
+    <None Include="Properties\DataSources\WebPageProduct.datasource" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tree03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\50.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Accept.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy03.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Files\Empty.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Files\InstagramShareProductComment.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Cryo64 Genesis 2 003.ico" />
+    <None Include="Resources\07.png" />
+    <None Include="Resources\Edit.png" />
+    <None Include="Resources\47.png" />
+    <None Include="Resources\Save.png" />
+    <None Include="Resources\21.png" />
+    <None Include="Resources\06.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.1">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.1 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\EKirtasiye.Controls\EKirtasiye.Controls.csproj">
+      <Project>{bcc4dce5-43d0-4908-ac40-b51ba27ceb70}</Project>
+      <Name>EKirtasiye.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EKirtasiye.Helper\EKirtasiye.Helper.csproj">
+      <Project>{07ef3ac9-bfb3-4e4e-abc7-3ff7d075aab3}</Project>
+      <Name>EKirtasiye.Helper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EKirtasiye.HepsiBurada\EKirtasiye.HepsiBurada.csproj">
+      <Project>{f5bb2249-f1f8-4692-9cff-fb2f6f1dd4cb}</Project>
+      <Name>EKirtasiye.HepsiBurada</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EKirtasiye.Model\EKirtasiye.Model.csproj">
+      <Project>{7a95e231-3f6d-4efc-9ae0-a28d4210b6e5}</Project>
+      <Name>EKirtasiye.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\EKirtasiye.N11\EKirtasiye.N11.csproj">
+      <Project>{a7c22121-00bd-41f6-89c5-5d1832b7fe5e}</Project>
+      <Name>EKirtasiye.N11</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

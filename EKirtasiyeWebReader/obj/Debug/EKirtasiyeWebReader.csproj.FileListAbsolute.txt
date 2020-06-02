@@ -1,0 +1,16 @@
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\bin\Debug\EKirtasiyeWebReader.exe.config
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\bin\Debug\EKirtasiyeWebReader.exe
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\bin\Debug\EKirtasiyeWebReader.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\bin\Debug\EKirtasiye.DBLayer.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\bin\Debug\HtmlAgilityPack.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\bin\Debug\EKirtasiye.DBLayer.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\bin\Debug\HtmlAgilityPack.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\bin\Debug\HtmlAgilityPack.xml
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\obj\Debug\EKirtasiyeWebReader.csprojAssemblyReference.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\obj\Debug\EKirtasiyeWebReader.Form1.resources
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\obj\Debug\EKirtasiyeWebReader.Properties.Resources.resources
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\obj\Debug\EKirtasiyeWebReader.csproj.GenerateResource.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\obj\Debug\EKirtasiyeWebReader.csproj.CoreCompileInputs.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\obj\Debug\EKirtasiyeWebReader.csproj.CopyComplete
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\obj\Debug\EKirtasiyeWebReader.exe
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiyeWebReader\obj\Debug\EKirtasiyeWebReader.pdb

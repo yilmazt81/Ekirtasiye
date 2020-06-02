@@ -1,0 +1,7 @@
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.N11\bin\Debug\EKirtasiye.N11.dll.config
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.N11\bin\Debug\EKirtasiye.N11.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.N11\bin\Debug\EKirtasiye.N11.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.N11\obj\Debug\EKirtasiye.N11.csprojAssemblyReference.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.N11\obj\Debug\EKirtasiye.N11.csproj.CoreCompileInputs.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.N11\obj\Debug\EKirtasiye.N11.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.N11\obj\Debug\EKirtasiye.N11.pdb

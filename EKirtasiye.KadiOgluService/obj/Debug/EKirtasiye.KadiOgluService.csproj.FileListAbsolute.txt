@@ -1,0 +1,16 @@
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\bin\Debug\EKirtasiye.KadiOgluService.exe.config
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\bin\Debug\EKirtasiye.KadiOgluService.exe
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\bin\Debug\EKirtasiye.KadiOgluService.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\obj\Debug\EKirtasiye.KadiOgluService.csprojAssemblyReference.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\obj\Debug\EKirtasiye.KadiOgluService.FormMain.resources
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\obj\Debug\EKirtasiye.KadiOgluService.Properties.Resources.resources
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\obj\Debug\EKirtasiye.KadiOgluService.csproj.GenerateResource.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\obj\Debug\EKirtasiye.KadiOgluService.csproj.CoreCompileInputs.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\obj\Debug\EKirtasiye.KadiOgluService.exe
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\obj\Debug\EKirtasiye.KadiOgluService.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\bin\Debug\EKirtasiye.DBLayer.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\bin\Debug\EKirtasiye.DBLayer.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\obj\Debug\EKirtasiye.KadiOgluService.csproj.CopyComplete
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\bin\Debug\HtmlAgilityPack.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\bin\Debug\HtmlAgilityPack.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.KadiOgluService\bin\Debug\HtmlAgilityPack.xml

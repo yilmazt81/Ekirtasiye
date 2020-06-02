@@ -1,0 +1,6 @@
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\bin\Debug\EKirtasiye.Model.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\bin\Debug\EKirtasiye.Model.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\obj\Debug\EKirtasiye.Model.csproj.CoreCompileInputs.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\obj\Debug\EKirtasiye.Model.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\obj\Debug\EKirtasiye.Model.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\obj\Debug\EKirtasiye.Model.csprojAssemblyReference.cache

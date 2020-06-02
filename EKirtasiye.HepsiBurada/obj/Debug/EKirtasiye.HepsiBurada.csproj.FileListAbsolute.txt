@@ -1,0 +1,9 @@
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\bin\Debug\EKirtasiye.HepsiBurada.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\bin\Debug\EKirtasiye.HepsiBurada.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\bin\Debug\Newtonsoft.Json.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\bin\Debug\Newtonsoft.Json.xml
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\obj\Debug\EKirtasiye.HepsiBurada.csprojAssemblyReference.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\obj\Debug\EKirtasiye.HepsiBurada.csproj.CoreCompileInputs.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\obj\Debug\EKirtasiye.HepsiBurada.csproj.CopyComplete
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\obj\Debug\EKirtasiye.HepsiBurada.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.HepsiBurada\obj\Debug\EKirtasiye.HepsiBurada.pdb

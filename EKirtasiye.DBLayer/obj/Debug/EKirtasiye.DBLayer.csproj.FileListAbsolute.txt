@@ -1,0 +1,9 @@
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\bin\Debug\EKirtasiye.DBLayer.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\bin\Debug\EKirtasiye.DBLayer.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Debug\EKirtasiye.DBLayer.csprojAssemblyReference.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Debug\EKirtasiye.DBLayer.csproj.CoreCompileInputs.cache
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Debug\EKirtasiye.DBLayer.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Debug\EKirtasiye.DBLayer.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\bin\Debug\EKirtasiye.Model.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\bin\Debug\EKirtasiye.Model.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Debug\EKirtasiye.DBLayer.csproj.CopyComplete
