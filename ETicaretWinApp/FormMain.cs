@@ -151,23 +151,15 @@ namespace ETicaretWinApp
                   
                  */
 
-                DocumentFilterRequest documentFilterRequest = new DocumentFilterRequest()
-                {
-                    CategoryId = uCategoryView1.Category.Id,
-                    MainCategoryId = uCategoryView1.MainCategory.Id,
-                    SubCategoryId = uCategoryView1.SubCategory.Id,
-                    StokCode = textBoxStokCode.Text,
-                    StokSource = uProductFilterCombo1.StokSource,
-                    WebExportState = uProductFilterCombo1.WebExportState,
-                    HaveInternetPrice = uProductFilterCombo1.WebPrice,
-                    ProductStatus = uProductFilterCombo1.ProductStatus,
-                    StokCodeList = uProductFilterCombo1.StokCodeList.ToArray(),
-                    HepsiBuradaExport = uProductFilterCombo1.ExportHB,
-                    N11Export = uProductFilterCombo1.ExportN11,
-                    PriceFilter = uProductFilterCombo1.PriceFilter,
-                    PriceFilterType = uProductFilterCombo1.PriceFilterType
+                DocumentFilterRequest documentFilterRequest = uProductFilterCombo1.DocumentFilterRequest;
 
-                };
+
+                documentFilterRequest.CategoryId = uCategoryView1.Category.Id;
+                documentFilterRequest.MainCategoryId = uCategoryView1.MainCategory.Id;
+                documentFilterRequest.SubCategoryId = uCategoryView1.SubCategory.Id;
+                documentFilterRequest.StokCode = textBoxStokCode.Text;
+
+
                 var catalog = ApiHelper.FilterCatalog(documentFilterRequest);
                 lSearchCatalogList = catalog;
                 gridControlProduct.DataSource = catalog;
@@ -818,9 +810,9 @@ namespace ETicaretWinApp
         {
             try
             {
-              FormN11Export formN11 = new FormN11Export();
+                FormN11Export formN11 = new FormN11Export();
 
-              formN11.Show();
+                formN11.Show();
 
 
             }

@@ -112,8 +112,12 @@ namespace ETicaretWinApp
                 htmlTextboxDescription.Text = ideaCatalog.Details;
                 if (!string.IsNullOrEmpty(ideaCatalog.Label))
                 {
-
-                    string pageUrl = $@"https://www.google.com/search?q={ HelperXmlRead.ConvertHtmlCodesToTurkish(ideaCatalog.Label).Replace("%", "yüzde").Replace("&", "%26") }&tbm=shop";
+                    string searchParam = HelperXmlRead.ConvertHtmlCodesToTurkish(ideaCatalog.Label).Replace("%", "yüzde").Replace("&", "%26");
+                    if (!string.IsNullOrEmpty(ideaCatalog.Barcode))
+                    {
+                        searchParam = ideaCatalog.Barcode;
+                    }
+                    string pageUrl = $@"https://www.google.com/search?q={ searchParam }&tbm=shop";
                     textBoxGoogleUrl.Text = pageUrl;
                     webBrowserProduct.Navigate(textBoxGoogleUrl.Text);
                 }
@@ -298,12 +302,19 @@ namespace ETicaretWinApp
                 // ClickDescriptionMoreClick();
 
                 var selectedProduct = GoogleSearchHtmlExtractor.GetSelectedProduct(webBrowserProduct.Document.Body.InnerHtml);
+                if (selectedProduct.ProductImages == null)
+                    return;
+
                 ideaCatalog.Picture1Path = "";
                 ideaCatalog.Picture2Path = "";
                 ideaCatalog.Picture3Path = "";
                 ideaCatalog.Picture4Path = "";
 
-                htmlTextboxDescription.Text = selectedProduct.Description;
+                if (!string.IsNullOrEmpty(selectedProduct.Description))
+                {
+                    htmlTextboxDescription.Text = selectedProduct.Description;
+                }
+                
                 textBoxWebPrice.Text = selectedProduct.ProductPrice;
                 uProductPictures.ClearImages();
                 int counter = 1;

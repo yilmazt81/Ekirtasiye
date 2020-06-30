@@ -45,6 +45,8 @@
             this.comboBoxPriceFilterType = new System.Windows.Forms.ComboBox();
             this.label7 = new System.Windows.Forms.Label();
             this.textBoxPrice = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.dTimePickerCreated = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // comboBoxInternetFiyat
@@ -226,10 +228,30 @@
             this.textBoxPrice.Size = new System.Drawing.Size(73, 20);
             this.textBoxPrice.TabIndex = 34;
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(530, 96);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(54, 13);
+            this.label8.TabIndex = 35;
+            this.label8.Text = "Oluşturma";
+            // 
+            // dTimePickerCreated
+            // 
+            this.dTimePickerCreated.Checked = false;
+            this.dTimePickerCreated.Location = new System.Drawing.Point(591, 91);
+            this.dTimePickerCreated.Name = "dTimePickerCreated";
+            this.dTimePickerCreated.ShowCheckBox = true;
+            this.dTimePickerCreated.Size = new System.Drawing.Size(137, 20);
+            this.dTimePickerCreated.TabIndex = 36;
+            // 
             // UProductFilterCombo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.dTimePickerCreated);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.textBoxPrice);
             this.Controls.Add(this.comboBoxPriceFilterType);
             this.Controls.Add(this.label7);
@@ -248,7 +270,7 @@
             this.Controls.Add(this.comboBoxWebExportState);
             this.Controls.Add(this.label4);
             this.Name = "UProductFilterCombo";
-            this.Size = new System.Drawing.Size(709, 127);
+            this.Size = new System.Drawing.Size(745, 127);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -273,5 +295,7 @@
         private System.Windows.Forms.ComboBox comboBoxPriceFilterType;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.TextBox textBoxPrice;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DateTimePicker dTimePickerCreated;
     }
 }

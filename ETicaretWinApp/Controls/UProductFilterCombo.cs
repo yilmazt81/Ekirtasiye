@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
 using System.IO;
+using EKirtasiye.Model;
 
 namespace ETicaretWinApp.Controls
 {
@@ -34,6 +35,27 @@ namespace ETicaretWinApp.Controls
             }
         }
 
+        private DocumentFilterRequest documentFilter;
+
+        public DocumentFilterRequest DocumentFilterRequest {
+            get {
+                documentFilter = new DocumentFilterRequest();
+
+                documentFilter.StokSource = this.StokSource;
+                documentFilter.WebExportState = this.WebExportState;
+                documentFilter.HaveInternetPrice = this.WebPrice;
+                documentFilter.ProductStatus = this.ProductStatus;
+                documentFilter.StokCodeList = this.StokCodeList.ToArray();
+                documentFilter.HepsiBuradaExport = this.ExportHB;
+                documentFilter.N11Export = this.ExportN11;
+                documentFilter.PriceFilter = this.PriceFilter;
+                documentFilter.PriceFilterType = this.PriceFilterType;
+                documentFilter.CreatedDate = (!dTimePickerCreated.Checked ? null : (DateTime?)dTimePickerCreated.Value);
+
+                return documentFilter;
+            }
+        }
+
         public string ProductStatus {
             get {
                 return comboBoxStatus.Text;
@@ -57,8 +79,8 @@ namespace ETicaretWinApp.Controls
             }
         }
 
-        public string PriceFilterType { get { return comboBoxPriceFilterType.Text; }set { comboBoxPriceFilterType.Text = value; } }
-        public string PriceFilter { get {return textBoxPrice.Text; } set { textBoxPrice.Text = value; } }
+        public string PriceFilterType { get { return comboBoxPriceFilterType.Text; } set { comboBoxPriceFilterType.Text = value; } }
+        public string PriceFilter { get { return textBoxPrice.Text; } set { textBoxPrice.Text = value; } }
 
         private void buttonStokCodeList_Click(object sender, EventArgs e)
         {

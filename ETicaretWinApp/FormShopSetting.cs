@@ -28,6 +28,13 @@ namespace ETicaretWinApp
             textBoxN11AppKey.Text = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
             textBoxN11SecretKey.Text = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
 
+            textBoxTyEndPoint.Text = ApplicationSettingHelper.ReadValue("Trendyol", "EndPoint");
+            textBoxTyPassword.Text = ApplicationSettingHelper.ReadValue("Trendyol", "Password");
+            textBoxTySupplierId.Text = ApplicationSettingHelper.ReadValue("Trendyol", "SupplierId");
+            textBoxTyUserName.Text = ApplicationSettingHelper.ReadValue("Trendyol", "UserName");
+
+
+
 
         }
 
@@ -47,6 +54,13 @@ namespace ETicaretWinApp
             ApplicationSettingHelper.AddValue("N11", "N11AppKey", textBoxN11AppKey.Text);
             ApplicationSettingHelper.AddValue("N11", "N11SecretKey", textBoxN11SecretKey.Text);
             ApplicationSettingHelper.AddValue("HepsiBurada", "HBListingAdress", textBoxHBListingAdress.Text);
+             
+
+            ApplicationSettingHelper.AddValue("Trendyol", "EndPoint", textBoxTyEndPoint.Text);
+            ApplicationSettingHelper.AddValue("Trendyol", "Password", textBoxTyPassword.Text);
+            ApplicationSettingHelper.AddValue("Trendyol", "SupplierId", textBoxTySupplierId.Text);
+            ApplicationSettingHelper.AddValue("Trendyol", "UserName", textBoxTyUserName.Text);
+
 
             DialogResult = DialogResult.OK;
         }
@@ -94,6 +108,23 @@ namespace ETicaretWinApp
                 FormMain.ShowException(ex);
             }
 
+        }
+
+        private void buttonGetCategoryTrendyol_Click(object sender, EventArgs e)
+        {
+            if (textBoxTyEndPoint.Text == string.Empty)
+                return;
+            try
+            {
+                EKirtasiye.Trendyol.CategoryHelper categoryHelper = new EKirtasiye.Trendyol.CategoryHelper(textBoxTyEndPoint.Text);
+
+                var categoryList = categoryHelper.GetTrendyolCategories();
+            }
+            catch (Exception ex)
+            {
+
+                FormMain.ShowException(ex);
+            }
         }
     }
 }

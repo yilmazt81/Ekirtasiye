@@ -95,7 +95,7 @@ namespace EKirtasiye.DBLayer
                         {
 
                             var status = (documentFilter.N11Export == "Hayır" ? "0" : "1");
-                            query += $" ExportN11 ={status} and ";
+                            query += $" isnull(ExportN11,0) ={status} and ";
 
                             if (status=="1")
                             {
@@ -170,6 +170,11 @@ namespace EKirtasiye.DBLayer
                     {
                         query += $" dbo.fConvertToPrice(MarketPrice) {documentFilter.PriceFilterType} '" + documentFilter.PriceFilter + "' and ";
 
+                    }
+
+                    if (documentFilter.CreatedDate != null)
+                    {
+                        query += $" CAST(CreatedDate AS DATE) = CAST('{documentFilter.CreatedDate.Value.ToString("yyyyMMdd")} 00:00:00' AS DATE) and ";
                     }
 
                     if (!string.IsNullOrEmpty(query))

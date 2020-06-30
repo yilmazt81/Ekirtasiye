@@ -33,6 +33,9 @@ namespace EKirtasiye.Model
         public string PriceFilterType { get; set; }
         public string PriceFilter { get; set; }
 
+        public DateTime? CreatedDate { get; set; }
+
+
 
     }
 }

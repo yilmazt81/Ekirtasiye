@@ -88,35 +88,7 @@ namespace ETicaretWinApp
                 MessageBox.Show("Update işleminde hata", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            /*
-            if (uCategoryView1.Category.Id == 0)
-                return;
-
-            foreach (var item in _ideaCatalogs)
-            {
-                item.MainCategoryId = uCategoryView1.MainCategory.Id;
-                item.Web_MainCategory = uCategoryView1.MainCategory.CategoryName;
-                item.CategoryId = uCategoryView1.Category.Id;
-                item.Web_Category = (item.CategoryId == 0 ? "" : uCategoryView1.Category.CategoryName);
-                item.SubCategoryId = uCategoryView1.SubCategory.Id;
-                item.Web_SubCategory = (item.SubCategoryId == 0 ? "" : uCategoryView1.SubCategory.CategoryName);
-
-            }
-            var productUpdateReques = new UpdateProductGroupRequest()
-            {
-                ProductIdList = _ideaCatalogs.Select(s => s.Id).ToArray(),
-                MainCategoryId = uCategoryView1.MainCategory.Id,
-                CategoryId = uCategoryView1.Category.Id,
-                SubCategoryId = uCategoryView1.SubCategory.Id
-            };
-            */
-            /*
-            if (!ApiHelper.UpdateProductCategoryList(productUpdateReques))
-            {
-                MessageBox.Show("Update işleminde hata", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }*/
-
+           
 
             DialogResult = DialogResult.OK;
 

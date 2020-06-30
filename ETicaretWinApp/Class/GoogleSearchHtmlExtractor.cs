@@ -41,6 +41,26 @@ namespace ETicaretWinApp
 
             return null;
         }
+
+
+        private static void GetDataImageElements(HtmlNode htmlElement, List<HtmlNode> htmlNodes)
+        {
+
+            foreach (HtmlNode item in htmlElement.ChildNodes)
+            {
+                if (item.Name == "a" && item.Attributes.Contains("data-image"))
+                {
+                    htmlNodes.Add(item);
+                }
+                if (item.ChildNodes.Count != 0)
+                {
+                    GetDataImageElements(item, htmlNodes);
+
+                }
+            }
+
+        }
+
         private static HtmlNode GetElementByName(HtmlNode htmlElement, string elementName, string className)
         {
             foreach (var item in htmlElement.ChildNodes)
@@ -235,47 +255,72 @@ namespace ETicaretWinApp
             var document = new HtmlAgilityPack.HtmlDocument();
             document.LoadHtml(fullPageHtml);
 
-            var selectedDiv = document.DocumentNode.SelectNodes("//div").Where(s => s.Attributes.Contains("class") && (s.Attributes["class"].Value == "sh-dp__sc")).ToArray();
-            var productDescription = document.DocumentNode.SelectNodes("//span").Where(s => s.Attributes.Contains("class") && s.Attributes["class"].Value == "sh-ds__full-txt translate-details-content").ToArray();
-            if (selectedDiv.Length == 1)
+            var selectedDiv = document.DocumentNode.SelectNodes("//div").Where(s => s.Attributes.Contains("class") && (s.Attributes["class"].Value.Contains("sh-dp__sc"))).ToArray();
+            var productDescription = document.DocumentNode.SelectNodes("//span").Where(s => s.Attributes.Contains("class") && s.Attributes["class"].Value.Contains("full-txt")).ToArray();
+            if (selectedDiv.Length != 0)
             {
                 var currentDiv = selectedDiv.FirstOrDefault();
-                var firstImageDiv = currentDiv.ChildNodes.Where(s => s.Name == "div" && s.Attributes.Contains("class")).FirstOrDefault();
-                var thumnailImageDiv = firstImageDiv.ChildNodes.FirstOrDefault(s => s.Name == "div" && s.Attributes["class"].Value.Contains("media-options"));
-                if (thumnailImageDiv != null)
+                List<HtmlNode> htmlNodes = new List<HtmlNode>();
+                GetDataImageElements(currentDiv, htmlNodes);
+
+                if (htmlNodes.Count == 0)
                 {
+                    var imageNode = GetElementByName(currentDiv, "img");
+                    htmlNodes.Add(imageNode);
 
-                    List<HtmlNode> htmlNodes = new List<HtmlNode>();
-
-                    GetAllElementByName(thumnailImageDiv, "a", htmlNodes);
-                    webPagePRoductSelected.ProductImages = new List<ProductImage>();
-                    foreach (HtmlNode imageNode in htmlNodes)
-                    {
-                        if (imageNode.InnerHtml.Contains("Diğerlerini göster"))
-                            continue;
-                        webPagePRoductSelected.ProductImages.Add(new ProductImage() { ImageData = imageNode.Attributes["data-image"].Value });
-                    }
                 }
-                else
+                webPagePRoductSelected.ProductImages = new List<ProductImage>();
+                foreach (HtmlNode imageNode in htmlNodes)
                 {
-                    var mainImage = GetElementByName(currentDiv, "img");
-                    if (mainImage != null)
+                    if (imageNode.Attributes.Contains("src"))
                     {
-                        webPagePRoductSelected.ProductImages = new List<ProductImage>();
-                        webPagePRoductSelected.ProductImages.Add(new ProductImage() { ImageData = mainImage.Attributes["src"].Value });
+                        webPagePRoductSelected.ProductImages.Add(new ProductImage() { ImageData = imageNode.Attributes["src"].Value });
                     }
                     else
                     {
-                        System.Diagnostics.Trace.WriteLine("exxx");
+
+                        webPagePRoductSelected.ProductImages.Add(new ProductImage() { ImageData = imageNode.Attributes["data-image"].Value });
                     }
+
                 }
+                /* var firstImageDiv = currentDiv.ChildNodes.Where(s => s.Name == "div" && s.Attributes.Contains("class")).FirstOrDefault();
+                 var thumnailImageDiv = firstImageDiv.ChildNodes.FirstOrDefault(s => s.Name == "div" && s.Attributes.Contains("class") && s.Attributes["class"].Value.Contains("media-options"));
+                 if (thumnailImageDiv != null)
+                 {
+
+                     List<HtmlNode> htmlNodes = new List<HtmlNode>();
+
+                     GetAllElementByName(thumnailImageDiv, "a", htmlNodes);
+                     webPagePRoductSelected.ProductImages = new List<ProductImage>();
+                     foreach (HtmlNode imageNode in htmlNodes)
+                     {
+                         if (imageNode.InnerHtml.Contains("Diğerlerini göster"))
+                             continue;
+                         webPagePRoductSelected.ProductImages.Add(new ProductImage() { ImageData = imageNode.Attributes["data-image"].Value });
+                     }
+                 }
+                 else
+                 {
+                     var mainImage = GetElementByName(currentDiv, "img");
+                     if (mainImage != null)
+                     {
+                         webPagePRoductSelected.ProductImages = new List<ProductImage>();
+                         webPagePRoductSelected.ProductImages.Add(new ProductImage() { ImageData = mainImage.Attributes["src"].Value });
+                     }
+                     else
+                     {
+                         System.Diagnostics.Trace.WriteLine("exxx");
+                     }
+                 }
+                 */
                 webPagePRoductSelected.Description = productDescription.Length == 0 ? "" : HelperXmlRead.ConvertHtmlCodesToTurkish(productDescription[0].InnerHtml);
 
                 var divPrice = GetElementByName(currentDiv, "div", " _-dp _-do");
                 if (divPrice != null)
                 {
                     webPagePRoductSelected.ProductPrice = divPrice.InnerText.Replace("₺", "");
-                }else
+                }
+                else
                 {
                     var divPricedo2 = GetElementByName(currentDiv, "div", " _-dr _-dq");
                     if (divPricedo2 != null)

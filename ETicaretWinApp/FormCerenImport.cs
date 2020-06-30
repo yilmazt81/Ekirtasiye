@@ -125,11 +125,20 @@ namespace ETicaretWinApp
 
                 for (int i = 2; i <= category.data.pagination.total_page; i++)
                 {
-                    var categorySub = await cerenApi.GetCategoryProducts("2", i);
-                    ProcessProduct(categorySub.data);
-                    Thread.Sleep(6000);
+                    try
+                    {
+                        var categorySub = await cerenApi.GetCategoryProducts("2", i);
+                        ProcessProduct(categorySub.data);
+                        Thread.Sleep(600);
+                    }
+                    catch (Exception exception)
+                    {
+                        Console.WriteLine(exception);
+                       // throw;
+                    }
                 }
 
+                MessageBox.Show("işlem Bitti", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
