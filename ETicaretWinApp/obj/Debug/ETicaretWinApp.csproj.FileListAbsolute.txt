@@ -175,3 +175,5 @@ D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\obj\Debug\E
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.FormShopManagerN11.resources
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.FormN11Export.resources
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.FormN11ExportTemplate.resources
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\bin\Debug\EKirtasiye.Trendyol.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\bin\Debug\EKirtasiye.Trendyol.pdb

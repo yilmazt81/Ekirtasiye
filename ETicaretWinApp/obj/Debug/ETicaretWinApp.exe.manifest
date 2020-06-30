@@ -1094,7 +1094,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>FBr3CxJTV6YqY4w5ZJiT74kJ9L9CDyBrB7PNgo+5UMw=</dsig:DigestValue>
+        <dsig:DigestValue>iJgJQJ9HWNuDNdfuHmfGTcUcauAzoF3TwfILWOAWZO8=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1111,14 +1111,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="438752">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Trendyol.dll" size="7168">
+      <assemblyIdentity name="EKirtasiye.Trendyol" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>R0t0Vomi2cIYb9RFqw2UFH03DWN1hE96JwfHPyfBvuE=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="441824">
       <assemblyIdentity name="ETicaretWinApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>tOIpFPxwyHLBoET0KJ2HYrNjf5SlSwO79dNQ0NohRgQ=</dsig:DigestValue>
+        <dsig:DigestValue>lK4X/SZw1mKSufCPMcjBytWYus2TfJeFiFrZEI/VvGU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

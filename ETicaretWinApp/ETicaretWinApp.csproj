@@ -467,6 +467,10 @@
       <Project>{a7c22121-00bd-41f6-89c5-5d1832b7fe5e}</Project>
       <Name>EKirtasiye.N11</Name>
     </ProjectReference>
+    <ProjectReference Include="..\EKirtasiye.Trendyol\EKirtasiye.Trendyol.csproj">
+      <Project>{d17ce541-f3a4-4f56-a69d-9cbadaf8dea1}</Project>
+      <Name>EKirtasiye.Trendyol</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

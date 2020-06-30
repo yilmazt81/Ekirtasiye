@@ -14,14 +14,14 @@
     <framework targetVersion="4.6" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="ETicaretWinApp.exe.manifest" size="75692">
+    <dependentAssembly dependencyType="install" codebase="ETicaretWinApp.exe.manifest" size="76347">
       <assemblyIdentity name="ETicaretWinApp.exe" version="1.0.0.6" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>KjFCl3jVX3iw5BfaTyZv6j59FiZ1Akr9Ua6q+J60yhU=</dsig:DigestValue>
+        <dsig:DigestValue>lShUyVYi7iM4aLSwBLSsNTgYg09vy2hW92BIcFrMjmw=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
