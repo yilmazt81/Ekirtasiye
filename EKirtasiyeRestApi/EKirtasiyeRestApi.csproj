@@ -170,6 +170,7 @@
     <Compile Include="Controllers\IdeaCatalogController.cs" />
     <Compile Include="Controllers\InstagramUserController.cs" />
     <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\TrendyolController.cs" />
     <Compile Include="Controllers\N11Controller.cs" />
     <Compile Include="Controllers\ProductCategoryController.cs" />
     <Compile Include="Controllers\ProductUrlController.cs" />

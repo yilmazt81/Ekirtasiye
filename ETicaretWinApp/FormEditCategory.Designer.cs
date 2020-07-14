@@ -44,6 +44,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxN11ExportTemplate = new System.Windows.Forms.ComboBox();
             this.buttonAddN11Template = new System.Windows.Forms.Button();
+            this.buttonBrowsTrendyol = new System.Windows.Forms.Button();
+            this.textBoxTrendyolCategory = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -85,7 +88,7 @@
             // 
             this.buttonCancel.Image = global::ETicaretWinApp.Properties.Resources._50;
             this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCancel.Location = new System.Drawing.Point(454, 307);
+            this.buttonCancel.Location = new System.Drawing.Point(455, 398);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(129, 37);
             this.buttonCancel.TabIndex = 2;
@@ -97,7 +100,7 @@
             // 
             this.buttonOk.Image = global::ETicaretWinApp.Properties.Resources.Accept;
             this.buttonOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOk.Location = new System.Drawing.Point(605, 307);
+            this.buttonOk.Location = new System.Drawing.Point(606, 398);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(129, 37);
             this.buttonOk.TabIndex = 1;
@@ -198,11 +201,41 @@
             this.buttonAddN11Template.UseVisualStyleBackColor = true;
             this.buttonAddN11Template.Click += new System.EventHandler(this.buttonAddN11Template_Click);
             // 
+            // buttonBrowsTrendyol
+            // 
+            this.buttonBrowsTrendyol.Location = new System.Drawing.Point(445, 313);
+            this.buttonBrowsTrendyol.Name = "buttonBrowsTrendyol";
+            this.buttonBrowsTrendyol.Size = new System.Drawing.Size(38, 26);
+            this.buttonBrowsTrendyol.TabIndex = 17;
+            this.buttonBrowsTrendyol.Text = "...";
+            this.buttonBrowsTrendyol.UseVisualStyleBackColor = true;
+            // 
+            // textBoxTrendyolCategory
+            // 
+            this.textBoxTrendyolCategory.BackColor = System.Drawing.Color.White;
+            this.textBoxTrendyolCategory.Location = new System.Drawing.Point(121, 313);
+            this.textBoxTrendyolCategory.Name = "textBoxTrendyolCategory";
+            this.textBoxTrendyolCategory.ReadOnly = true;
+            this.textBoxTrendyolCategory.Size = new System.Drawing.Size(318, 26);
+            this.textBoxTrendyolCategory.TabIndex = 16;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(118, 277);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(120, 18);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Trendyol Kategory";
+            // 
             // FormEditCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(746, 356);
+            this.ClientSize = new System.Drawing.Size(757, 447);
+            this.Controls.Add(this.buttonBrowsTrendyol);
+            this.Controls.Add(this.textBoxTrendyolCategory);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.buttonAddN11Template);
             this.Controls.Add(this.comboBoxN11ExportTemplate);
             this.Controls.Add(this.label5);
@@ -250,5 +283,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.ComboBox comboBoxN11ExportTemplate;
         private System.Windows.Forms.Button buttonAddN11Template;
+        private System.Windows.Forms.Button buttonBrowsTrendyol;
+        private System.Windows.Forms.TextBox textBoxTrendyolCategory;
+        private System.Windows.Forms.Label label6;
     }
 }

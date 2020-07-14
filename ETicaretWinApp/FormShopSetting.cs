@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using EKirtasiye.Model;
 
-
 namespace ETicaretWinApp
 {
     public partial class FormShopSetting : Form
@@ -54,7 +53,7 @@ namespace ETicaretWinApp
             ApplicationSettingHelper.AddValue("N11", "N11AppKey", textBoxN11AppKey.Text);
             ApplicationSettingHelper.AddValue("N11", "N11SecretKey", textBoxN11SecretKey.Text);
             ApplicationSettingHelper.AddValue("HepsiBurada", "HBListingAdress", textBoxHBListingAdress.Text);
-             
+
 
             ApplicationSettingHelper.AddValue("Trendyol", "EndPoint", textBoxTyEndPoint.Text);
             ApplicationSettingHelper.AddValue("Trendyol", "Password", textBoxTyPassword.Text);
@@ -110,15 +109,123 @@ namespace ETicaretWinApp
 
         }
 
+        private void GetTrendyolAttribute(EKirtasiye.Trendyol.Category[] categories)
+        {
+            EKirtasiye.Trendyol.CategoryHelper categoryHelper = new EKirtasiye.Trendyol.CategoryHelper(textBoxTyEndPoint.Text);
+
+            foreach (var category in categories)
+            {
+
+                try
+                {
+                    ApiHelper.TrendyolSaveCategory(new TrendyolCategory()
+                    {
+                        Name = category.name,
+                        ParentCategoryId = category.parentId,
+                        Id = category.id
+                    });
+
+                    var attributes = categoryHelper.GetCategoryAttributes(category.id);
+                    if (attributes.categoryAttributes.Length > 0)
+                    {
+                        System.Diagnostics.Debug.WriteLine("ddd");
+                        foreach (var attribute in attributes.categoryAttributes)
+                        {
+                            ApiHelper.TrendyolSaveAttribute(new TrendyolAttribute()
+                            {
+                                Name = attribute.attribute.name,
+                                Attributename = attribute.attribute.name,
+                                AllowCustom = attribute.allowCustom,
+                                Attributeid = attribute.attribute.id,
+                                CategoryId = category.id,
+                                DisplayName = attribute.attribute.name,
+                                Required = attribute.required,
+                                Slicer = attribute.slicer,
+                                Varianter = attribute.varianter,
+                                TrendyolAttributes = (attribute.attributeValues == null ? null : attribute.attributeValues.Select(s => new TrendyolAttributeValue()
+                                {
+                                    AttributeText=s.name,
+                                    AttributeValue=s.id
+                                })).ToArray()
+                            });
+                        }
+                    }
+                    if (category.subCategories.Length != 0)
+                    {
+                        GetTrendyolAttribute(category.subCategories);
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                    System.Diagnostics.Trace.WriteLine(ex);
+                }
+            }
+        }
+
+
         private void buttonGetCategoryTrendyol_Click(object sender, EventArgs e)
         {
             if (textBoxTyEndPoint.Text == string.Empty)
                 return;
             try
             {
+
                 EKirtasiye.Trendyol.CategoryHelper categoryHelper = new EKirtasiye.Trendyol.CategoryHelper(textBoxTyEndPoint.Text);
 
-                var categoryList = categoryHelper.GetTrendyolCategories();
+                var categoryRequestReturn = categoryHelper.GetTrendyolCategories();
+
+                foreach (var category in categoryRequestReturn.categories)
+                {
+                    try
+                    {
+                        var attributes = categoryHelper.GetCategoryAttributes(category.id);
+                        if (attributes.categoryAttributes.Length > 0)
+                        {
+                            System.Diagnostics.Debug.WriteLine("ddd");
+
+                            foreach (var attribute in attributes.categoryAttributes)
+                            {
+                                ApiHelper.TrendyolSaveAttribute(new TrendyolAttribute()
+                                {
+                                    Name = attribute.attribute.name,
+                                    Attributename = attribute.attribute.name,
+                                    AllowCustom = attribute.allowCustom,
+                                    Attributeid = attribute.attribute.id,
+                                    CategoryId = category.id,
+                                    DisplayName = attribute.attribute.name,
+                                    Required = attribute.required,
+                                    Slicer = attribute.slicer,
+                                    Varianter = attribute.varianter,
+                                    TrendyolAttributes = (attribute.attributeValues == null ? null : attribute.attributeValues.Select(s => new TrendyolAttributeValue()
+                                    {
+                                        AttributeText = s.name,
+                                        AttributeValue = s.id
+                                    })).ToArray()
+                                });
+                            }
+                        }
+                        ApiHelper.TrendyolSaveCategory(new TrendyolCategory()
+                        {
+                            Name = category.name,
+                            ParentCategoryId = category.parentId,
+                            Id = category.id
+                        });
+                        GetTrendyolAttribute(category.subCategories);
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Trace.WriteLine(ex);
+                    }
+                }
+
+
+
+                /*
+                EKirtasiye.Trendyol.ProductHelper productHelper = new EKirtasiye.Trendyol.ProductHelper(textBoxTyEndPoint.Text, textBoxTySupplierId.Text, textBoxTyUserName.Text, textBoxTyPassword.Text);
+                var product = productHelper.FilterApprovedProduct("8693830030402");
+                */
+
             }
             catch (Exception ex)
             {

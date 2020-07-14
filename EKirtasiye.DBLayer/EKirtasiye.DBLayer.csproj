@@ -48,6 +48,7 @@
     <Compile Include="IdeaCatalogRepository.cs" />
     <Compile Include="InstagramUserFollowingRepository.cs" />
     <Compile Include="MemberRepository.cs" />
+    <Compile Include="TrendyolCategoryRepository.cs" />
     <Compile Include="N11CategoryRepository.cs" />
     <Compile Include="N11ExportTemplateRepository.cs" />
     <Compile Include="ProductCategoryRepository.cs" />

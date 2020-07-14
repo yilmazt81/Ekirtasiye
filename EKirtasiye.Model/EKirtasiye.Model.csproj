@@ -59,6 +59,9 @@
     <Compile Include="Request\UpdateProductGroupRequest.cs" />
     <Compile Include="Request\UpdateProductShopRequest.cs" />
     <Compile Include="Request\UpdateProductStatusRequest.cs" />
+    <Compile Include="TrendyolAttribute.cs" />
+    <Compile Include="TrendyolCategory.cs" />
+    <Compile Include="TrendyolCategoryDefaultAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -90,19 +90,7 @@ namespace ETicaretWinApp
             {
                 GetAllProductCategories();
             }
-            /*
-                List<ProductCategory> productSubCategories = new List<ProductCategory>();
-
-                string url = baseUrl + $"api/ProductCategory/getFromUpId/{upId}";
-                /
-                var result = client.GetAsync(url).Result;
-                if (result.IsSuccessStatusCode)
-                {
-                    var str = result.Content.ReadAsStringAsync().Result;
-
-                    productSubCategories = JsonConvert.DeserializeObject<List<ProductCategory>>(str);
-                }
-             ;*/
+          
             return productCategories.Where(s => s.UpId == upId).ToList();
         }
 
@@ -711,6 +699,28 @@ namespace ETicaretWinApp
             var saveOk = PostRequest<string, UpdateProductShopSaleRequest>(url, productShopSaleRequest);
             return (saveOk == "ok");
         }
+
+        public static bool TrendyolSaveDefaultAttribute(TrendyolCategoryDefaultAttribute defaultAttribute)
+        {
+            string url = baseUrl + $"api/trendyol/SaveDefaultAttributes";
+            var saveOk = PostRequest<string, TrendyolCategoryDefaultAttribute>(url, defaultAttribute);
+            return (saveOk == "ok");
+        }
+
+        public static bool TrendyolSaveCategory(TrendyolCategory trendyolCategory)
+        {
+            string url = baseUrl + $"api/trendyol/SaveCategory";
+            var saveOk = PostRequest<string, TrendyolCategory>(url, trendyolCategory);
+            return (saveOk == "ok");
+        }
+        public static bool TrendyolSaveAttribute(TrendyolAttribute trendyolAttribute)
+        {
+            string url = baseUrl + $"api/trendyol/SaveTrendyolAttribute";
+            var saveOk = PostRequest<string, TrendyolAttribute>(url, trendyolAttribute);
+            return (saveOk == "ok");
+        }
+
+
 
         public static T PostRequest<T, K>(string url, K obj)
         {
