@@ -44,10 +44,17 @@ namespace ETicaretWinApp
 
                 productCategory.N11CategoryId = (textBoxN11Category.Tag == null ? 0 : (int)textBoxN11Category.Tag);
                 productCategory.HepsiBuradaCategoryId = (textBoxHepsiBuradaCategory.Tag == null ? 0 : (int)textBoxHepsiBuradaCategory.Tag);
+                productCategory.TrendyolCategoryId = (textBoxTrendyolCategory.Tag == null ? 0 : (int)textBoxTrendyolCategory.Tag);
+
 
                 var exportTemplate = (EKirtasiye.Model.N11ExportTemplate)comboBoxN11ExportTemplate.SelectedItem;
                 productCategory.N11ExportTemplateId = exportTemplate.Id;
                 productCategory.N11ExportTemplateName = exportTemplate.TemplateName;
+
+                productCategory.TrendyolCategoryName = textBoxTrendyolCategory.Text;
+                productCategory.N11CategoryName = textBoxN11Category.Text;
+                productCategory.HepsiBuradaCategoryName = textBoxHepsiBuradaCategory.Text;
+
                 return productCategory;
             }
             set {
@@ -55,10 +62,12 @@ namespace ETicaretWinApp
                 textBoxCategoryName.Text = productCategory.CategoryName;
                 textBoxHepsiBuradaCategory.Text = productCategory.HepsiBuradaCategoryName;
                 textBoxN11Category.Text = productCategory.N11CategoryName;
+                textBoxTrendyolCategory.Text = productCategory.TrendyolCategoryName;
 
                 textBoxN11Category.Tag = productCategory.N11CategoryId;
                 textBoxHepsiBuradaCategory.Tag = productCategory.HepsiBuradaCategoryId;
-               // comboBoxN11ExportTemplate.SelectedValue=
+                textBoxTrendyolCategory.Tag = productCategory.TrendyolCategoryId;
+
 
             }
         }
@@ -126,6 +135,37 @@ namespace ETicaretWinApp
             {
                 ApiHelper.SaveN11ExportTemplate(formN11Export.ExportTemplate);
                 RefreshCombobox();
+            }
+        }
+
+        private void buttonBrowsTrendyol_Click(object sender, EventArgs e)
+        {
+            var trendyolCategoryList = ApiHelper.GetTrendyolCategories();
+            if (trendyolCategoryList == null)
+            {
+                MessageBox.Show("Category Listesi Alınamadı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            FormShopEntegrationCategory formShopEntegrationCategory = new FormShopEntegrationCategory();
+            formShopEntegrationCategory.ShowCheckBoxes = false;
+            formShopEntegrationCategory.LoadData(trendyolCategoryList);
+            if (formShopEntegrationCategory.ShowDialog() == DialogResult.OK)
+            {
+                var tmpCateg = ProductCategory;
+                tmpCateg.TrendyolCategoryId = formShopEntegrationCategory.SelectedCategory.Id;
+                tmpCateg.TrendyolCategoryName = formShopEntegrationCategory.SelectedCategory.CategoryName;
+                ProductCategory = tmpCateg;
+            }
+        }
+
+        private void buttonTrendyolAttributes_Click(object sender, EventArgs e)
+        {
+            if (textBoxTrendyolCategory.Text == string.Empty)
+                return;
+            FormTrendyoldefaultAttribute formTrendyoldefaultAttribute = new FormTrendyoldefaultAttribute((int)textBoxTrendyolCategory.Tag);
+            if (formTrendyoldefaultAttribute.ShowDialog() == DialogResult.OK)
+            {
+
             }
         }
     }

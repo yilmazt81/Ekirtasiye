@@ -43,6 +43,16 @@ namespace ETicaretWinApp
                 TargetCategory = s.TargetCategory
             }).ToList());
         }
+        public void LoadData(List<TrendyolCategory> trendyolCategories)
+        {
+            LoadData(trendyolCategories.Select(s => new ProductCategory()
+            {
+                CategoryName = s.Name,
+                Id = (int)s.Id,
+                UpId = (int)s.ParentCategoryId,
+                TargetCategory = s.TargetCategory
+            }).ToList());
+        }
 
         public void LoadData(List<N11Category> n11Categories)
         {

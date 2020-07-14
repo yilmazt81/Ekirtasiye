@@ -16,7 +16,7 @@ namespace EKirtasiyeRestApi.Controllers
         {
             DBHelper.SqlConnectionStr = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
         }
-        // GET: api/N11
+        // GET: api/trendyol
         public IEnumerable<TrendyolCategory> Get()
         {
             return TrendyolCategoryRepository.GetCategory();
@@ -43,7 +43,17 @@ namespace EKirtasiyeRestApi.Controllers
                 return ex.Message;
             }
         }
-        
+
+        [Route("GetCategoryAttribute/{categoryId}")]
+        [HttpGet]
+        public List<TrendyolAttribute> GetCategoryAttribute(int categoryId)
+        {
+
+         return   TrendyolCategoryRepository.GetTrendyolAttributes(categoryId);
+
+
+
+        }
         [Route("SaveDefaultAttributes")]
         [HttpPost]
         public string SaveDefaultAttribute(TrendyolCategoryDefaultAttribute categoryDefaultAttribute)

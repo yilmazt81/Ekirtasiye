@@ -36,8 +36,10 @@ namespace EKirtasiye.DBLayer
                 HepsiBuradaCategoryName = reader["HepsiBuradaCategoryName"].ToString(),
                 N11CategoryName = reader["N11CategoryName"].ToString(),
                 N11ExportTemplateId = reader["N11ExportTemplateId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["N11ExportTemplateId"]),
-                N11ExportTemplateName = reader["N11ExportTemplateName"].ToString() 
-            };
+                N11ExportTemplateName = reader["N11ExportTemplateName"].ToString() ,
+                TrendyolCategoryId= reader["TrendyolCategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TrendyolCategoryId"]),
+                TrendyolCategoryName=reader["TrendyolCategoryName"].ToString()
+          };
         }
         public static List<ProductCategory> GetProductCategoriesAll()
         {
@@ -70,8 +72,11 @@ namespace EKirtasiye.DBLayer
                     scom.Parameters.AddWithValue("@CategoryUrl", (string.IsNullOrEmpty(productCategory.CategoryUrl) ? DBNull.Value : (object)productCategory.CategoryUrl));
                     scom.Parameters.AddWithValue("@N11CategoryId", productCategory.N11CategoryId);
                     scom.Parameters.AddWithValue("@HepsiBuradaCategoryId", productCategory.HepsiBuradaCategoryId);
+                    scom.Parameters.AddWithValue("@TrendyolCategoryId", productCategory.TrendyolCategoryId);
+
                     scom.Parameters.AddWithValue("@N11CategoryName", (string.IsNullOrEmpty(productCategory.N11CategoryName) ? DBNull.Value : (object)productCategory.N11CategoryName));
                     scom.Parameters.AddWithValue("@HepsiBuradaCategoryName", (string.IsNullOrEmpty(productCategory.HepsiBuradaCategoryName) ? DBNull.Value : (object)productCategory.HepsiBuradaCategoryName));
+                    scom.Parameters.AddWithValue("@TrendyolCategoryName", (string.IsNullOrEmpty(productCategory.TrendyolCategoryName) ? DBNull.Value : (object)productCategory.TrendyolCategoryName));
 
                     productCategory.Id = Convert.ToInt32(scom.ExecuteScalar());
                 }

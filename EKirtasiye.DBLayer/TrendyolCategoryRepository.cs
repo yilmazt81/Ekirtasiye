@@ -23,6 +23,41 @@ namespace EKirtasiye.DBLayer
             });
         }
 
+        public static List<TrendyolAttribute> GetTrendyolAttributes(int categoryId)
+        {
+            var dataAttributes = DBHelper.GetQuery($"SELECT   * FROM  TrendyolAttribute  WHERE CategoryId={categoryId}");
+
+            return dataAttributes.Rows.Cast<DataRow>().Select(row => new TrendyolAttribute()
+            {
+                Id = Convert.ToInt32(row["Id"]),
+                Name = row["name"].ToString(),
+                DisplayName = row["displayName"].ToString(),
+                AllowCustom = Convert.ToBoolean(row["allowCustom"]),
+                Attributeid = Convert.ToInt32(row["attributeid"]),
+                Attributename = row["attributename"].ToString(),
+                CategoryId = Convert.ToInt32(row["categoryId"]),
+                Required = Convert.ToBoolean(row["required"]),
+                Slicer = Convert.ToBoolean(row["slicer"]),
+                Varianter = Convert.ToBoolean(row["varianter"]),
+                TrendyolAttributes= GetTrendyolAttributeValues(Convert.ToInt32(row["Id"]))
+
+            }).ToList();
+
+        }
+
+        public static TrendyolAttributeValue[] GetTrendyolAttributeValues(int attributeId)
+        {
+            var dataAttributes = DBHelper.GetQuery($"SELECT   * FROM  TrendyolAttributeValue  WHERE TrendyolAttributeId={attributeId}");
+
+            return dataAttributes.Rows.Cast<DataRow>().Select(row => new TrendyolAttributeValue()
+            {
+                AttributeValue=Convert.ToInt32(row["AttributeValue"]),
+                AttributeText=row["AttributeText"].ToString()
+
+            }).ToArray();
+
+        }
+
         public static List<TrendyolCategory> GetCategory()
         {
 

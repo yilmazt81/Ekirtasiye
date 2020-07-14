@@ -28,13 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEditCategory));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.labelMainGroup = new System.Windows.Forms.Label();
             this.textBoxCategoryName = new System.Windows.Forms.TextBox();
-            this.buttonCancel = new System.Windows.Forms.Button();
-            this.buttonOk = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.textBoxHepsiBuradaCategory = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.buttonHepsiBurada = new System.Windows.Forms.Button();
@@ -43,10 +41,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.comboBoxN11ExportTemplate = new System.Windows.Forms.ComboBox();
-            this.buttonAddN11Template = new System.Windows.Forms.Button();
             this.buttonBrowsTrendyol = new System.Windows.Forms.Button();
             this.textBoxTrendyolCategory = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.buttonTrendyolAttributes = new System.Windows.Forms.Button();
+            this.buttonAddN11Template = new System.Windows.Forms.Button();
+            this.buttonCancel = new System.Windows.Forms.Button();
+            this.buttonOk = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,39 +85,6 @@
             this.textBoxCategoryName.Name = "textBoxCategoryName";
             this.textBoxCategoryName.Size = new System.Drawing.Size(333, 26);
             this.textBoxCategoryName.TabIndex = 5;
-            // 
-            // buttonCancel
-            // 
-            this.buttonCancel.Image = global::ETicaretWinApp.Properties.Resources._50;
-            this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCancel.Location = new System.Drawing.Point(455, 398);
-            this.buttonCancel.Name = "buttonCancel";
-            this.buttonCancel.Size = new System.Drawing.Size(129, 37);
-            this.buttonCancel.TabIndex = 2;
-            this.buttonCancel.Text = "İptal";
-            this.buttonCancel.UseVisualStyleBackColor = true;
-            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
-            // 
-            // buttonOk
-            // 
-            this.buttonOk.Image = global::ETicaretWinApp.Properties.Resources.Accept;
-            this.buttonOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOk.Location = new System.Drawing.Point(606, 398);
-            this.buttonOk.Name = "buttonOk";
-            this.buttonOk.Size = new System.Drawing.Size(129, 37);
-            this.buttonOk.TabIndex = 1;
-            this.buttonOk.Text = "Tamam ";
-            this.buttonOk.UseVisualStyleBackColor = true;
-            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::ETicaretWinApp.Properties.Resources.tree03;
-            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(80, 77);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
             // 
             // textBoxHepsiBuradaCategory
             // 
@@ -191,16 +160,6 @@
             this.comboBoxN11ExportTemplate.Size = new System.Drawing.Size(185, 26);
             this.comboBoxN11ExportTemplate.TabIndex = 13;
             // 
-            // buttonAddN11Template
-            // 
-            this.buttonAddN11Template.Image = global::ETicaretWinApp.Properties.Resources.add;
-            this.buttonAddN11Template.Location = new System.Drawing.Point(688, 235);
-            this.buttonAddN11Template.Name = "buttonAddN11Template";
-            this.buttonAddN11Template.Size = new System.Drawing.Size(37, 26);
-            this.buttonAddN11Template.TabIndex = 14;
-            this.buttonAddN11Template.UseVisualStyleBackColor = true;
-            this.buttonAddN11Template.Click += new System.EventHandler(this.buttonAddN11Template_Click);
-            // 
             // buttonBrowsTrendyol
             // 
             this.buttonBrowsTrendyol.Location = new System.Drawing.Point(445, 313);
@@ -209,6 +168,7 @@
             this.buttonBrowsTrendyol.TabIndex = 17;
             this.buttonBrowsTrendyol.Text = "...";
             this.buttonBrowsTrendyol.UseVisualStyleBackColor = true;
+            this.buttonBrowsTrendyol.Click += new System.EventHandler(this.buttonBrowsTrendyol_Click);
             // 
             // textBoxTrendyolCategory
             // 
@@ -228,11 +188,66 @@
             this.label6.TabIndex = 15;
             this.label6.Text = "Trendyol Kategory";
             // 
+            // buttonTrendyolAttributes
+            // 
+            this.buttonTrendyolAttributes.Image = ((System.Drawing.Image)(resources.GetObject("buttonTrendyolAttributes.Image")));
+            this.buttonTrendyolAttributes.Location = new System.Drawing.Point(496, 313);
+            this.buttonTrendyolAttributes.Name = "buttonTrendyolAttributes";
+            this.buttonTrendyolAttributes.Size = new System.Drawing.Size(38, 26);
+            this.buttonTrendyolAttributes.TabIndex = 18;
+            this.buttonTrendyolAttributes.Text = "...";
+            this.buttonTrendyolAttributes.UseVisualStyleBackColor = true;
+            this.buttonTrendyolAttributes.Click += new System.EventHandler(this.buttonTrendyolAttributes_Click);
+            // 
+            // buttonAddN11Template
+            // 
+            this.buttonAddN11Template.Image = global::ETicaretWinApp.Properties.Resources.add;
+            this.buttonAddN11Template.Location = new System.Drawing.Point(688, 235);
+            this.buttonAddN11Template.Name = "buttonAddN11Template";
+            this.buttonAddN11Template.Size = new System.Drawing.Size(37, 26);
+            this.buttonAddN11Template.TabIndex = 14;
+            this.buttonAddN11Template.UseVisualStyleBackColor = true;
+            this.buttonAddN11Template.Click += new System.EventHandler(this.buttonAddN11Template_Click);
+            // 
+            // buttonCancel
+            // 
+            this.buttonCancel.Image = global::ETicaretWinApp.Properties.Resources._50;
+            this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonCancel.Location = new System.Drawing.Point(455, 398);
+            this.buttonCancel.Name = "buttonCancel";
+            this.buttonCancel.Size = new System.Drawing.Size(129, 37);
+            this.buttonCancel.TabIndex = 2;
+            this.buttonCancel.Text = "İptal";
+            this.buttonCancel.UseVisualStyleBackColor = true;
+            this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
+            // 
+            // buttonOk
+            // 
+            this.buttonOk.Image = global::ETicaretWinApp.Properties.Resources.Accept;
+            this.buttonOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonOk.Location = new System.Drawing.Point(606, 398);
+            this.buttonOk.Name = "buttonOk";
+            this.buttonOk.Size = new System.Drawing.Size(129, 37);
+            this.buttonOk.TabIndex = 1;
+            this.buttonOk.Text = "Tamam ";
+            this.buttonOk.UseVisualStyleBackColor = true;
+            this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ETicaretWinApp.Properties.Resources.tree03;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 12);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(80, 77);
+            this.pictureBox1.TabIndex = 0;
+            this.pictureBox1.TabStop = false;
+            // 
             // FormEditCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(757, 447);
+            this.Controls.Add(this.buttonTrendyolAttributes);
             this.Controls.Add(this.buttonBrowsTrendyol);
             this.Controls.Add(this.textBoxTrendyolCategory);
             this.Controls.Add(this.label6);
@@ -286,5 +301,6 @@
         private System.Windows.Forms.Button buttonBrowsTrendyol;
         private System.Windows.Forms.TextBox textBoxTrendyolCategory;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button buttonTrendyolAttributes;
     }
 }

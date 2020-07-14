@@ -625,6 +625,7 @@ namespace ETicaretWinApp
         {
 
             string url = baseUrl + $"api/N11";
+            
             List<N11Category> n11Categories = null;
 
             var result = client.GetAsync(url).Result;
@@ -642,33 +643,16 @@ namespace ETicaretWinApp
         public static List<HepsiBuradaCategory> GetHepsiBuradaCategories()
         {
             string url = baseUrl + $"api/HepsiBurada/";
-
-            var result = client.GetAsync(url).Result;
-            List<HepsiBuradaCategory> hepsiBuradaCategories = null;
-            if (result.IsSuccessStatusCode)
-            {
-                var str = result.Content.ReadAsStringAsync().Result;
-
-                hepsiBuradaCategories = JsonConvert.DeserializeObject<List<HepsiBuradaCategory>>(str);
-            }
-
-            return hepsiBuradaCategories;
+             
+            return GetRequest<List<HepsiBuradaCategory>>(url);
         }
 
         public static IdeaCatalog[] GetExportExternalShopExportProducts(string shopName)
         {
             string url = baseUrl + $"api/IdeaCatalog/exportexternalshop/{shopName}";
 
-            var lideaCatalogs = new IdeaCatalog[0];
-            var result = client.GetAsync(url).Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var str = result.Content.ReadAsStringAsync().Result;
-
-                lideaCatalogs = JsonConvert.DeserializeObject<IdeaCatalog[]>(str);
-            }
-
-            return lideaCatalogs.ToArray();
+            return GetRequest<IdeaCatalog[]>(url);
+            
         }
 
 
@@ -676,21 +660,10 @@ namespace ETicaretWinApp
         public static bool UpdateProductShopId(UpdateProductShopRequest updateProductShopRequest)
         {
 
-            string url = baseUrl + $"api/IdeaCatalog/exportexternalshop/UpdateProductShop";
-            var jsonClass = JsonConvert.SerializeObject(updateProductShopRequest);
-            var content = new StringContent(jsonClass, Encoding.UTF8, "application/json");
-
-            var result = client.PostAsync(url, content).Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var str = result.Content.ReadAsStringAsync().Result;
-                bool rV = (str == "\"ok\"");
-                return rV;
-            }
-            else
-            {
-                return false;
-            }
+            string url = baseUrl + $"api/IdeaCatalog/exportexternalshop/UpdateProductShop";            
+             
+            var saveOk = PostRequest<string, UpdateProductShopRequest>(url, updateProductShopRequest);
+            return (saveOk == "ok");
         }
 
         public static bool UpdateShopProductState(UpdateProductShopSaleRequest productShopSaleRequest)
@@ -720,8 +693,20 @@ namespace ETicaretWinApp
             return (saveOk == "ok");
         }
 
+        public static List<TrendyolCategory> GetTrendyolCategories()
+        {
+            string url = baseUrl + $"api/trendyol/";
 
+            return GetRequest<List<TrendyolCategory>>(url);
+            
+        }
+        public static List<TrendyolAttribute> GetTrendyolCategorieAttributes(int categoryId)
+        {
+            string url = baseUrl + $"api/trendyol/GetCategoryAttribute/{categoryId}";
 
+            return GetRequest<List<TrendyolAttribute>>(url);
+            //GetCategoryAttribute
+        }
         public static T PostRequest<T, K>(string url, K obj)
         {
 
@@ -729,6 +714,25 @@ namespace ETicaretWinApp
             var content = new StringContent(jsonClass, Encoding.UTF8, "application/json");
             T requestReturn;
             var result = client.PostAsync(url, content).Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var str = result.Content.ReadAsStringAsync().Result;
+                requestReturn = JsonConvert.DeserializeObject<T>(str);
+
+                return requestReturn;
+            }
+            else
+            {
+                throw new Exception("Request Return Code : " + result.StatusCode);
+
+            }
+        }
+
+        public static T GetRequest<T>(string url)
+        {
+             
+            T requestReturn;
+            var result = client.GetAsync(url).Result;
             if (result.IsSuccessStatusCode)
             {
                 var str = result.Content.ReadAsStringAsync().Result;

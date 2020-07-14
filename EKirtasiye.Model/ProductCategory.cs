@@ -24,6 +24,11 @@ public class ProductCategory
 
     public int N11ExportTemplateId { get; set; }
 
+    public string TrendyolCategoryName { get; set; }
+
+    public int TrendyolCategoryId { get; set; }
+
+
     public override string ToString()
     {
         return CategoryName + " - " + CategoryUrl;
