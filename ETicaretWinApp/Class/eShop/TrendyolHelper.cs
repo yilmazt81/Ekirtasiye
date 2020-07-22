@@ -71,11 +71,16 @@ namespace ETicaretWinApp
                 {
                     if (!defaultAttribute.Any(s => s.AttributeId == attribute.Attributeid))
                     {
+                        string defaultValue = "yok";
+                        if (attribute.Attributename == "Renk")
+                        {
+                            defaultValue = "Karışık Çok Renkli";
+                        }
                         defaultAttribute.Add(new EKirtasiye.Model.TrendyolCategoryDefaultAttribute()
                         {
                             AttributeId = attribute.Attributeid,
                             AttributeName = attribute.Attributename,
-                            CustomAttributeValue = "Yok"
+                            CustomAttributeValue = defaultValue
 
                         });
                     }
@@ -121,7 +126,7 @@ namespace ETicaretWinApp
                     }).ToArray(),
                     currencyType = ideaCatalog.CurrencyAbbr,
                     dimensionalWeight = ideaCatalog.Dm3,
-                    listPrice = price.ToString().Replace(",", "."),
+                    listPrice = (price * 1.1).ToString().Replace(",", "."),
                     salePrice = price.ToString().Replace(",", "."),
                     cargoCompanyId = 1,
                     //deliveryDuration = 10,
