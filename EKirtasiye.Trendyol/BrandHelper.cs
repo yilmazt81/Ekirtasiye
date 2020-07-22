@@ -16,7 +16,7 @@ namespace EKirtasiye.Trendyol
 
         public BrandHelper(string endPoint)
         {
-            _endPoint = "https://api.trendyol.com/sapigw/";
+            _endPoint = endPoint;
         }
 
         public BrandReturn GetBrands()

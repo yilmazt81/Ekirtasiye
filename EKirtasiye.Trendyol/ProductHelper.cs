@@ -58,28 +58,14 @@ namespace EKirtasiye.Trendyol
         {
             string serviceUrl = $"{_endPoint}suppliers/{_supplierid}/v2/products";
 
+            return PostRequest<CreateRequestReturn, CreateProductRequest>(serviceUrl, createProductRequest);
+        }
 
-            var jsonClass = JsonConvert.SerializeObject(createProductRequest);
-            var content = new StringContent(jsonClass, Encoding.UTF8, "application/json");
+        public CreateRequestReturn UpdatePriceAndInventory(UpdatePriceRequest updatePriceRequest)
+        {
+            string serviceUrl = $"{_endPoint}suppliers/{_supplierid}/products/price-and-inventory";
 
-
-            var result = client.PostAsync(serviceUrl, content).Result;
-
-            CreateRequestReturn createRequestReturn = null;
-            if (result.IsSuccessStatusCode)
-            {
-
-                var serviceReturn = result.Content.ReadAsStringAsync().Result;
-
-                createRequestReturn = JsonConvert.DeserializeObject<CreateRequestReturn>(serviceReturn);
-                
-            }
-            else
-            {
-                var statusCode = result.StatusCode;
-              
-            }
-            return createRequestReturn;
+            return PostRequest<CreateRequestReturn, UpdatePriceRequest>(serviceUrl, updatePriceRequest);
         }
 
         public T PostRequest<T, K>(string url, K obj)

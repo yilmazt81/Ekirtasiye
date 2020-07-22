@@ -135,25 +135,21 @@ namespace EKirtasiyeRestApi.Controllers
                 return ex.Message;
             }
         }
-        /*
-        [Route("GetEXportTemplates")]
-        [HttpGet]
-        public List<N11ExportTemplate> GetEXportTemplates()
+        [Route("SaveTrendyolAttributes")]
+        [HttpPost]
+        public string SaveTrendyolAttributes(List<TrendyolProductAttribute> trendyolAttributes)
         {
+            try
+            {
+                TrendyolCategoryRepository.SaveTrendyolProductAttributes(trendyolAttributes);
 
-            return N11ExportTemplateRepository.GetN11ExportTemplates();
-
-
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
-        [Route("GetEXportTemplate/{id}")]
-        [HttpGet]
-        public N11ExportTemplate GetExportTemplate(int id)
-        {
-
-            return N11ExportTemplateRepository.GetN11ExportTemplates(id);
-
-
-        }*/
 
         // PUT: api/N11/5
         public void Put(int id, [FromBody]string value)

@@ -32,6 +32,9 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTrendyolExport));
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.MenuStripProduct = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.MenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemBulkExport = new System.Windows.Forms.ToolStripMenuItem();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStockCode = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -52,13 +55,11 @@
             this.colLastEditedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colN11ProductId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colExportN11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.MenuStripProduct = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.MenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.MenuItemBulkExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemPriceUpdate = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.MenuStripProduct.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureBox1
@@ -81,6 +82,28 @@
             this.gridControl1.TabIndex = 2;
             this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridView1});
+            // 
+            // MenuStripProduct
+            // 
+            this.MenuStripProduct.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemEdit,
+            this.MenuItemBulkExport,
+            this.MenuItemPriceUpdate});
+            this.MenuStripProduct.Name = "MenuStripProduct";
+            this.MenuStripProduct.Size = new System.Drawing.Size(181, 92);
+            // 
+            // MenuItemEdit
+            // 
+            this.MenuItemEdit.Name = "MenuItemEdit";
+            this.MenuItemEdit.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemEdit.Text = "Özellikler";
+            // 
+            // MenuItemBulkExport
+            // 
+            this.MenuItemBulkExport.Name = "MenuItemBulkExport";
+            this.MenuItemBulkExport.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemBulkExport.Text = "Toplu Export";
+            this.MenuItemBulkExport.Click += new System.EventHandler(this.MenuItemBulkExport_Click);
             // 
             // gridView1
             // 
@@ -240,26 +263,12 @@
             this.colExportN11.Visible = true;
             this.colExportN11.VisibleIndex = 18;
             // 
-            // MenuStripProduct
+            // MenuItemPriceUpdate
             // 
-            this.MenuStripProduct.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemEdit,
-            this.MenuItemBulkExport});
-            this.MenuStripProduct.Name = "MenuStripProduct";
-            this.MenuStripProduct.Size = new System.Drawing.Size(181, 70);
-            // 
-            // MenuItemEdit
-            // 
-            this.MenuItemEdit.Name = "MenuItemEdit";
-            this.MenuItemEdit.Size = new System.Drawing.Size(180, 22);
-            this.MenuItemEdit.Text = "Özellikler";
-            // 
-            // MenuItemBulkExport
-            // 
-            this.MenuItemBulkExport.Name = "MenuItemBulkExport";
-            this.MenuItemBulkExport.Size = new System.Drawing.Size(180, 22);
-            this.MenuItemBulkExport.Text = "Toplu Export";
-            this.MenuItemBulkExport.Click += new System.EventHandler(this.MenuItemBulkExport_Click);
+            this.MenuItemPriceUpdate.Name = "MenuItemPriceUpdate";
+            this.MenuItemPriceUpdate.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemPriceUpdate.Text = "Fiyat Güncelle";
+            this.MenuItemPriceUpdate.Click += new System.EventHandler(this.MenuItemPriceUpdate_Click);
             // 
             // FormTrendyolExport
             // 
@@ -273,8 +282,8 @@
             this.Load += new System.EventHandler(this.FormTrendyolExport_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.MenuStripProduct.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -306,5 +315,6 @@
         private System.Windows.Forms.ContextMenuStrip MenuStripProduct;
         private System.Windows.Forms.ToolStripMenuItem MenuItemEdit;
         private System.Windows.Forms.ToolStripMenuItem MenuItemBulkExport;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemPriceUpdate;
     }
 }

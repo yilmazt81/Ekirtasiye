@@ -63,6 +63,7 @@
     <Compile Include="TrendyolCategory.cs" />
     <Compile Include="TrendyolCategoryDefaultAttribute.cs" />
     <Compile Include="TrendyolCreateRequest.cs" />
+    <Compile Include="TrendyolProductAttribute.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -146,9 +146,10 @@
     <Compile Include="Class\HelperXmlRead.cs" />
     <Compile Include="Class\LocalDBHelper.cs" />
     <Compile Include="Class\MuhasebeData.cs" />
-    <Compile Include="Class\N11Helper.cs" />
+    <Compile Include="Class\eShop\N11Helper.cs" />
     <Compile Include="Class\ShareFileHelper.cs" />
     <Compile Include="Class\TreeNodeWithCategory.cs" />
+    <Compile Include="Class\eShop\TrendyolHelper.cs" />
     <Compile Include="Class\WebPageProduct.cs" />
     <Compile Include="Controls\UCategoryView.cs">
       <SubType>UserControl</SubType>

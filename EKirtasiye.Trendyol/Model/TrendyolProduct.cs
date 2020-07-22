@@ -63,7 +63,7 @@ namespace EKirtasiye.Trendyol
     public class ProductCreateAttribute
     {
         public int attributeId { get; set; }
-        public string attributeValueId { get; set; }
+        public object attributeValueId { get; set; }
         public string customAttributeValue { get; set; }
 
 

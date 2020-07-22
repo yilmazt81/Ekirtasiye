@@ -364,6 +364,8 @@ namespace ETicaretWinApp
 
                     return;
                 }
+                
+
 
                 if (OnSaveAndNextDocument != null)
                     OnSaveAndNextDocument(SelectedProduct);

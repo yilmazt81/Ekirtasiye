@@ -698,6 +698,13 @@ namespace ETicaretWinApp
             string url = baseUrl + $"api/trendyol/SaveTrendyolAttribute";
             var saveOk = PostRequest<string, TrendyolAttribute>(url, trendyolAttribute);
             return (saveOk == "ok");
+       
+        }
+        public static bool SaveTrendyolAttributes(List<TrendyolProductAttribute> trendyolAttributes)
+        {
+            string url = baseUrl + $"api/trendyol/SaveTrendyolAttributes";
+            var saveOk = PostRequest<string, List<TrendyolProductAttribute>>(url, trendyolAttributes);
+            return (saveOk == "ok"); 
         }
 
         public static List<TrendyolCategory> GetTrendyolCategories()

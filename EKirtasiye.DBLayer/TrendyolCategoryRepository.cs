@@ -155,6 +155,25 @@ namespace EKirtasiye.DBLayer
             }
         }*/
 
+        public static void SaveTrendyolProductAttributes(List<TrendyolProductAttribute> trendyolProductAttributes)
+        {
+            var firstAttribute = trendyolProductAttributes.FirstOrDefault();
+            DBHelper.ExecuteCommand($"DELETE FROM TrendyolProductAttribute WHERE ProductId={firstAttribute.ProductId}");
+
+            foreach (var trendyolProductAttribute in trendyolProductAttributes)
+            {
+
+                DBHelper.ExecuteCommand("pSaveTrendyolProductAttribute", new SqlParameter[]
+                {
+                    new SqlParameter("@ProductId",trendyolProductAttribute.ProductId),
+                    new SqlParameter("@Attributeid",trendyolProductAttribute.Attributeid),
+                    new SqlParameter("@AttributeName",trendyolProductAttribute.AttributeName),
+                    new SqlParameter("@AttributeValue",trendyolProductAttribute.AttributeValue),
+                    new SqlParameter("@AttributeCustomeValue",(string.IsNullOrEmpty(trendyolProductAttribute.AttributeCustomeValue)?DBNull.Value:(object)trendyolProductAttribute.AttributeCustomeValue))
+
+                });
+            }
+        }
         public static void SaveTrendyolAttribute(TrendyolAttribute trendyolAttribute)
         {
             using (SqlConnection connection = DBHelper.GetOpenConnection())

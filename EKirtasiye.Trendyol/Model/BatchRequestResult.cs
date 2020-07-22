@@ -51,8 +51,8 @@ namespace EKirtasiye.Trendyol
         public TrendyolUrl[] images { get; set; }
         public ProductAttribute[] attributes { get; set; }
         public int cargoCompanyId { get; set; }
-        public int shipmentAddressId { get; set; }
-        public int returningAddressId { get; set; }
+        public object shipmentAddressId { get; set; }
+        public object returningAddressId { get; set; }
     }
 
    

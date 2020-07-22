@@ -28,9 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            ProductCategory productCategory1 = new ProductCategory();
-            ProductCategory productCategory2 = new ProductCategory();
-            ProductCategory productCategory3 = new ProductCategory();
+            ProductCategory productCategory7 = new ProductCategory();
+            ProductCategory productCategory8 = new ProductCategory();
+            ProductCategory productCategory9 = new ProductCategory();
             this.label1 = new System.Windows.Forms.Label();
             this.textBoxProductName = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -217,7 +217,7 @@
             this.MenuItemExportN11.Name = "MenuItemExportN11";
             this.MenuItemExportN11.ShortcutKeys = System.Windows.Forms.Keys.F10;
             this.MenuItemExportN11.Size = new System.Drawing.Size(182, 22);
-            this.MenuItemExportN11.Text = "N11 e Aktar";
+            this.MenuItemExportN11.Text = "E Pazar\'a Aktar";
             this.MenuItemExportN11.Click += new System.EventHandler(this.MenuItemExportN11_Click);
             // 
             // panelGalery
@@ -225,7 +225,7 @@
             this.panelGalery.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panelGalery.Location = new System.Drawing.Point(0, 0);
             this.panelGalery.Name = "panelGalery";
-            this.panelGalery.Size = new System.Drawing.Size(254, 587);
+            this.panelGalery.Size = new System.Drawing.Size(255, 587);
             this.panelGalery.TabIndex = 13;
             // 
             // webBrowserProduct
@@ -236,7 +236,7 @@
             this.webBrowserProduct.Location = new System.Drawing.Point(0, 0);
             this.webBrowserProduct.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowserProduct.Name = "webBrowserProduct";
-            this.webBrowserProduct.Size = new System.Drawing.Size(862, 587);
+            this.webBrowserProduct.Size = new System.Drawing.Size(867, 584);
             this.webBrowserProduct.TabIndex = 14;
             this.webBrowserProduct.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.webBrowserProduct_DocumentCompleted);
             // 
@@ -261,7 +261,7 @@
             this.splitContainer1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.splitContainer1.Location = new System.Drawing.Point(522, 104);
+            this.splitContainer1.Location = new System.Drawing.Point(516, 104);
             this.splitContainer1.Name = "splitContainer1";
             // 
             // splitContainer1.Panel1
@@ -271,8 +271,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.webBrowserProduct);
-            this.splitContainer1.Size = new System.Drawing.Size(1120, 587);
-            this.splitContainer1.SplitterDistance = 254;
+            this.splitContainer1.Size = new System.Drawing.Size(1126, 587);
+            this.splitContainer1.SplitterDistance = 255;
             this.splitContainer1.TabIndex = 17;
             // 
             // buttonBack
@@ -342,7 +342,7 @@
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Location = new System.Drawing.Point(15, 469);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(459, 139);
+            this.groupBox1.Size = new System.Drawing.Size(471, 139);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Ürün Fiyatları";
@@ -460,45 +460,51 @@
             // 
             // uCategoryViewProduct
             // 
-            productCategory1.CategoryName = "Tümü";
-            productCategory1.CategoryUrl = null;
-            productCategory1.HepsiBuradaCategoryId = 0;
-            productCategory1.HepsiBuradaCategoryName = null;
-            productCategory1.Id = 0;
-            productCategory1.N11CategoryId = 0;
-            productCategory1.N11CategoryName = null;
-            productCategory1.N11ExportTemplateId = 0;
-            productCategory1.N11ExportTemplateName = null;
-            productCategory1.TargetCategory = false;
-            productCategory1.UpId = 0;
-            this.uCategoryViewProduct.Category = productCategory1;
+            productCategory7.CategoryName = "Tümü";
+            productCategory7.CategoryUrl = null;
+            productCategory7.HepsiBuradaCategoryId = 0;
+            productCategory7.HepsiBuradaCategoryName = null;
+            productCategory7.Id = 0;
+            productCategory7.N11CategoryId = 0;
+            productCategory7.N11CategoryName = null;
+            productCategory7.N11ExportTemplateId = 0;
+            productCategory7.N11ExportTemplateName = null;
+            productCategory7.TargetCategory = false;
+            productCategory7.TrendyolCategoryId = 0;
+            productCategory7.TrendyolCategoryName = null;
+            productCategory7.UpId = 0;
+            this.uCategoryViewProduct.Category = productCategory7;
             this.uCategoryViewProduct.Location = new System.Drawing.Point(12, 56);
-            productCategory2.CategoryName = "Tümü";
-            productCategory2.CategoryUrl = null;
-            productCategory2.HepsiBuradaCategoryId = 0;
-            productCategory2.HepsiBuradaCategoryName = null;
-            productCategory2.Id = 0;
-            productCategory2.N11CategoryId = 0;
-            productCategory2.N11CategoryName = null;
-            productCategory2.N11ExportTemplateId = 0;
-            productCategory2.N11ExportTemplateName = null;
-            productCategory2.TargetCategory = false;
-            productCategory2.UpId = 0;
-            this.uCategoryViewProduct.MainCategory = productCategory2;
+            productCategory8.CategoryName = "Tümü";
+            productCategory8.CategoryUrl = null;
+            productCategory8.HepsiBuradaCategoryId = 0;
+            productCategory8.HepsiBuradaCategoryName = null;
+            productCategory8.Id = 0;
+            productCategory8.N11CategoryId = 0;
+            productCategory8.N11CategoryName = null;
+            productCategory8.N11ExportTemplateId = 0;
+            productCategory8.N11ExportTemplateName = null;
+            productCategory8.TargetCategory = false;
+            productCategory8.TrendyolCategoryId = 0;
+            productCategory8.TrendyolCategoryName = null;
+            productCategory8.UpId = 0;
+            this.uCategoryViewProduct.MainCategory = productCategory8;
             this.uCategoryViewProduct.Name = "uCategoryViewProduct";
             this.uCategoryViewProduct.Size = new System.Drawing.Size(474, 261);
-            productCategory3.CategoryName = "Tümü";
-            productCategory3.CategoryUrl = null;
-            productCategory3.HepsiBuradaCategoryId = 0;
-            productCategory3.HepsiBuradaCategoryName = null;
-            productCategory3.Id = 0;
-            productCategory3.N11CategoryId = 0;
-            productCategory3.N11CategoryName = null;
-            productCategory3.N11ExportTemplateId = 0;
-            productCategory3.N11ExportTemplateName = null;
-            productCategory3.TargetCategory = false;
-            productCategory3.UpId = 0;
-            this.uCategoryViewProduct.SubCategory = productCategory3;
+            productCategory9.CategoryName = "Tümü";
+            productCategory9.CategoryUrl = null;
+            productCategory9.HepsiBuradaCategoryId = 0;
+            productCategory9.HepsiBuradaCategoryName = null;
+            productCategory9.Id = 0;
+            productCategory9.N11CategoryId = 0;
+            productCategory9.N11CategoryName = null;
+            productCategory9.N11ExportTemplateId = 0;
+            productCategory9.N11ExportTemplateName = null;
+            productCategory9.TargetCategory = false;
+            productCategory9.TrendyolCategoryId = 0;
+            productCategory9.TrendyolCategoryName = null;
+            productCategory9.UpId = 0;
+            this.uCategoryViewProduct.SubCategory = productCategory9;
             this.uCategoryViewProduct.TabIndex = 3;
             // 
             // FormProductEdit

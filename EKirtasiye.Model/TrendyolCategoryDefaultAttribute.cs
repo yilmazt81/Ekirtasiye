@@ -12,6 +12,8 @@ namespace EKirtasiye.Model
         public int AttributeId { get; set; }
         public string AttributeName { get; set; }
         public int AttributeValue { get; set; }
+        public string CustomAttributeValue { get; set; }
+
 
     }
 }

@@ -1087,14 +1087,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Model.dll" size="35840">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Model.dll" size="36352">
       <assemblyIdentity name="EKirtasiye.Model" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>fI3ltw/psjxAGTZrjmw6S53xWqMYVxM9utYYTxNoV0Y=</dsig:DigestValue>
+        <dsig:DigestValue>ada1QRlKXPnbklhUuloadImmtc4W3O8he5HYISomagA=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1111,26 +1111,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Trendyol.dll" size="32768">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Trendyol.dll" size="33280">
       <assemblyIdentity name="EKirtasiye.Trendyol" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>C79v4YDjmmBREEaYQ6IFhVRV379acb+jYPONYnZaQxU=</dsig:DigestValue>
+        <dsig:DigestValue>eKwM+uzz5V9FBJVFtjssXRXY4v7l4GuUmDGk4YuFxiU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="479712">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="482272">
       <assemblyIdentity name="ETicaretWinApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>wwqHhu9BsQksUazN9GeBAyzhXCKq4T2456/y8KZC5Ec=</dsig:DigestValue>
+        <dsig:DigestValue>G9LySrWZ8FWgJTtmz1J8Fv1ROWlWcArv+Ip35MeI4Zs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

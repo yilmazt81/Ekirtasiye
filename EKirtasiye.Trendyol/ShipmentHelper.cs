@@ -15,7 +15,7 @@ namespace EKirtasiye.Trendyol
         string _endPoint = "";
         public ShipmentHelper(string endpoint)
         {
-            _endPoint = "https://api.trendyol.com/sapigw/";
+            _endPoint = endpoint;
         }
         public TrendyolCargo[] GetShipMentCompany()
         {

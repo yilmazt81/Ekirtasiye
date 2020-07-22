@@ -252,8 +252,9 @@ namespace ETicaretWinApp
             {
                 var productListUpdate = ApiHelper.FilterCatalog(new EKirtasiye.Model.DocumentFilterRequest()
                 {
-                    N11Export = "Evet",
+                    N11Export = "Beklemede",
                     ProductStatus = "Aktif"
+
                 }
                 );
 

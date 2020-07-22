@@ -35,8 +35,8 @@ namespace EKirtasiye.Trendyol
         public int vatRate { get; set; }
         public int cargoCompanyId { get; set; }
         public int shipmentAddressId { get; set; }
-        public int returningAddressId { get; set; }
-        public int deliveryDuration { get; set; }
+        public object returningAddressId { get; set; }
+      //  public int deliveryDuration { get; set; }
 
         public TrendyolUrl[] images { get; set; }
         public ProductCreateAttribute[] attributes { get; set; }
