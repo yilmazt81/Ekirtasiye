@@ -31,7 +31,10 @@ namespace ETicaretWinApp.Class
         public string StockCode { get; set; }
         [JsonProperty("c")]
         public string ProductName { get; set; }
-        
+
+        [JsonProperty("j")]
+        public string ProductPrice { get; set; }
+
         [JsonProperty("f")]
         public StokDurum[] StokDurumu { get; set; }
     }

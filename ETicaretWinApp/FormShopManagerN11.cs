@@ -278,6 +278,12 @@ namespace ETicaretWinApp
                         if (updatePrice)
                         {
                             var update = productSaleService.StartProduct(ideaCatalog.N11ProductId);
+                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                            {
+                                Id = ideaCatalog.Id,
+                                ShopName = "N11",
+                                ApprovalStatus = "1"
+                            });
 
                         }
                         else
@@ -294,6 +300,12 @@ namespace ETicaretWinApp
                         {
 
                             var update = productSaleService.StartProduct(ideaCatalog.StockCode);
+                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                            {
+                                Id = ideaCatalog.Id,
+                                ShopName = "N11",
+                                ApprovalStatus = "1"
+                            });
 
                         }
                         else

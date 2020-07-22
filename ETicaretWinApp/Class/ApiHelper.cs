@@ -672,18 +672,25 @@ namespace ETicaretWinApp
             var saveOk = PostRequest<string, UpdateProductShopSaleRequest>(url, productShopSaleRequest);
             return (saveOk == "ok");
         }
-
+        /*
         public static bool TrendyolSaveDefaultAttribute(TrendyolCategoryDefaultAttribute defaultAttribute)
         {
             string url = baseUrl + $"api/trendyol/SaveDefaultAttributes";
             var saveOk = PostRequest<string, TrendyolCategoryDefaultAttribute>(url, defaultAttribute);
             return (saveOk == "ok");
-        }
+        }*/
 
         public static bool TrendyolSaveCategory(TrendyolCategory trendyolCategory)
         {
             string url = baseUrl + $"api/trendyol/SaveCategory";
             var saveOk = PostRequest<string, TrendyolCategory>(url, trendyolCategory);
+            return (saveOk == "ok");
+        }
+
+        public static bool SaveCategoryDefaultAttribute(List<TrendyolCategoryDefaultAttribute> trendyolCategoryDefaultAttributes)
+        {
+            string url = baseUrl + $"api/trendyol/SaveCategoryDefaultAttribute";
+            var saveOk = PostRequest<string, List<TrendyolCategoryDefaultAttribute>>(url, trendyolCategoryDefaultAttributes);
             return (saveOk == "ok");
         }
         public static bool TrendyolSaveAttribute(TrendyolAttribute trendyolAttribute)
@@ -707,6 +714,29 @@ namespace ETicaretWinApp
             return GetRequest<List<TrendyolAttribute>>(url);
             //GetCategoryAttribute
         }
+
+        public static TrendyolCategoryDefaultAttribute GetTrendyolCategoryDefaultAttribute(int categoryId,int attributeId)
+        {
+            string url = baseUrl + $"api/trendyol/GetTrendyolCategoryDefaultAttribute/{categoryId}/{attributeId}";
+
+            return GetRequest<TrendyolCategoryDefaultAttribute>(url);
+        }
+
+        public static List<TrendyolCategoryDefaultAttribute> GetCategoryDefaultAttributes(int categoryId)
+        {
+            string url = baseUrl + $"api/trendyol/GetCategoryDefaultAttributes/{categoryId}";
+
+            return GetRequest<List<TrendyolCategoryDefaultAttribute>>(url);
+        }
+
+        public static bool SaveTrendyolCreateRequest(TrendyolCreateRequest trendyolCreateRequest)
+        {
+            string url = baseUrl + $"api/trendyol/SaveTrendyolCreateRequest/";
+
+            var saveOk = PostRequest<string, TrendyolCreateRequest>(url, trendyolCreateRequest);
+            return (saveOk == "ok");
+        }
+
         public static T PostRequest<T, K>(string url, K obj)
         {
 

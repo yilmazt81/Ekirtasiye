@@ -822,5 +822,11 @@ namespace ETicaretWinApp
             }
 
         }
+
+        private void MenuItemTrendyol_Click(object sender, EventArgs e)
+        {
+            FormTrendyolExport formTrendyol = new FormTrendyolExport();
+            formTrendyol.Show();
+        }
     }
 }

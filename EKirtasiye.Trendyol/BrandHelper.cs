@@ -19,7 +19,7 @@ namespace EKirtasiye.Trendyol
             _endPoint = "https://api.trendyol.com/sapigw/";
         }
 
-        public BrandReturn  GetBrands()
+        public BrandReturn GetBrands()
         {
             string serviceUrl = $"{_endPoint}brands";
 
@@ -29,6 +29,20 @@ namespace EKirtasiye.Trendyol
             {
                 var str = result.Content.ReadAsStringAsync().Result;
                 brands = JsonConvert.DeserializeObject<BrandReturn>(str);
+            }
+
+            return brands;
+        }
+
+        public Brand[] GetBrandByName(string brandName) {
+            string serviceUrl = $"{_endPoint}brands/by-name?name={brandName}";
+
+            var result = client.GetAsync(serviceUrl).Result;
+            Brand[] brands = null;
+            if (result.IsSuccessStatusCode)
+            {
+                var str = result.Content.ReadAsStringAsync().Result;
+                brands = JsonConvert.DeserializeObject<Brand[]>(str);
             }
 
             return brands;

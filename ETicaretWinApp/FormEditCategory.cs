@@ -162,7 +162,7 @@ namespace ETicaretWinApp
         {
             if (textBoxTrendyolCategory.Text == string.Empty)
                 return;
-            FormTrendyoldefaultAttribute formTrendyoldefaultAttribute = new FormTrendyoldefaultAttribute((int)textBoxTrendyolCategory.Tag);
+            FormTrendyoldefaultAttribute formTrendyoldefaultAttribute = new FormTrendyoldefaultAttribute(this.ProductCategory.Id,this.ProductCategory.TrendyolCategoryId);
             if (formTrendyoldefaultAttribute.ShowDialog() == DialogResult.OK)
             {
 

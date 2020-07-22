@@ -8,6 +8,12 @@ namespace EKirtasiye.Trendyol
 {
     public class CreateProductRequest
     {
+        public CreateTrendyolProduct[] items { get; set; }
+
+    }
+
+    public class CreateTrendyolProduct
+    {
         public string barcode { get; set; }
 
         public string title { get; set; }
@@ -33,8 +39,14 @@ namespace EKirtasiye.Trendyol
         public int deliveryDuration { get; set; }
 
         public TrendyolUrl[] images { get; set; }
-        public ProductAttribute[] attributes { get; set; }
-
+        public ProductCreateAttribute[] attributes { get; set; }
 
     }
+
+
+    public class CreateRequestReturn
+    {
+        public string batchRequestId { get; set; }
+    }
+
 }

@@ -14,13 +14,15 @@ namespace ETicaretWinApp
 {
     public partial class FormTrendyoldefaultAttribute : Form
     {
-        private int _categoryId = 0;
-        public FormTrendyoldefaultAttribute(int categoryId)
+        private int _categoryId = 0; 
+        List<UTrendyolAttribute> uTrendyolAttributes = new List<UTrendyolAttribute>();
+        public FormTrendyoldefaultAttribute(int categoryId,int trendyolCategoryId)
         {
             InitializeComponent();
             _categoryId = categoryId;
-
-            var attributeList = ApiHelper.GetTrendyolCategorieAttributes(_categoryId);
+            EKirtasiye.Trendyol.CategoryHelper categoryHelper = new EKirtasiye.Trendyol.CategoryHelper("");
+           
+            var attributeList = ApiHelper.GetTrendyolCategorieAttributes(trendyolCategoryId);
             foreach (var item in attributeList)
             {
                 LoadTrendyolAttribute(item);
@@ -34,7 +36,14 @@ namespace ETicaretWinApp
             {
                 Attribute = trendyolAttribute
             };
+
+            var attributedefaultValue = ApiHelper.GetTrendyolCategoryDefaultAttribute(_categoryId, trendyolAttribute.Attributeid);
+            if (attributedefaultValue != null)
+            {
+                uTrendyol.AttributeValue = attributedefaultValue.AttributeValue;
+            }
             this.fLayoutPanelAttribute.Controls.Add(uTrendyol);
+            uTrendyolAttributes.Add(uTrendyol);
         }
 
         private void buttonCancel_Click(object sender, EventArgs e)
@@ -45,6 +54,25 @@ namespace ETicaretWinApp
 
         private void buttonOk_Click(object sender, EventArgs e)
         {
+            List<TrendyolCategoryDefaultAttribute> ltrendyolDefaultAttribute = new List<TrendyolCategoryDefaultAttribute>();
+            foreach (var uTrendyolAttribute in uTrendyolAttributes)
+            {
+
+                ltrendyolDefaultAttribute.Add(new TrendyolCategoryDefaultAttribute()
+                {
+                    AttributeId = uTrendyolAttribute.Attribute.Attributeid,
+                    CategoryId = _categoryId,
+                    AttributeName = uTrendyolAttribute.Attribute.Attributename,
+                    AttributeValue = uTrendyolAttribute.AttributeValue
+                });
+
+            }
+            var saveR = ApiHelper.SaveCategoryDefaultAttribute(ltrendyolDefaultAttribute);
+            if (!saveR)
+            {
+                MessageBox.Show("Değerler kaydedilemedi", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
 
             DialogResult = DialogResult.OK;
         }

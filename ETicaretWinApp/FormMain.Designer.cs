@@ -88,6 +88,7 @@
             this.MenuItemSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemShopSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.sContainer1 = new System.Windows.Forms.SplitContainer();
+            this.MenuItemTrendyol = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlProduct)).BeginInit();
             this.cMenuStripProductList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -583,6 +584,8 @@
             productCategory1.N11ExportTemplateId = 0;
             productCategory1.N11ExportTemplateName = null;
             productCategory1.TargetCategory = false;
+            productCategory1.TrendyolCategoryId = 0;
+            productCategory1.TrendyolCategoryName = null;
             productCategory1.UpId = 0;
             this.uCategoryView1.Category = productCategory1;
             this.uCategoryView1.Location = new System.Drawing.Point(12, 10);
@@ -596,6 +599,8 @@
             productCategory2.N11ExportTemplateId = 0;
             productCategory2.N11ExportTemplateName = null;
             productCategory2.TargetCategory = false;
+            productCategory2.TrendyolCategoryId = 0;
+            productCategory2.TrendyolCategoryName = null;
             productCategory2.UpId = 0;
             this.uCategoryView1.MainCategory = productCategory2;
             this.uCategoryView1.Name = "uCategoryView1";
@@ -610,6 +615,8 @@
             productCategory3.N11ExportTemplateId = 0;
             productCategory3.N11ExportTemplateName = null;
             productCategory3.TargetCategory = false;
+            productCategory3.TrendyolCategoryId = 0;
+            productCategory3.TrendyolCategoryName = null;
             productCategory3.UpId = 0;
             this.uCategoryView1.SubCategory = productCategory3;
             this.uCategoryView1.TabIndex = 18;
@@ -628,7 +635,8 @@
             // MenuItemShopEntegration
             // 
             this.MenuItemShopEntegration.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.MenuItemN11Entegration});
+            this.MenuItemN11Entegration,
+            this.MenuItemTrendyol});
             this.MenuItemShopEntegration.Name = "MenuItemShopEntegration";
             this.MenuItemShopEntegration.Size = new System.Drawing.Size(69, 20);
             this.MenuItemShopEntegration.Text = "Pazar Yeri";
@@ -636,7 +644,7 @@
             // MenuItemN11Entegration
             // 
             this.MenuItemN11Entegration.Name = "MenuItemN11Entegration";
-            this.MenuItemN11Entegration.Size = new System.Drawing.Size(95, 22);
+            this.MenuItemN11Entegration.Size = new System.Drawing.Size(180, 22);
             this.MenuItemN11Entegration.Text = "N11";
             this.MenuItemN11Entegration.Click += new System.EventHandler(this.MenuItemN11Entegration_Click);
             // 
@@ -651,7 +659,7 @@
             // MenuItemShopSetting
             // 
             this.MenuItemShopSetting.Name = "MenuItemShopSetting";
-            this.MenuItemShopSetting.Size = new System.Drawing.Size(163, 22);
+            this.MenuItemShopSetting.Size = new System.Drawing.Size(180, 22);
             this.MenuItemShopSetting.Text = "Pazaryeri Şifreleri";
             this.MenuItemShopSetting.Click += new System.EventHandler(this.MenuItemShopSetting_Click);
             // 
@@ -676,6 +684,13 @@
             this.sContainer1.Size = new System.Drawing.Size(1540, 458);
             this.sContainer1.SplitterDistance = 229;
             this.sContainer1.TabIndex = 20;
+            // 
+            // MenuItemTrendyol
+            // 
+            this.MenuItemTrendyol.Name = "MenuItemTrendyol";
+            this.MenuItemTrendyol.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemTrendyol.Text = "Trendyol";
+            this.MenuItemTrendyol.Click += new System.EventHandler(this.MenuItemTrendyol_Click);
             // 
             // FormMain
             // 
@@ -768,6 +783,7 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemN11Entegration;
         private System.Windows.Forms.ToolStripMenuItem MenuItemExportN11;
         private System.Windows.Forms.SplitContainer sContainer1;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemTrendyol;
     }
 }
 

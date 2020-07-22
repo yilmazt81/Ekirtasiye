@@ -17,8 +17,8 @@ namespace EKirtasiye.Trendyol
 
         public string supplierId { get; set; }
 
-        public string createDateTime { get; set; }
-        public string lastUpdateDate { get; set; }
+        public object createDateTime { get; set; }
+        public object lastUpdateDate { get; set; }
 
         public string gender { get; set; }
 
@@ -58,5 +58,14 @@ namespace EKirtasiye.Trendyol
     {
         public string attributeName { get; set; }
         public string attributeValue { get; set; }
+    }
+
+    public class ProductCreateAttribute
+    {
+        public int attributeId { get; set; }
+        public string attributeValueId { get; set; }
+        public string customAttributeValue { get; set; }
+
+
     }
 }

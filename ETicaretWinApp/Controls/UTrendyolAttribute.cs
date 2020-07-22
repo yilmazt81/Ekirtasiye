@@ -34,5 +34,15 @@ namespace ETicaretWinApp.Controls
                 comboBoxValues.DisplayMember = "AttributeText";
             }
         }
+
+        public int AttributeValue {
+            get {
+               return (int)comboBoxValues.SelectedValue;
+
+            }
+            set {
+                comboBoxValues.SelectedValue = value;
+            }
+        }
     }
 }

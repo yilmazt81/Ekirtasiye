@@ -39,7 +39,7 @@ namespace EKirtasiye.DBLayer
                 Required = Convert.ToBoolean(row["required"]),
                 Slicer = Convert.ToBoolean(row["slicer"]),
                 Varianter = Convert.ToBoolean(row["varianter"]),
-                TrendyolAttributes= GetTrendyolAttributeValues(Convert.ToInt32(row["Id"]))
+                TrendyolAttributes = GetTrendyolAttributeValues(Convert.ToInt32(row["Id"]))
 
             }).ToList();
 
@@ -51,11 +51,61 @@ namespace EKirtasiye.DBLayer
 
             return dataAttributes.Rows.Cast<DataRow>().Select(row => new TrendyolAttributeValue()
             {
-                AttributeValue=Convert.ToInt32(row["AttributeValue"]),
-                AttributeText=row["AttributeText"].ToString()
+                AttributeValue = Convert.ToInt32(row["AttributeValue"]),
+                AttributeText = row["AttributeText"].ToString()
 
             }).ToArray();
 
+        }
+
+        public static TrendyolCategoryDefaultAttribute GetDefaultAttribute(int categoryId, int attributeId)
+        {
+            var datadefaultAttribute = DBHelper.GetQuery($"SELECT * FROM TrendyolCategoryDefaultAttribute WHERE CategoryId={categoryId} AND AttributeId={attributeId}");
+
+            return (datadefaultAttribute.Rows.Count == 0 ? null : new TrendyolCategoryDefaultAttribute()
+            {
+                AttributeId = Convert.ToInt32(datadefaultAttribute.Rows[0]["AttributeId"]),
+                AttributeName = datadefaultAttribute.Rows[0]["AttributeName"].ToString(),
+                AttributeValue = Convert.ToInt32(datadefaultAttribute.Rows[0]["AttributeValue"]),
+                CategoryId = Convert.ToInt32(datadefaultAttribute.Rows[0]["CategoryId"]),
+                Id = Convert.ToInt32(datadefaultAttribute.Rows[0]["Id"])
+            });
+        }
+
+        public static List<TrendyolCategoryDefaultAttribute> GetCategoryDefaultAttributes(int categoryId)
+        {
+            var datadefaultAttribute = DBHelper.GetQuery($"SELECT * FROM TrendyolCategoryDefaultAttribute WHERE CategoryId={categoryId}  ");
+
+
+            return datadefaultAttribute.Rows.Cast<DataRow>().Select(row => new TrendyolCategoryDefaultAttribute()
+            {
+                AttributeId = Convert.ToInt32(row["AttributeId"]),
+                AttributeName = row["AttributeName"].ToString(),
+                AttributeValue = Convert.ToInt32(row["AttributeValue"]),
+                CategoryId = Convert.ToInt32(row["CategoryId"]),
+                Id = Convert.ToInt32(row["Id"])
+
+            }).ToList();
+
+        }
+
+        public static bool SaveCategoryDefaultAttribute(List<TrendyolCategoryDefaultAttribute> trendyolCategoryDefaultAttributes)
+        {
+            var categoryId = trendyolCategoryDefaultAttributes.FirstOrDefault().CategoryId;
+            DBHelper.ExecuteCommand($"DELETE FROM  TrendyolCategoryDefaultAttribute WHERE CategoryId={categoryId}");
+            foreach (var defaultAttribute in trendyolCategoryDefaultAttributes.Where(s => s.AttributeValue != 0))
+            {
+
+
+                DBHelper.ExecuteCommand("pSaveTrendyolDefaultAttribute", new SqlParameter[] {
+                new SqlParameter("@CategoryId",defaultAttribute.CategoryId),
+                new SqlParameter("@AttributeId",defaultAttribute.AttributeId),
+                new SqlParameter("@AttributeName",defaultAttribute.AttributeName),
+                new SqlParameter("@AttributeValue",defaultAttribute.AttributeValue)
+                });
+
+            }
+            return true;
         }
 
         public static List<TrendyolCategory> GetCategory()
@@ -74,6 +124,17 @@ namespace EKirtasiye.DBLayer
 
         }
 
+        public static bool SaveTrendyolCreateRequest(TrendyolCreateRequest trendyolCreate)
+        {
+            DBHelper.ExecuteCommand("pSaveTrendyolCreateRequest", new SqlParameter[]
+            {
+                new SqlParameter("@ProductId",trendyolCreate.ProductId),
+                new SqlParameter("@BatchRequest",trendyolCreate.BatchRequest)
+            });
+
+            return true;
+        }
+        /*
         public static void SaveTrendyolDefaulAttribute(TrendyolCategoryDefaultAttribute defaultAttribute)
         {
             using (SqlConnection connection = DBHelper.GetOpenConnection())
@@ -92,7 +153,7 @@ namespace EKirtasiye.DBLayer
 
                 }
             }
-        }
+        }*/
 
         public static void SaveTrendyolAttribute(TrendyolAttribute trendyolAttribute)
         {

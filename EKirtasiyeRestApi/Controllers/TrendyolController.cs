@@ -51,9 +51,59 @@ namespace EKirtasiyeRestApi.Controllers
 
          return   TrendyolCategoryRepository.GetTrendyolAttributes(categoryId);
 
-
-
+             
         }
+        [Route("GetTrendyolCategoryDefaultAttribute/{categoryId}/{attributeId}")]
+        [HttpGet]
+        public TrendyolCategoryDefaultAttribute GetTrendyolCategoryDefaultAttribute(int categoryId,int attributeId)
+        {
+            
+            return TrendyolCategoryRepository.GetDefaultAttribute(categoryId, attributeId);
+        }
+
+        [Route("GetCategoryDefaultAttributes/{categoryId}")]
+        [HttpGet]
+        public List<TrendyolCategoryDefaultAttribute> GetCategoryDefaultAttributes(int categoryId )
+        {
+            //GetCategoryDefaultAttributes
+            return TrendyolCategoryRepository.GetCategoryDefaultAttributes(categoryId);
+        }
+
+        [Route("SaveCategoryDefaultAttribute")]
+        [HttpPost]
+        public string SaveCategoryDefaultAttribute(List<TrendyolCategoryDefaultAttribute> trendyolCategoryDefaultAttributes)
+        {
+
+            try
+            {
+                TrendyolCategoryRepository.SaveCategoryDefaultAttribute(trendyolCategoryDefaultAttributes);
+
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+        [Route("SaveTrendyolCreateRequest")]
+        [HttpPost]
+        public string SaveTrendyolCreateRequest(TrendyolCreateRequest trendyolCreateRequest)
+        {
+            try
+            {
+                TrendyolCategoryRepository.SaveTrendyolCreateRequest(trendyolCreateRequest);
+
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
+        /*
+
         [Route("SaveDefaultAttributes")]
         [HttpPost]
         public string SaveDefaultAttribute(TrendyolCategoryDefaultAttribute categoryDefaultAttribute)
@@ -68,7 +118,7 @@ namespace EKirtasiyeRestApi.Controllers
             {
                 return ex.Message;
             }
-        }
+        }*/
 
         [Route("SaveTrendyolAttribute")]
         [HttpPost]

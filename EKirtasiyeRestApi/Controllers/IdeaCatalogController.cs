@@ -11,8 +11,8 @@ namespace EKirtasiyeRestApi.Controllers
 {
     [RoutePrefix("api/IdeaCatalog")]
     public class IdeaCatalogController : ApiController
-    { 
-      
+    {
+
         public IdeaCatalogController()
         {
             DBHelper.SqlConnectionStr = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
@@ -38,11 +38,11 @@ namespace EKirtasiyeRestApi.Controllers
             }
         }
         [Route("GetIdeaCatalogFromBarcode/{barcode}/{getBackup}")]
-        public IdeaCatalog GetIdeaCatalogFromBarcode(string barcode,bool getBackup)
+        public IdeaCatalog GetIdeaCatalogFromBarcode(string barcode, bool getBackup)
         {
             return IdeaCatalogRepository.GetIdeaCatalogFromBarcode(barcode, getBackup);
         }
-        
+
 
         [HttpGet]
         [Route("getwebexportstatus")]
@@ -133,6 +133,8 @@ namespace EKirtasiyeRestApi.Controllers
                 return ex.Message;
             }
         }
+
+     
 
         [HttpPost]
         [Route("exportexternalshop/UpdateShopProductState")]

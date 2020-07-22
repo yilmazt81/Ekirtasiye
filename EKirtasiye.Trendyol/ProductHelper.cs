@@ -10,16 +10,16 @@ namespace EKirtasiye.Trendyol
 {
     public class ProductHelper
     {
-        private string _supplierid, _userName,_password, _endPoint = string.Empty;
-        HttpClient client = new HttpClient(); 
-        public ProductHelper(string endPoint,string suplierId,string userName,string password)
+        private string _supplierid, _userName, _password, _endPoint = string.Empty;
+        HttpClient client = new HttpClient();
+        public ProductHelper(string endPoint, string suplierId, string userName, string password)
         {
             _supplierid = suplierId;
             _userName = userName;
             _password = password;
             _endPoint = endPoint;
 
-             
+
             string svcCredentials = Convert.ToBase64String(ASCIIEncoding.UTF8.GetBytes(_userName + ":" + _password));
 
             client.DefaultRequestHeaders.Add("Authorization", "Basic " + svcCredentials);
@@ -45,7 +45,16 @@ namespace EKirtasiye.Trendyol
             return trendyolProducts;
         }
 
-        public bool CreateProduct(CreateProductRequest createProductRequest)
+        public BatchRequestResult GetBatchRequest(string batchRequestId)
+        {
+
+            string serviceUrl = $"{_endPoint}/suppliers/{_supplierid}/products/batch-requests/{batchRequestId}";
+
+            return GetRequest<BatchRequestResult>(serviceUrl);
+
+        }
+
+        public CreateRequestReturn CreateProduct(CreateProductRequest createProductRequest)
         {
             string serviceUrl = $"{_endPoint}suppliers/{_supplierid}/v2/products";
 
@@ -56,21 +65,61 @@ namespace EKirtasiye.Trendyol
 
             var result = client.PostAsync(serviceUrl, content).Result;
 
-
+            CreateRequestReturn createRequestReturn = null;
             if (result.IsSuccessStatusCode)
             {
 
                 var serviceReturn = result.Content.ReadAsStringAsync().Result;
 
-                //serviceToken = JsonConvert.DeserializeObject<ServiceToken>(serviceReturn);
-                  return true;
+                createRequestReturn = JsonConvert.DeserializeObject<CreateRequestReturn>(serviceReturn);
+                
             }
             else
             {
                 var statusCode = result.StatusCode;
-                return false;
+              
             }
-             
+            return createRequestReturn;
+        }
+
+        public T PostRequest<T, K>(string url, K obj)
+        {
+
+            var jsonClass = JsonConvert.SerializeObject(obj);
+            var content = new StringContent(jsonClass, Encoding.UTF8, "application/json");
+            T requestReturn;
+            var result = client.PostAsync(url, content).Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var str = result.Content.ReadAsStringAsync().Result;
+                requestReturn = JsonConvert.DeserializeObject<T>(str);
+
+                return requestReturn;
+            }
+            else
+            {
+                throw new Exception("Request Return Code : " + result.StatusCode);
+
+            }
+        }
+
+        public T GetRequest<T>(string url)
+        {
+
+            T requestReturn;
+            var result = client.GetAsync(url).Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var str = result.Content.ReadAsStringAsync().Result;
+                requestReturn = JsonConvert.DeserializeObject<T>(str);
+
+                return requestReturn;
+            }
+            else
+            {
+                throw new Exception("Request Return Code : " + result.StatusCode);
+
+            }
         }
 
     }

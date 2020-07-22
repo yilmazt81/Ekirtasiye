@@ -34,6 +34,19 @@ namespace EKirtasiye.DBLayer
                 }
             }
         }
+        public static void ExecuteCommand(string sqlCommandText)
+        {
+            using (SqlConnection connection = GetOpenConnection())
+            {
+                using (SqlCommand sqlCommand = connection.CreateCommand())
+                {
+                    sqlCommand.CommandType = System.Data.CommandType.Text;
+                    sqlCommand.CommandText = sqlCommandText;
+                    
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+        }
 
         public static DataTable GetQuery(string queryStr)
         {

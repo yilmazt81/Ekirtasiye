@@ -126,7 +126,7 @@ namespace ETicaretWinApp
                     });
 
                     var attributes = categoryHelper.GetCategoryAttributes(category.id);
-                    if (attributes.categoryAttributes.Length > 0)
+                    if (attributes!=null && attributes.categoryAttributes.Length > 0)
                     {
                         System.Diagnostics.Debug.WriteLine("ddd");
                         foreach (var attribute in attributes.categoryAttributes)
@@ -180,7 +180,8 @@ namespace ETicaretWinApp
                     try
                     {
                         var attributes = categoryHelper.GetCategoryAttributes(category.id);
-                        if (attributes.categoryAttributes.Length > 0)
+                        
+                        if (attributes!=null && attributes.categoryAttributes.Length > 0)
                         {
                             System.Diagnostics.Debug.WriteLine("ddd");
 

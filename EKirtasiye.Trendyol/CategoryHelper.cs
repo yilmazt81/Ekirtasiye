@@ -14,7 +14,7 @@ namespace EKirtasiye.Trendyol
         private string _endPoint = string.Empty;
         public CategoryHelper(string endPoint)
         {
-            _endPoint = "https://api.trendyol.com/sapigw";
+            _endPoint = endPoint;
         }
 
         public CategoryRequestReturn GetTrendyolCategories()
