@@ -1087,14 +1087,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Model.dll" size="36352">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Model.dll" size="37376">
       <assemblyIdentity name="EKirtasiye.Model" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>ada1QRlKXPnbklhUuloadImmtc4W3O8he5HYISomagA=</dsig:DigestValue>
+        <dsig:DigestValue>fRDZaRxRV9wVSlgcjHTn9Q40TsEywnGb4qTXWvU2DM4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1118,19 +1118,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>eKwM+uzz5V9FBJVFtjssXRXY4v7l4GuUmDGk4YuFxiU=</dsig:DigestValue>
+        <dsig:DigestValue>8QhAXQVrsl0XRSpNOtZP+wt3SJvlMUiBlSkAOmCKwro=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="482272">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="481248">
       <assemblyIdentity name="ETicaretWinApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>G9LySrWZ8FWgJTtmz1J8Fv1ROWlWcArv+Ip35MeI4Zs=</dsig:DigestValue>
+        <dsig:DigestValue>Iq6vhpKEiMc3eozd8qr5g69R15ZNI7Y2LvLlGXIlaoE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

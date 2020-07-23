@@ -1,4 +1,5 @@
-﻿using LiteDB;
+﻿using EKirtasiye.Model;
+using LiteDB;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,9 +17,10 @@ namespace ETicaretWinApp
             return new LiteDatabase(Path.Combine(Application.StartupPath, "ApplicationDB.db"));
         }
 
-        public static void SaveSetting(AppSetting appSetting)
+        public static void SaveSetting(ApplicationSetting appSetting)
         {
-            using (var db = GetLiteDatabase())
+            ApiHelper.SaveApplicationSetting(appSetting);
+            /*using (var db = GetLiteDatabase())
             {
                 var col = db.GetCollection<AppSetting>("AppSetting");
                 var oneSetting = col.FindOne(s => s.SectionName == appSetting.SectionName && s.SettingName == appSetting.SettingName);
@@ -31,18 +33,12 @@ namespace ETicaretWinApp
                     oneSetting.SettingValue = appSetting.SettingValue;
                     col.Update(oneSetting);
                 }
-            }
+            }*/
         }
 
-        public static AppSetting GetApplication(string sectionName,string settingName)
+        public static ApplicationSetting GetApplication(string sectionName,string settingName)
         {
-            using (var db = GetLiteDatabase())
-            {
-                var col = db.GetCollection<AppSetting>("AppSetting");
-                var oneSetting = col.FindOne(s => s.SectionName == sectionName && s.SettingName == settingName);
-
-                return oneSetting;
-            }
+           return ApiHelper.GetApplicationSetting(sectionName, settingName);
         }
 
     }

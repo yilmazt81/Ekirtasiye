@@ -744,6 +744,21 @@ namespace ETicaretWinApp
             return (saveOk == "ok");
         }
 
+        public static ApplicationSetting GetApplicationSetting(string sectionName,string settingName)
+        { 
+
+            string url = baseUrl + $"api/ApplicationSetting/GetApplication/{sectionName}/{settingName}";
+
+            return GetRequest<ApplicationSetting>(url);
+        }
+
+        public static bool SaveApplicationSetting(ApplicationSetting applicationSetting)
+        {
+            string url = baseUrl + $"api/ApplicationSetting/";
+
+            var saveOk = PostRequest<string, ApplicationSetting>(url, applicationSetting);
+            return (saveOk == "ok");
+        }
         public static T PostRequest<T, K>(string url, K obj)
         {
 

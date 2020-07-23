@@ -134,7 +134,7 @@ namespace ETicaretWinApp
                     returningAddressId = null,
                     shipmentAddressId = supplierAdress.defaultShipmentAddress.id,
                     categoryId = productCategory.TrendyolCategoryId,
-                    productMainId = ideaCatalog.Id.ToString(),
+                    productMainId = ideaCatalog.StockCode,
 
                 };
 
@@ -150,9 +150,7 @@ namespace ETicaretWinApp
                 {
                     return "Post işlemi başarısız ";
                 }
-
-
-
+                 
                 ApiHelper.SaveTrendyolCreateRequest(new EKirtasiye.Model.TrendyolCreateRequest()
                 {
                     ProductId = ideaCatalog.Id,

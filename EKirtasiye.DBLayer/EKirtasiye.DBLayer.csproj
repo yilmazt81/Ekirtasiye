@@ -43,6 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationSettingRepository.cs" />
     <Compile Include="DBHelper.cs" />
     <Compile Include="HepsiBuradaCategoryRepository.cs" />
     <Compile Include="IdeaCatalogRepository.cs" />

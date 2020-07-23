@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationSetting.cs" />
     <Compile Include="HepsiBuradaCategory.cs" />
     <Compile Include="IdeaCatalog_Barcode.cs" />
     <Compile Include="InstagramShareType.cs" />

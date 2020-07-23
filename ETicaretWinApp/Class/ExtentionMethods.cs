@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EKirtasiye.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace ETicaretWinApp
 
         public static void AddValue( string section, string key, string value)
         {
-            LocalDBHelper.SaveSetting(new AppSetting()
+            LocalDBHelper.SaveSetting(new ApplicationSetting()
             {
                 SectionName = section,
                 SettingName = key,

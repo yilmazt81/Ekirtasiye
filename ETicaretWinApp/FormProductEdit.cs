@@ -149,7 +149,7 @@ namespace ETicaretWinApp
 
                 ideaCatalog.Details = htmlTextboxDescription.Text;
                 ideaCatalog.Brand = HelperXmlRead.ConvertHtmlCodesToTurkish(comboBoxBrand.Text);
-
+         
                 ideaCatalog.WebPrice = textBoxWebPrice.Text;
                 if (string.IsNullOrEmpty(ideaCatalog.Picture1Path) && !string.IsNullOrEmpty(_localDownloadPicture))
                 {
