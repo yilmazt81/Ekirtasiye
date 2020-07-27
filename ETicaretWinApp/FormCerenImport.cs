@@ -22,17 +22,20 @@ namespace ETicaretWinApp
         private ProductUrl _productUrl = null;
         private bool stopprocess = false;
         List<IdeaCatalogCategoryMatch> ideaCategegoryMatch = null;
-
-
+        List<string> ldbProductList = new List<string>();
+        ProductSaleService productHelper = null;
+        ProductHelper productHelperPrice = null;
         public FormCerenImport()
         {
             InitializeComponent();
             ideaCategegoryMatch = ApiHelper.GetIdeaCatalogCategoryMatches();
 
+            var _apiKey = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
+            var _secretKey = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
+            productHelper = new ProductSaleService(_apiKey, _secretKey);
+            productHelperPrice = new ProductHelper(_apiKey, _secretKey);
+
         }
-
-
-
 
         public string RemoveTurkish(string s)
         {
@@ -118,6 +121,14 @@ namespace ETicaretWinApp
         {
             try
             {
+
+                var productListUpdate = ApiHelper.FilterCatalog(new EKirtasiye.Model.DocumentFilterRequest()
+                {
+                    N11Export = "Evet",
+                    ProductStatus = "Aktif",
+                    StokSource = "Ceren"
+                });
+                ldbProductList = productListUpdate.Select(s => s.StockCode).ToList();
                 CerenApi cerenApi = new CerenApi();
                 var result = await cerenApi.Login("kemalkesab@gmail.com", "QYJ5ZW_UQN!9");
                 var category = await cerenApi.GetCategoryProducts("2");
@@ -137,6 +148,51 @@ namespace ETicaretWinApp
                         // throw;
                     }
                 }
+                foreach (var oneproductCode in ldbProductList)
+                {
+                    try
+                    {
+                        var stokSearch = await cerenApi.GetProductCode(oneproductCode);
+                        var ideaCatalog = productListUpdate.FirstOrDefault(s => s.StockCode == oneproductCode);
+                        if (stokSearch.data.list.Length == 0)
+                        {
+                            ideaCatalog.Status = false;
+                            ApiHelper.InsertIdeaCatalog(ideaCatalog);
+                            var resultdisable = productHelper.DisableProduct(ideaCatalog.N11ProductId);
+                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                            {
+                                Id = ideaCatalog.Id,
+                                ShopName = "N11",
+                                ApprovalStatus = "2"
+                            });
+
+                        }
+                        else
+                        {
+                            var stokstate = stokSearch.data.list[0].StokDurumu.Any(s => s.StokState == "Var");
+                            if (!stokstate)
+                            {
+                                ideaCatalog.Status = false;
+                                ApiHelper.InsertIdeaCatalog(ideaCatalog);
+
+                                var resultdisable = productHelper.DisableProduct(ideaCatalog.N11ProductId);
+                                ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                                {
+                                    Id = ideaCatalog.Id,
+                                    ShopName = "N11",
+                                    ApprovalStatus = "2"
+                                });
+                            }
+
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine(ex);
+                    }
+
+                }
 
                 MessageBox.Show("işlem Bitti", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -148,10 +204,7 @@ namespace ETicaretWinApp
 
         private async void ProcessProduct(Class.DataCategory dataCategory, CerenApi cerenApi)
         {
-            var _apiKey = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
-            var _secretKey = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
-            var productHelper = new ProductSaleService(_apiKey, _secretKey);
-            var productHelperPrice = new ProductHelper(_apiKey, _secretKey);
+
             foreach (var cerenProduct in dataCategory.list)
             {
                 try
@@ -186,6 +239,7 @@ namespace ETicaretWinApp
                                 ShopName = "N11",
                                 ApprovalStatus = "2"
                             });
+
                         }
                         else
                         {
@@ -193,6 +247,16 @@ namespace ETicaretWinApp
                             var cerenPrice = cerenProduct.ProductPrice.Replace(ideaCatalog.CurrencyAbbr, "").Trim();
                             priceChanged = ideaCatalog.Price1.Trim() != cerenPrice;
 
+                            if (string.IsNullOrEmpty(ideaCatalog.Barcode))
+                            {
+                                var product = await cerenApi.GetProductDetail(int.Parse(cerenProduct.Id));
+                                ideaCatalog.Barcode = product.data.Barkodlar.FirstOrDefault().Barkod;
+                                ideaCatalog.Barcodes = product.data.Barkodlar.Select(s => new IdeaCatalog_Barcode()
+                                {
+                                    Barcode = s.Barkod,
+                                    StockType = s.StokTuru
+                                }).ToArray();
+                            }
                             ideaCatalog.Price1 = cerenProduct.ProductPrice.Replace(ideaCatalog.CurrencyAbbr, "");
                             var priceTemp = float.Parse(ideaCatalog.Price1.Replace(".", ""));
                             var taxRate = float.Parse("1," + ideaCatalog.Tax);
@@ -201,20 +265,9 @@ namespace ETicaretWinApp
 
                             ApiHelper.InsertIdeaCatalog(ideaCatalog);
                             if (ideaCatalog.N11ProductId != 0)
-                            {/*
-                            if (product.data.Barkodlar.Count() < 2)
                             {
-                                var result = productHelper.DisableProduct(ideaCatalog.N11ProductId);
-                                ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
-                                {
-                                    Id = ideaCatalog.Id,
-                                    ShopName = "N11",
-                                    ApprovalStatus = "2"
-                                });
-                            }*/
-
                                 if (priceChanged)
-                                { 
+                                {
                                     float price = float.Parse(ideaCatalog.MimimumPrice) * (float)1.15;
                                     if (price > 150)
                                     {
@@ -224,8 +277,8 @@ namespace ETicaretWinApp
                                 }
                             }
 
-
                         }
+                        ldbProductList.Remove(ideaCatalog.StockCode);
                     }
                 }
                 catch (Exception ex)

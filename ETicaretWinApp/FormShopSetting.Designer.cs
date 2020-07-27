@@ -47,19 +47,22 @@
             this.textBoxN11AppKey = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.tabPageTrendYol = new System.Windows.Forms.TabPage();
+            this.buttonGetCategoryTrendyol = new System.Windows.Forms.Button();
+            this.textBoxTyEndPoint = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.textBoxTyPassword = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.textBoxTyUserName = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.textBoxTySupplierId = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.imageListShop = new System.Windows.Forms.ImageList(this.components);
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
-            this.tabPageTrendYol = new System.Windows.Forms.TabPage();
-            this.label8 = new System.Windows.Forms.Label();
-            this.textBoxTySupplierId = new System.Windows.Forms.TextBox();
-            this.textBoxTyUserName = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.textBoxTyPassword = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.textBoxTyEndPoint = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.buttonGetCategoryTrendyol = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.comboBoxTrendyolCargo = new System.Windows.Forms.ComboBox();
+            this.buttonTrendyolRefresh = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -251,6 +254,104 @@
             this.label6.TabIndex = 7;
             this.label6.Text = "AppKey";
             // 
+            // tabPageTrendYol
+            // 
+            this.tabPageTrendYol.Controls.Add(this.buttonTrendyolRefresh);
+            this.tabPageTrendYol.Controls.Add(this.comboBoxTrendyolCargo);
+            this.tabPageTrendYol.Controls.Add(this.label12);
+            this.tabPageTrendYol.Controls.Add(this.buttonGetCategoryTrendyol);
+            this.tabPageTrendYol.Controls.Add(this.textBoxTyEndPoint);
+            this.tabPageTrendYol.Controls.Add(this.label11);
+            this.tabPageTrendYol.Controls.Add(this.textBoxTyPassword);
+            this.tabPageTrendYol.Controls.Add(this.label10);
+            this.tabPageTrendYol.Controls.Add(this.textBoxTyUserName);
+            this.tabPageTrendYol.Controls.Add(this.label9);
+            this.tabPageTrendYol.Controls.Add(this.textBoxTySupplierId);
+            this.tabPageTrendYol.Controls.Add(this.label8);
+            this.tabPageTrendYol.Location = new System.Drawing.Point(4, 27);
+            this.tabPageTrendYol.Name = "tabPageTrendYol";
+            this.tabPageTrendYol.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPageTrendYol.Size = new System.Drawing.Size(581, 288);
+            this.tabPageTrendYol.TabIndex = 2;
+            this.tabPageTrendYol.Text = "TrendYol";
+            this.tabPageTrendYol.UseVisualStyleBackColor = true;
+            // 
+            // buttonGetCategoryTrendyol
+            // 
+            this.buttonGetCategoryTrendyol.Image = global::ETicaretWinApp.Properties.Resources._07;
+            this.buttonGetCategoryTrendyol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.buttonGetCategoryTrendyol.Location = new System.Drawing.Point(373, 248);
+            this.buttonGetCategoryTrendyol.Name = "buttonGetCategoryTrendyol";
+            this.buttonGetCategoryTrendyol.Size = new System.Drawing.Size(202, 31);
+            this.buttonGetCategoryTrendyol.TabIndex = 12;
+            this.buttonGetCategoryTrendyol.Text = "KategoryListesi Çek";
+            this.buttonGetCategoryTrendyol.UseVisualStyleBackColor = true;
+            this.buttonGetCategoryTrendyol.Click += new System.EventHandler(this.buttonGetCategoryTrendyol_Click);
+            // 
+            // textBoxTyEndPoint
+            // 
+            this.textBoxTyEndPoint.Location = new System.Drawing.Point(127, 153);
+            this.textBoxTyEndPoint.Name = "textBoxTyEndPoint";
+            this.textBoxTyEndPoint.Size = new System.Drawing.Size(296, 26);
+            this.textBoxTyEndPoint.TabIndex = 7;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(27, 156);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(26, 18);
+            this.label11.TabIndex = 6;
+            this.label11.Text = "Url";
+            // 
+            // textBoxTyPassword
+            // 
+            this.textBoxTyPassword.Location = new System.Drawing.Point(127, 103);
+            this.textBoxTyPassword.Name = "textBoxTyPassword";
+            this.textBoxTyPassword.Size = new System.Drawing.Size(296, 26);
+            this.textBoxTyPassword.TabIndex = 5;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(27, 106);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(66, 18);
+            this.label10.TabIndex = 4;
+            this.label10.Text = "API Secet";
+            // 
+            // textBoxTyUserName
+            // 
+            this.textBoxTyUserName.Location = new System.Drawing.Point(127, 61);
+            this.textBoxTyUserName.Name = "textBoxTyUserName";
+            this.textBoxTyUserName.Size = new System.Drawing.Size(296, 26);
+            this.textBoxTyUserName.TabIndex = 3;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(27, 64);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(55, 18);
+            this.label9.TabIndex = 2;
+            this.label9.Text = "API Key";
+            // 
+            // textBoxTySupplierId
+            // 
+            this.textBoxTySupplierId.Location = new System.Drawing.Point(127, 17);
+            this.textBoxTySupplierId.Name = "textBoxTySupplierId";
+            this.textBoxTySupplierId.Size = new System.Drawing.Size(296, 26);
+            this.textBoxTySupplierId.TabIndex = 1;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(27, 20);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(73, 18);
+            this.label8.TabIndex = 0;
+            this.label8.Text = "SupplierID";
+            // 
             // imageListShop
             // 
             this.imageListShop.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit;
@@ -283,100 +384,33 @@
             this.buttonOk.UseVisualStyleBackColor = true;
             this.buttonOk.Click += new System.EventHandler(this.buttonOk_Click);
             // 
-            // tabPageTrendYol
+            // label12
             // 
-            this.tabPageTrendYol.Controls.Add(this.buttonGetCategoryTrendyol);
-            this.tabPageTrendYol.Controls.Add(this.textBoxTyEndPoint);
-            this.tabPageTrendYol.Controls.Add(this.label11);
-            this.tabPageTrendYol.Controls.Add(this.textBoxTyPassword);
-            this.tabPageTrendYol.Controls.Add(this.label10);
-            this.tabPageTrendYol.Controls.Add(this.textBoxTyUserName);
-            this.tabPageTrendYol.Controls.Add(this.label9);
-            this.tabPageTrendYol.Controls.Add(this.textBoxTySupplierId);
-            this.tabPageTrendYol.Controls.Add(this.label8);
-            this.tabPageTrendYol.Location = new System.Drawing.Point(4, 27);
-            this.tabPageTrendYol.Name = "tabPageTrendYol";
-            this.tabPageTrendYol.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTrendYol.Size = new System.Drawing.Size(581, 288);
-            this.tabPageTrendYol.TabIndex = 2;
-            this.tabPageTrendYol.Text = "TrendYol";
-            this.tabPageTrendYol.UseVisualStyleBackColor = true;
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(27, 205);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(90, 18);
+            this.label12.TabIndex = 13;
+            this.label12.Text = "Kargo Firması";
             // 
-            // label8
+            // comboBoxTrendyolCargo
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(27, 20);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(73, 18);
-            this.label8.TabIndex = 0;
-            this.label8.Text = "SupplierID";
+            this.comboBoxTrendyolCargo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTrendyolCargo.FormattingEnabled = true;
+            this.comboBoxTrendyolCargo.Location = new System.Drawing.Point(127, 201);
+            this.comboBoxTrendyolCargo.Name = "comboBoxTrendyolCargo";
+            this.comboBoxTrendyolCargo.Size = new System.Drawing.Size(296, 26);
+            this.comboBoxTrendyolCargo.TabIndex = 14;
             // 
-            // textBoxTySupplierId
+            // buttonTrendyolRefresh
             // 
-            this.textBoxTySupplierId.Location = new System.Drawing.Point(127, 17);
-            this.textBoxTySupplierId.Name = "textBoxTySupplierId";
-            this.textBoxTySupplierId.Size = new System.Drawing.Size(296, 26);
-            this.textBoxTySupplierId.TabIndex = 1;
-            // 
-            // textBoxTyUserName
-            // 
-            this.textBoxTyUserName.Location = new System.Drawing.Point(127, 61);
-            this.textBoxTyUserName.Name = "textBoxTyUserName";
-            this.textBoxTyUserName.Size = new System.Drawing.Size(296, 26);
-            this.textBoxTyUserName.TabIndex = 3;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(27, 64);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(76, 18);
-            this.label9.TabIndex = 2;
-            this.label9.Text = "User Name";
-            // 
-            // textBoxTyPassword
-            // 
-            this.textBoxTyPassword.Location = new System.Drawing.Point(127, 103);
-            this.textBoxTyPassword.Name = "textBoxTyPassword";
-            this.textBoxTyPassword.Size = new System.Drawing.Size(296, 26);
-            this.textBoxTyPassword.TabIndex = 5;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(27, 106);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(37, 18);
-            this.label10.TabIndex = 4;
-            this.label10.Text = "Şifre";
-            // 
-            // textBoxTyEndPoint
-            // 
-            this.textBoxTyEndPoint.Location = new System.Drawing.Point(127, 153);
-            this.textBoxTyEndPoint.Name = "textBoxTyEndPoint";
-            this.textBoxTyEndPoint.Size = new System.Drawing.Size(296, 26);
-            this.textBoxTyEndPoint.TabIndex = 7;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(27, 156);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(26, 18);
-            this.label11.TabIndex = 6;
-            this.label11.Text = "Url";
-            // 
-            // buttonGetCategoryTrendyol
-            // 
-            this.buttonGetCategoryTrendyol.Image = global::ETicaretWinApp.Properties.Resources._07;
-            this.buttonGetCategoryTrendyol.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonGetCategoryTrendyol.Location = new System.Drawing.Point(221, 206);
-            this.buttonGetCategoryTrendyol.Name = "buttonGetCategoryTrendyol";
-            this.buttonGetCategoryTrendyol.Size = new System.Drawing.Size(202, 31);
-            this.buttonGetCategoryTrendyol.TabIndex = 12;
-            this.buttonGetCategoryTrendyol.Text = "KategoryListesi Çek";
-            this.buttonGetCategoryTrendyol.UseVisualStyleBackColor = true;
-            this.buttonGetCategoryTrendyol.Click += new System.EventHandler(this.buttonGetCategoryTrendyol_Click);
+            this.buttonTrendyolRefresh.Image = global::ETicaretWinApp.Properties.Resources.Accept;
+            this.buttonTrendyolRefresh.Location = new System.Drawing.Point(429, 202);
+            this.buttonTrendyolRefresh.Name = "buttonTrendyolRefresh";
+            this.buttonTrendyolRefresh.Size = new System.Drawing.Size(45, 25);
+            this.buttonTrendyolRefresh.TabIndex = 15;
+            this.buttonTrendyolRefresh.UseVisualStyleBackColor = true;
+            this.buttonTrendyolRefresh.Click += new System.EventHandler(this.buttonTrendyolRefresh_Click);
             // 
             // FormShopSetting
             // 
@@ -435,5 +469,8 @@
         private System.Windows.Forms.TextBox textBoxTyEndPoint;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button buttonGetCategoryTrendyol;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox comboBoxTrendyolCargo;
+        private System.Windows.Forms.Button buttonTrendyolRefresh;
     }
 }

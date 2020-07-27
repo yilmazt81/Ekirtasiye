@@ -49,6 +49,7 @@
             this.buttonCancel = new System.Windows.Forms.Button();
             this.buttonOk = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.buttonN11Attribute = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -242,11 +243,23 @@
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
+            // buttonN11Attribute
+            // 
+            this.buttonN11Attribute.Image = ((System.Drawing.Image)(resources.GetObject("buttonN11Attribute.Image")));
+            this.buttonN11Attribute.Location = new System.Drawing.Point(731, 235);
+            this.buttonN11Attribute.Name = "buttonN11Attribute";
+            this.buttonN11Attribute.Size = new System.Drawing.Size(38, 26);
+            this.buttonN11Attribute.TabIndex = 19;
+            this.buttonN11Attribute.Text = "...";
+            this.buttonN11Attribute.UseVisualStyleBackColor = true;
+            this.buttonN11Attribute.Click += new System.EventHandler(this.buttonN11Attribute_Click);
+            // 
             // FormEditCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(757, 447);
+            this.ClientSize = new System.Drawing.Size(778, 447);
+            this.Controls.Add(this.buttonN11Attribute);
             this.Controls.Add(this.buttonTrendyolAttributes);
             this.Controls.Add(this.buttonBrowsTrendyol);
             this.Controls.Add(this.textBoxTrendyolCategory);
@@ -302,5 +315,6 @@
         private System.Windows.Forms.TextBox textBoxTrendyolCategory;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonTrendyolAttributes;
+        private System.Windows.Forms.Button buttonN11Attribute;
     }
 }

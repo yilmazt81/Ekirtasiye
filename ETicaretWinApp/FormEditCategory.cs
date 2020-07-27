@@ -162,11 +162,26 @@ namespace ETicaretWinApp
         {
             if (textBoxTrendyolCategory.Text == string.Empty)
                 return;
-            FormTrendyoldefaultAttribute formTrendyoldefaultAttribute = new FormTrendyoldefaultAttribute(this.ProductCategory.Id,this.ProductCategory.TrendyolCategoryId);
+            FormTrendyoldefaultAttribute formTrendyoldefaultAttribute = new FormTrendyoldefaultAttribute(this.ProductCategory.Id, this.ProductCategory.TrendyolCategoryId);
             if (formTrendyoldefaultAttribute.ShowDialog() == DialogResult.OK)
             {
 
             }
+        }
+
+        private void buttonN11Attribute_Click(object sender, EventArgs e)
+        {
+            if (textBoxN11Category.Text == string.Empty)
+                return;
+
+            EKirtasiye.N11.CategoryHelper categoryHelper = new EKirtasiye.N11.CategoryHelper(ApplicationSettingHelper.ReadValue("N11", "N11AppKey"), ApplicationSettingHelper.ReadValue("N11", "N11SecretKey"));
+            categoryHelper.GetCategoryAttributes(this.ProductCategory.N11CategoryId);
+
+            /*FormTrendyoldefaultAttribute formTrendyoldefaultAttribute = new FormTrendyoldefaultAttribute(this.ProductCategory.Id, this.ProductCategory.N11CategoryId);
+            if (formTrendyoldefaultAttribute.ShowDialog() == DialogResult.OK)
+            {
+
+            }*/
         }
     }
 }

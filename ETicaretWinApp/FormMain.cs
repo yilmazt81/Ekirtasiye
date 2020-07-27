@@ -467,8 +467,7 @@ namespace ETicaretWinApp
                     ProductIdList = new List<int>(),
                     WebStatus = "Fiyat Kontrol"
                 };
-                var columnHeaders = new string[] { "stockCode",
-                    "label",                    "status",                    "brand",                    "brandDistCode",                    "barcode",
+                var columnHeaders = new string[] { "stockCode","label", "status","brand","brandDistCode","barcode",
                     "mainCategory",                    "mainCategoryDistCode",                    "category",                    "categoryDistCode",
                     "subCategory",                    "subCategoryDistCode",                    "rootProductStockCode",                    "buyingPrice",
                     "price1",                    "price2",                    "price3",                    "price4",                    "price5",
@@ -532,9 +531,9 @@ namespace ETicaretWinApp
 
                                     if (ideaCatalog.Status)
                                     {
-                                        if (string.IsNullOrEmpty(ideaCatalog.WebPrice))
+                                      /*  if (string.IsNullOrEmpty(ideaCatalog.WebPrice))
                                             continue;
-
+                                        */
 
                                         if (ideaCatalog.ProductSource == "Stok")
                                         {
@@ -554,7 +553,7 @@ namespace ETicaretWinApp
                                         }
                                         else if (ideaCatalog.ProductSource == "Ceren")
                                         {
-                                            priceMaliyet = double.Parse(ideaCatalog.MarketPrice);
+                                        /*    priceMaliyet = double.Parse(ideaCatalog.MarketPrice);
                                             webPrice = double.Parse(ideaCatalog.WebPrice);
                                             ideaCatalog.Status = (priceMaliyet > webPrice) ? false : true;
 
@@ -574,14 +573,14 @@ namespace ETicaretWinApp
 
                                                 continue;
 
-                                            }
+                                            }*/
 
                                         }
                                         else
                                         {
-                                            priceMaliyet = double.Parse(ideaCatalog.MarketPrice) * double.Parse("1," + ideaCatalog.Tax);
-                                            webPrice = double.Parse(ideaCatalog.WebPrice);
-                                            ideaCatalog.Status = (priceMaliyet > webPrice) ? false : true;
+                                           // priceMaliyet = double.Parse(ideaCatalog.MarketPrice) * double.Parse("1," + ideaCatalog.Tax);
+                                           // webPrice = double.Parse(ideaCatalog.WebPrice);
+                                           // ideaCatalog.Status = (priceMaliyet > webPrice) ? false : true;
                                         }
                                     }
                                 }
@@ -636,6 +635,19 @@ namespace ETicaretWinApp
                     }
                 }
 
+                foreach (var id in updateList.ProductIdList)
+                {
+                    var updateDB = ApiHelper.UpdateProductShopId(new EKirtasiye.Model.UpdateProductShopRequest()
+                    {
+                        Exported = true,
+                        Id = id,
+                        ShopName = "Idea",
+                        ShopPrice = ""
+                    });
+
+                }
+
+                /*
                 ApiHelper.UpdateProductWebExportState(updatePriceListCheck);
 
                 if (!ApiHelper.UpdateProductWebExportState(updateList))
@@ -646,7 +658,7 @@ namespace ETicaretWinApp
                 {
                     MessageBox.Show($"Veriler Export Edildi {updateList.ProductIdList.Count} Adet Ürün ", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-
+                */
             }
             catch (Exception ex)
             {

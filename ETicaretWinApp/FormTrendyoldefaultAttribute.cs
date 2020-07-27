@@ -20,8 +20,7 @@ namespace ETicaretWinApp
         {
             InitializeComponent();
             _categoryId = categoryId;
-            EKirtasiye.Trendyol.CategoryHelper categoryHelper = new EKirtasiye.Trendyol.CategoryHelper("");
-           
+            
             var attributeList = ApiHelper.GetTrendyolCategorieAttributes(trendyolCategoryId);
             foreach (var item in attributeList)
             {

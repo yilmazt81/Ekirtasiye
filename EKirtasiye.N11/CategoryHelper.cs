@@ -43,18 +43,18 @@ namespace EKirtasiye.N11
             {
                 Id = s.id,
                 Name = s.name
-               
+
             }).ToArray();
 
-            
         }
 
-        public N11Category  GetParentCategory(int categoryId)
+        public N11Category GetParentCategory(int categoryId)
         {
-            
-            var topCategory = categoryService.GetParentCategory(new CategoryService.GetParentCategoryRequest() {
-                auth=Authentication,
-                categoryId= categoryId
+
+            var topCategory = categoryService.GetParentCategory(new CategoryService.GetParentCategoryRequest()
+            {
+                auth = Authentication,
+                categoryId = categoryId
             });
             if (topCategory.result.status != "success")
             {
@@ -62,15 +62,16 @@ namespace EKirtasiye.N11
             }
             return new N11Category()
             {
-                Id= topCategory.category.id,
-                Name= topCategory.category.name
+                Id = topCategory.category.id,
+                Name = topCategory.category.name
             };
         }
         public N11Category[] GetSubCategories(long categoryId)
         {
-            var topCategory = categoryService.GetSubCategories(new CategoryService.GetSubCategoriesRequest() {
-                auth=Authentication,
-                categoryId= categoryId
+            var topCategory = categoryService.GetSubCategories(new CategoryService.GetSubCategoriesRequest()
+            {
+                auth = Authentication,
+                categoryId = categoryId
             });
             if (topCategory.result.status != "success")
             {
@@ -92,6 +93,38 @@ namespace EKirtasiye.N11
 
                 throw;
             }
+        }
+
+
+        public N11CategoryAttribute[] GetCategoryAttributes(int categoryId)
+        {
+
+            var categoryAttributes = categoryService.GetCategoryAttributes(new CategoryService.GetCategoryAttributesRequest()
+            {
+                auth = Authentication,
+                categoryId = categoryId,
+                pagingData = new CategoryService.RequestPagingData()
+                {
+                    currentPage = 1,
+                    pageSize = 20
+                }
+            });
+
+            var attributes = categoryAttributes.category.attributeList;
+
+            return attributes.Select(s => new N11CategoryAttribute()
+            {
+                Id = s.id,
+                Mandatory = s.mandatory,
+                Multiselect = s.multipleSelect,
+                Name = s.name,
+                N11CategoryAttributes = s.valueList.Select(k => new N11CategoryAttributeValue()
+                {
+                    Id = k.id,
+                    Name = k.name
+                }).ToArray()
+            }).ToArray();
+
         }
 
 

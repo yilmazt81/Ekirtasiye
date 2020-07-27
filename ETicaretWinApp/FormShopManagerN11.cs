@@ -171,18 +171,29 @@ namespace ETicaretWinApp
             }
         }
 
-        private void buttonUpdateProductPrice_Click(object sender, EventArgs e)
+        private async void buttonUpdateProductPrice_Click(object sender, EventArgs e)
         {
             try
             {
                 var productListUpdate = ApiHelper.FilterCatalog(new EKirtasiye.Model.DocumentFilterRequest()
                 {
                     N11Export = "Evet",
-                    ProductStatus = "Aktif"
+                    ProductStatus = "Aktif",
+                    StokSource = "Ceren"
                 });
 
+                var _apiKey = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
+                var _secretKey = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
+                var productHelperSale = new ProductSaleService(_apiKey, _secretKey);
+
+                CerenApi cerenApi = new CerenApi();
+                var result = await cerenApi.Login("kemalkesab@gmail.com", "QYJ5ZW_UQN!9");
                 foreach (var ideaCatalog in productListUpdate)
                 {
+                    if (ideaCatalog.ApprovalStatus != "1")
+                        continue;
+
+                    /*
                     var _apiKey = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
                     var _secretKey = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
                     var productHelper = new ProductHelper(_apiKey, _secretKey);
@@ -193,9 +204,41 @@ namespace ETicaretWinApp
                     if (price > 150)
                     {
                         price = price + 20;
-                    }
-                    var update = productHelper.UpdateProductPrice(ideaCatalog.N11ProductId, (decimal)price, ideaCatalog.CurrencyAbbr);
+                    }*/
+                    // var update = productHelper.UpdateProductPrice(ideaCatalog.N11ProductId, (decimal)price, ideaCatalog.CurrencyAbbr);
+                    var stokSearch = await cerenApi.GetProductCode(ideaCatalog.StockCode);
+                   
+                    if (stokSearch.data.list.Length == 0)
+                    {
+                        ideaCatalog.Status = false;
+                        ApiHelper.InsertIdeaCatalog(ideaCatalog);
+                        var resultdisable = productHelperSale.DisableProduct(ideaCatalog.N11ProductId);
+                        ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                        {
+                            Id = ideaCatalog.Id,
+                            ShopName = "N11",
+                            ApprovalStatus = "2"
+                        });
 
+                    }
+                    else
+                    {
+                        var stokstate = stokSearch.data.list[0].StokDurumu.Any(s => s.StokState == "Var");
+                        if (!stokstate)
+                        {
+                            ideaCatalog.Status = false;
+                            ApiHelper.InsertIdeaCatalog(ideaCatalog);
+
+                            var resultdisable =   productHelperSale.DisableProduct(ideaCatalog.N11ProductId);
+                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                            {
+                                Id = ideaCatalog.Id,
+                                ShopName = "N11",
+                                ApprovalStatus = "2"
+                            });
+                        }
+
+                    }
                 }
 
             }

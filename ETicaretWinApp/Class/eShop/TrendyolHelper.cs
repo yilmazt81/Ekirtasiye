@@ -12,6 +12,7 @@ namespace ETicaretWinApp
         static EKirtasiye.Trendyol.ProductHelper productHelper = new EKirtasiye.Trendyol.ProductHelper(ApplicationSettingHelper.ReadValue("Trendyol", "EndPoint"), ApplicationSettingHelper.ReadValue("Trendyol", "SupplierId"), ApplicationSettingHelper.ReadValue("Trendyol", "UserName"), ApplicationSettingHelper.ReadValue("Trendyol", "Password"));
         static EKirtasiye.Trendyol.BrandHelper brandHelper = new EKirtasiye.Trendyol.BrandHelper(ApplicationSettingHelper.ReadValue("Trendyol", "EndPoint"));
         static EKirtasiye.Trendyol.SuppliersAddressesHelper suppliersAddressesHelper = null;
+        static TrendyolPartnerpageHelper trendyolPartnerpageHelper = null;
         static TrendyolHelper()
         {
             productHelper = new EKirtasiye.Trendyol.ProductHelper(ApplicationSettingHelper.ReadValue("Trendyol", "EndPoint"), ApplicationSettingHelper.ReadValue("Trendyol", "SupplierId"), ApplicationSettingHelper.ReadValue("Trendyol", "UserName"), ApplicationSettingHelper.ReadValue("Trendyol", "Password"));
@@ -28,12 +29,50 @@ namespace ETicaretWinApp
             });
         }
 
+        public static bool OpenProductAccepted(string barcode)
+        {
+            var productAccepted = productHelper.FilterApprovedProduct(barcode, false);
+            if (productAccepted.totalElements != 0)
+            {
+
+                var updateProduct = new EKirtasiye.Trendyol.UpdatePriceAndInventor[] { new EKirtasiye.Trendyol.UpdatePriceAndInventor()
+                {
+                    barcode=barcode,
+                    quantity=10,
+                    listPrice=(float)434.358 ,
+                    salePrice=(float)394.871
+                } };
+
+                var updatePrice = UpdatePriceAndEnvantor(updateProduct);
+
+                var requst = productHelper.GetBatchRequest(updatePrice.batchRequestId);
+            }
+
+            return false;
+
+        }
+
         public static string ExportProduct(IdeaCatalog ideaCatalog)
         {
 
 
             try
             {
+                var cargoCompany = ApplicationSettingHelper.ReadValue("Trendyol", "SelectedCargo");
+
+                /* if (trendyolPartnerpageHelper == null)
+                 {
+                     trendyolPartnerpageHelper = new TrendyolPartnerpageHelper();
+                     trendyolPartnerpageHelper.Login("kemalkesab@gmail.com", "Kemal.8061");
+                 }*/
+                /*
+    
+                if (!string.IsNullOrEmpty(ideaCatalog.Barcode))
+                {
+                    var productAccepted = productHelper.FilterApprovedProduct("0887961744545");
+
+                }
+                */
                 var brand = brandHelper.GetBrandByName(ideaCatalog.Brand);
 
                 var supplierAdress = suppliersAddressesHelper.GetAdress();
@@ -128,8 +167,8 @@ namespace ETicaretWinApp
                     dimensionalWeight = ideaCatalog.Dm3,
                     listPrice = (price * 1.1).ToString().Replace(",", "."),
                     salePrice = price.ToString().Replace(",", "."),
-                    cargoCompanyId = 1,
-                    //deliveryDuration = 10,
+                    cargoCompanyId = int.Parse(cargoCompany),
+                    //deliveryDuration = 3,
                     images = trendyolUrls.ToArray(),
                     returningAddressId = null,
                     shipmentAddressId = supplierAdress.defaultShipmentAddress.id,
@@ -150,7 +189,7 @@ namespace ETicaretWinApp
                 {
                     return "Post işlemi başarısız ";
                 }
-                 
+
                 ApiHelper.SaveTrendyolCreateRequest(new EKirtasiye.Model.TrendyolCreateRequest()
                 {
                     ProductId = ideaCatalog.Id,

@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace EKirtasiye.Trendyol
 {
+
+
     public class TrendyolProduct
     {
         public string id { get; set; }
@@ -58,6 +60,9 @@ namespace EKirtasiye.Trendyol
     {
         public string attributeName { get; set; }
         public string attributeValue { get; set; }
+
+        public int attributeId { get; set; } 
+        public int attributeValueId { get; set; } 
     }
 
     public class ProductCreateAttribute

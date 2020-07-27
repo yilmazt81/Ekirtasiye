@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="CategoryHelper.cs" />
     <Compile Include="Model\N11Category.cs" />
+    <Compile Include="Model\N11CategoryAttribute.cs" />
     <Compile Include="Model\N11Product.cs" />
     <Compile Include="Model\N11ShipmentTemplate.cs" />
     <Compile Include="ProductHelper.cs" />

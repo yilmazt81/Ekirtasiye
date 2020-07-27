@@ -15,6 +15,7 @@ namespace EKirtasiye.N11
         public ProductHelper(string appKey, string appSecret)
         {
             productServicePortClient = new ProductService.ProductServicePortService();
+       
             _appKey = appKey;
             _appSecret = appSecret;
         }

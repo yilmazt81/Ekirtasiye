@@ -31,9 +31,12 @@ namespace ETicaretWinApp
             textBoxTyPassword.Text = ApplicationSettingHelper.ReadValue("Trendyol", "Password");
             textBoxTySupplierId.Text = ApplicationSettingHelper.ReadValue("Trendyol", "SupplierId");
             textBoxTyUserName.Text = ApplicationSettingHelper.ReadValue("Trendyol", "UserName");
-
-
-
+            buttonTrendyolRefresh_Click(null, null);
+            var selectedCargo = ApplicationSettingHelper.ReadValue("Trendyol", "SelectedCargo");
+            if (!string.IsNullOrEmpty(selectedCargo))
+            {
+                comboBoxTrendyolCargo.SelectedValue = int.Parse(selectedCargo);
+            }
 
         }
 
@@ -59,7 +62,7 @@ namespace ETicaretWinApp
             ApplicationSettingHelper.AddValue("Trendyol", "Password", textBoxTyPassword.Text);
             ApplicationSettingHelper.AddValue("Trendyol", "SupplierId", textBoxTySupplierId.Text);
             ApplicationSettingHelper.AddValue("Trendyol", "UserName", textBoxTyUserName.Text);
-
+            ApplicationSettingHelper.AddValue("Trendyol", "SelectedCargo",comboBoxTrendyolCargo.SelectedValue==null?"": comboBoxTrendyolCargo.SelectedValue.ToString());
 
             DialogResult = DialogResult.OK;
         }
@@ -126,7 +129,7 @@ namespace ETicaretWinApp
                     });
 
                     var attributes = categoryHelper.GetCategoryAttributes(category.id);
-                    if (attributes!=null && attributes.categoryAttributes.Length > 0)
+                    if (attributes != null && attributes.categoryAttributes.Length > 0)
                     {
                         System.Diagnostics.Debug.WriteLine("ddd");
                         foreach (var attribute in attributes.categoryAttributes)
@@ -144,8 +147,8 @@ namespace ETicaretWinApp
                                 Varianter = attribute.varianter,
                                 TrendyolAttributes = (attribute.attributeValues == null ? null : attribute.attributeValues.Select(s => new TrendyolAttributeValue()
                                 {
-                                    AttributeText=s.name,
-                                    AttributeValue=s.id
+                                    AttributeText = s.name,
+                                    AttributeValue = s.id
                                 })).ToArray()
                             });
                         }
@@ -180,8 +183,8 @@ namespace ETicaretWinApp
                     try
                     {
                         var attributes = categoryHelper.GetCategoryAttributes(category.id);
-                        
-                        if (attributes!=null && attributes.categoryAttributes.Length > 0)
+
+                        if (attributes != null && attributes.categoryAttributes.Length > 0)
                         {
                             System.Diagnostics.Debug.WriteLine("ddd");
 
@@ -222,17 +225,32 @@ namespace ETicaretWinApp
 
 
 
-                /*
-                EKirtasiye.Trendyol.ProductHelper productHelper = new EKirtasiye.Trendyol.ProductHelper(textBoxTyEndPoint.Text, textBoxTySupplierId.Text, textBoxTyUserName.Text, textBoxTyPassword.Text);
-                var product = productHelper.FilterApprovedProduct("8693830030402");
-                */
-
             }
             catch (Exception ex)
             {
 
                 FormMain.ShowException(ex);
             }
+        }
+
+        private void buttonTrendyolRefresh_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(textBoxTyEndPoint.Text))
+                return;
+            try
+            {
+                EKirtasiye.Trendyol.ShipmentHelper trendyolCargo = new EKirtasiye.Trendyol.ShipmentHelper(textBoxTyEndPoint.Text);
+                var cargoCompany = trendyolCargo.GetShipMentCompany();
+                comboBoxTrendyolCargo.ValueMember = "id";
+                comboBoxTrendyolCargo.DisplayMember = "name";
+                comboBoxTrendyolCargo.DataSource = cargoCompany;
+            }
+            catch (Exception ex)
+            {
+
+                FormMain.ShowException(ex);
+            }
+
         }
     }
 }

@@ -341,7 +341,7 @@ namespace ETicaretWinApp
 
             var aProduct = new List<WebPageProduct>();
             //sh-dlr__content
-            var linkeList = document.DocumentNode.SelectNodes("//div").Where(s => s.Attributes.Contains("class") && (s.Attributes["class"].Value == "sh-dgr__content" || s.Attributes["class"].Value == "sh-dlr__content")).ToArray();
+            var linkeList = document.DocumentNode.SelectNodes("//div").Where(s => s.Attributes.Contains("class") && s.Attributes["class"].Value.Contains("__content")).ToArray();
             int pageOrder = 1;
             foreach (HtmlNode oneNodeProduct in linkeList)
             {
@@ -352,12 +352,9 @@ namespace ETicaretWinApp
                 };
                 pageOrder++;
                 foreach (var oneNode in oneNodeProduct.ChildNodes)
-                {
-
-
-
+                { 
                     var classValue = oneNode.Attributes["class"].Value;
-                    if (classValue == "sh-dgr__thumbnail" || classValue == "sh-dlr__thumbnail")
+                    if (classValue.Contains("thumbnail"))
                     {
                         var imageElement = GetElementByName(oneNode, "img");
                         var aLinkNode = GetElementByName(oneNode, "a");

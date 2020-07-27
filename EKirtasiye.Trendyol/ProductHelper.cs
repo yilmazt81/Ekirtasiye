@@ -30,16 +30,17 @@ namespace EKirtasiye.Trendyol
             return true;
         }
 
-        public TrendyolProduct[] FilterApprovedProduct(string barcode)
+        public FilterRequestReturn FilterApprovedProduct(string barcode, bool approved = true)
         {
             //suppliers/{supplierId}/products?approved=true
-            string serviceUrl = $"{_endPoint}suppliers/{_supplierid}/products?approved=true&page=0&size=10&barcode={barcode}";
+            string serviceUrl = $"{_endPoint}suppliers/{_supplierid}/products?approved={approved}&page=0&size=10&barcode={barcode}";
+            //string serviceurl= $"{_endPoint}suppliers/{_supplierid}/products?approved=true&page=1&size=10&barcode={barcode}";
             var result = client.GetAsync(serviceUrl).Result;
-            TrendyolProduct[] trendyolProducts = null;
+            FilterRequestReturn trendyolProducts = null;
             if (result.IsSuccessStatusCode)
             {
                 var str = result.Content.ReadAsStringAsync().Result;
-                trendyolProducts = JsonConvert.DeserializeObject<TrendyolProduct[]>(str);
+                trendyolProducts = JsonConvert.DeserializeObject<FilterRequestReturn>(str);
             }
 
             return trendyolProducts;

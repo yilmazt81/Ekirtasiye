@@ -113,5 +113,38 @@ namespace ETicaretWinApp
             }
         }
 
+        public async Task<Class.CategoryResult> GetProductCode(string code)
+        {
+
+
+            string serviceUrl = rootUrl + "/search/get_product_list";
+            var form = new Dictionary<string, string>
+               {
+
+                   {"type","product"},
+                   {"parameter",code},
+                   {"search",""}
+
+               };
+            var result = await client.PostAsync(serviceUrl, new FormUrlEncodedContent(form));
+            Class.CategoryResult cerenProduct = null;
+            if (result.IsSuccessStatusCode)
+            {
+
+                var serviceReturn = result.Content.ReadAsStringAsync().Result;
+
+                cerenProduct = JsonConvert.DeserializeObject<Class.CategoryResult>(serviceReturn);
+                // client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.AccessToken);
+              
+            }
+            else
+            {
+                var statusCode = result.StatusCode;
+                
+            }
+
+            return cerenProduct;
+        }
+
     }
 }

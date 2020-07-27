@@ -50,13 +50,10 @@ namespace ETicaretWinApp
         {
             try
             {
-                var batchResult = TrendyolHelper.UpdatePriceAndEnvantor(new EKirtasiye.Trendyol.UpdatePriceAndInventor[] { new EKirtasiye.Trendyol.UpdatePriceAndInventor()
-                {
-                    barcode="0887961639872",
-                    quantity=10,
-                    listPrice=(float)780.5,
-                    salePrice=(float)870.5
-                } });
+
+                TrendyolHelper.OpenProductAccepted("5010993447503");
+
+              //  var batchResult = TrendyolHelper.UpdatePriceAndEnvantor();
             }
             catch (Exception ex)
             {
