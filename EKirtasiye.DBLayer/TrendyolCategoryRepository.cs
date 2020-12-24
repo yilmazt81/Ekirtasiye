@@ -129,7 +129,8 @@ namespace EKirtasiye.DBLayer
             DBHelper.ExecuteCommand("pSaveTrendyolCreateRequest", new SqlParameter[]
             {
                 new SqlParameter("@ProductId",trendyolCreate.ProductId),
-                new SqlParameter("@BatchRequest",trendyolCreate.BatchRequest)
+                new SqlParameter("@BatchRequest",trendyolCreate.BatchRequest),
+                new SqlParameter("@RequestType",trendyolCreate.RequestType)
             });
 
             return true;

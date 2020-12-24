@@ -298,6 +298,8 @@
         <xs:complexType>
           <xs:sequence>
             <xs:element name="result" type="n11:ResultInfo" />
+            <xs:element name="successProductCount" type="xs:integer" />
+            <xs:element name="failedProductCount" type="xs:integer" />
           </xs:sequence>
         </xs:complexType>
       </xs:element>
@@ -329,6 +331,7 @@
           <xs:element name="saleStatus" type="xs:integer" />
           <xs:element name="currencyAmount" type="xs:decimal" />
           <xs:element name="currencyType" type="xs:integer" />
+          <xs:element name="unitInfo" type="n11:ProductUnitInfoModel" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="SpecialProductInfoList">
@@ -367,6 +370,7 @@
           <xs:element name="discount" type="n11:ProductDiscountRequest" />
           <xs:element name="shipmentTemplate" type="xs:string" />
           <xs:element name="stockItems" type="n11:ProductSkuRequestList" />
+          <xs:element name="unitInfo" type="n11:ProductUnitInfoModel" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="ProductBasic">
@@ -480,6 +484,7 @@
               <xs:element name="displayPrice" type="xs:decimal" />
               <xs:element name="oldOptionPrice" type="xs:decimal" />
               <xs:element name="gtin" type="xs:string" />
+              <xs:element name="n11CatalogId" type="xs:long" />
               <xs:element name="mpn" type="xs:string" />
               <xs:element name="oem" type="xs:string" />
               <xs:element name="bundle" type="xs:boolean" />
@@ -526,6 +531,7 @@
           <xs:element name="bundle" nillable="true" type="xs:boolean" />
           <xs:element name="mpn" nillable="true" type="xs:string" />
           <xs:element name="gtin" nillable="true" type="xs:string" />
+          <xs:element name="n11CatalogId" type="xs:long" />
           <xs:element name="oem" nillable="true" type="xs:string" />
           <xs:element name="quantity" type="xs:integer" />
           <xs:element name="sellerStockCode" type="xs:string" />
@@ -744,6 +750,9 @@
           <xs:enumeration value="Active" />
           <xs:enumeration value="Suspended" />
           <xs:enumeration value="Prohibited" />
+          <xs:enumeration value="WaitingForApproval" />
+          <xs:enumeration value="Rejected" />
+          <xs:enumeration value="UnapprovedUpdate" />
         </xs:restriction>
       </xs:simpleType>
       <xs:simpleType name="ProductQuestionStatus">
@@ -795,6 +804,12 @@
       <xs:complexType name="ProductIdList">
         <xs:sequence>
           <xs:element maxOccurs="unbounded" name="productId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ProductUnitInfoModel">
+        <xs:sequence>
+          <xs:element name="unitType" type="xs:integer" />
+          <xs:element name="unitWeight" type="xs:integer" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="BaseRequest">

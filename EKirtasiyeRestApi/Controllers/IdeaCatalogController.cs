@@ -43,7 +43,12 @@ namespace EKirtasiyeRestApi.Controllers
             return IdeaCatalogRepository.GetIdeaCatalogFromBarcode(barcode, getBackup);
         }
 
-
+        [HttpGet]
+        [Route("GetIdeaExportTargets")]
+        public IdeaExportTarget[] GetIdeaExportTargets()
+        {
+            return IdeaCatalogRepository.GetIdeaExportTargets();
+        }
         [HttpGet]
         [Route("getwebexportstatus")]
         public IEnumerable<string> GetWebExportStatus()
@@ -56,6 +61,13 @@ namespace EKirtasiyeRestApi.Controllers
         public IEnumerable<string> GetStokSourceStatus()
         {
             return IdeaCatalogRepository.GetStockSource();
+        }
+
+        [HttpGet]
+        [Route("GetUpdatedExportCatalog/{exportTargetId}")]
+        public IdeaCatalog[] GetUpdatedExportCatalog(int exportTargetId)
+        {
+            return IdeaCatalogRepository.GetUpdatedExportCatalog(exportTargetId).ToArray();
         }
 
         [HttpPost]
@@ -89,9 +101,24 @@ namespace EKirtasiyeRestApi.Controllers
         [Route("UpdateProductWebExportStatus")]
         public void UpdateProductWebExportStatus(UpdateProductStatusRequest updateProductStatus)
         {
-            foreach (var id in updateProductStatus.ProductIdList)
+            foreach (var catalog in updateProductStatus.ProductIdList)
             {
-                IdeaCatalogRepository.UpdateWebExportState(id, updateProductStatus.WebStatus);
+                IdeaCatalogRepository.UpdateWebExportState(catalog.Id, updateProductStatus.WebStatus);
+            }
+        }
+
+        [HttpPost]
+        [Route("addproducttoshopexport")]
+        public string AddProductToShopExport(AddProductToShopExportRequest addProduct)
+        {
+            try
+            {
+                IdeaCatalogRepository.AddProductToShopExport(addProduct.ProductId);
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
 
@@ -107,7 +134,16 @@ namespace EKirtasiyeRestApi.Controllers
         // POST: api/IdeaCatalog
         public void Post(IdeaCatalog value)
         {
-            IdeaCatalogRepository.InsertIdeaCatalog(value);
+            try
+            {
+                IdeaCatalogRepository.InsertIdeaCatalog(value);
+
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
         }
 
         [HttpGet]
@@ -134,7 +170,23 @@ namespace EKirtasiyeRestApi.Controllers
             }
         }
 
-     
+        [HttpPost]
+        [Route("SaveLastProductExportProperty")]
+        public string SaveLastProductExportProperty(LastProductExportProperty lastProductExport)
+        {
+            try
+            {
+                IdeaCatalogRepository.SaveLastProductExportProperty(lastProductExport);
+
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
 
         [HttpPost]
         [Route("exportexternalshop/UpdateShopProductState")]

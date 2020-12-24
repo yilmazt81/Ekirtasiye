@@ -1,4 +1,5 @@
-﻿using EKirtasiye.N11;
+﻿using EKirtasiye.Model;
+using EKirtasiye.N11;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -121,6 +122,19 @@ namespace ETicaretWinApp
                 {
                     throw new Exception("Ürün N11 e gönderildi fakat DB update edilemedi");
                 }
+
+                ApiHelper.SaveLastProductExportProperty(new LastProductExportProperty()
+                {
+                    ProductId = ideaCatalog.Id,
+                    IdeaExportTargetId = 4, //N11 ExportId
+                    ProductPrice = ideaCatalog.MarketPrice,
+                    PicturePath1 = ideaCatalog.Picture1Path,
+                    PicturePath2 = ideaCatalog.Picture2Path,
+                    PicturePath3 = ideaCatalog.Picture3Path,
+                    PicturePath4 = ideaCatalog.Picture4Path,
+                    ProductState = ideaCatalog.Status
+                });
+
                 return "ok";
             }
             catch (Exception ex)

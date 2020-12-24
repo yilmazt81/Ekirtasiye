@@ -39,6 +39,8 @@
             this.numUpDownDiscountProductCount = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.uProductFilterCombo1 = new ETicaretWinApp.Controls.UProductFilterCombo();
+            this.label3 = new System.Windows.Forms.Label();
+            this.comboBoxTargetExport = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownMaxDiscount)).BeginInit();
             this.panelDiscount.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numUpDownDiscountProductCount)).BeginInit();
@@ -49,7 +51,7 @@
             this.buttonOk.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonOk.Image = global::ETicaretWinApp.Properties.Resources.Accept;
             this.buttonOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOk.Location = new System.Drawing.Point(615, 304);
+            this.buttonOk.Location = new System.Drawing.Point(748, 304);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(107, 23);
             this.buttonOk.TabIndex = 1;
@@ -62,7 +64,7 @@
             this.buttonCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonCancel.Image = global::ETicaretWinApp.Properties.Resources._50;
             this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCancel.Location = new System.Drawing.Point(489, 302);
+            this.buttonCancel.Location = new System.Drawing.Point(622, 302);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(107, 23);
             this.buttonCancel.TabIndex = 2;
@@ -83,7 +85,7 @@
             // checkBoxAddDiscount
             // 
             this.checkBoxAddDiscount.AutoSize = true;
-            this.checkBoxAddDiscount.Location = new System.Drawing.Point(25, 178);
+            this.checkBoxAddDiscount.Location = new System.Drawing.Point(136, 302);
             this.checkBoxAddDiscount.Name = "checkBoxAddDiscount";
             this.checkBoxAddDiscount.Size = new System.Drawing.Size(92, 17);
             this.checkBoxAddDiscount.TabIndex = 4;
@@ -133,7 +135,7 @@
             this.panelDiscount.Controls.Add(this.label2);
             this.panelDiscount.Controls.Add(this.numUpDownMaxDiscount);
             this.panelDiscount.Controls.Add(this.label1);
-            this.panelDiscount.Location = new System.Drawing.Point(128, 173);
+            this.panelDiscount.Location = new System.Drawing.Point(234, 258);
             this.panelDiscount.Name = "panelDiscount";
             this.panelDiscount.Size = new System.Drawing.Size(336, 69);
             this.panelDiscount.TabIndex = 7;
@@ -174,20 +176,41 @@
             this.uProductFilterCombo1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.uProductFilterCombo1.ExportHB = "";
+            this.uProductFilterCombo1.ExportIdea = "";
             this.uProductFilterCombo1.ExportN11 = "";
             this.uProductFilterCombo1.Location = new System.Drawing.Point(12, 12);
             this.uProductFilterCombo1.Name = "uProductFilterCombo1";
             this.uProductFilterCombo1.PriceFilter = "";
             this.uProductFilterCombo1.PriceFilterType = "";
-            this.uProductFilterCombo1.Size = new System.Drawing.Size(723, 159);
+            this.uProductFilterCombo1.Size = new System.Drawing.Size(856, 159);
             this.uProductFilterCombo1.StokCodeList = ((System.Collections.Generic.List<string>)(resources.GetObject("uProductFilterCombo1.StokCodeList")));
             this.uProductFilterCombo1.TabIndex = 0;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(22, 189);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(69, 13);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Export Hedef";
+            // 
+            // comboBoxTargetExport
+            // 
+            this.comboBoxTargetExport.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxTargetExport.FormattingEnabled = true;
+            this.comboBoxTargetExport.Location = new System.Drawing.Point(121, 186);
+            this.comboBoxTargetExport.Name = "comboBoxTargetExport";
+            this.comboBoxTargetExport.Size = new System.Drawing.Size(152, 21);
+            this.comboBoxTargetExport.TabIndex = 9;
             // 
             // FormSelectProductSource
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(741, 339);
+            this.ClientSize = new System.Drawing.Size(874, 339);
+            this.Controls.Add(this.comboBoxTargetExport);
+            this.Controls.Add(this.label3);
             this.Controls.Add(this.panelDiscount);
             this.Controls.Add(this.checkBoxAddDiscount);
             this.Controls.Add(this.checkBoxExportAll);
@@ -218,5 +241,7 @@
         private System.Windows.Forms.Panel panelDiscount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.NumericUpDown numUpDownDiscountProductCount;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ComboBox comboBoxTargetExport;
     }
 }

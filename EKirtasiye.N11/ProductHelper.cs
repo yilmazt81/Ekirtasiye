@@ -31,18 +31,10 @@ namespace EKirtasiye.N11
 
         public bool DeleteProductBySellerCode(string productCode)
         {
-            var resulst = productServicePortClient.GetProductBySellerCode(new GetProductBySellerCodeRequest()
-            {
+            
+            var deleteResult = productServicePortClient.DeleteProductBySellerCode(new DeleteProductBySellerCodeRequest() {
                 auth = GetAuthentication(),
-                sellerCode = productCode
-            });
-            if (resulst.result.errorCode == "SELLER_API.notFound")
-                return true;
-            var deleteResult = productServicePortClient.DeleteProductById(new DeleteProductByIdRequest()
-            {
-                auth = GetAuthentication(),
-                productId = resulst.product.id
-
+                productSellerCode= productCode
             });
             return deleteResult.result.status == "success";
 

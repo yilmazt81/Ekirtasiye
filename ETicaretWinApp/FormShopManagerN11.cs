@@ -104,8 +104,8 @@ namespace ETicaretWinApp
 
             while (!complated)
             {
-
-                var productList = productHelper.GetProductList(out maxPageCount, pageSize: 10, currentPage: pageNumber);
+                System.Threading.Thread.Sleep(new TimeSpan(0, 0, 5));
+                var productList = productHelper.GetProductList(out maxPageCount, pageSize: 50, currentPage: pageNumber);
                 if (productList.Count == 0)
                     complated = true;
                 foreach (var n11Product in productList)
@@ -173,79 +173,8 @@ namespace ETicaretWinApp
 
         private async void buttonUpdateProductPrice_Click(object sender, EventArgs e)
         {
-            try
-            {
-                var productListUpdate = ApiHelper.FilterCatalog(new EKirtasiye.Model.DocumentFilterRequest()
-                {
-                    N11Export = "Evet",
-                    ProductStatus = "Aktif",
-                    StokSource = "Ceren"
-                });
-
-                var _apiKey = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
-                var _secretKey = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
-                var productHelperSale = new ProductSaleService(_apiKey, _secretKey);
-
-                CerenApi cerenApi = new CerenApi();
-                var result = await cerenApi.Login("kemalkesab@gmail.com", "QYJ5ZW_UQN!9");
-                foreach (var ideaCatalog in productListUpdate)
-                {
-                    if (ideaCatalog.ApprovalStatus != "1")
-                        continue;
-
-                    /*
-                    var _apiKey = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
-                    var _secretKey = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
-                    var productHelper = new ProductHelper(_apiKey, _secretKey);
-                    float price = 0;
-                    var stokCo = ideaCatalog.StockCode;
-
-                    price = float.Parse(ideaCatalog.MimimumPrice) * (float)1.15;
-                    if (price > 150)
-                    {
-                        price = price + 20;
-                    }*/
-                    // var update = productHelper.UpdateProductPrice(ideaCatalog.N11ProductId, (decimal)price, ideaCatalog.CurrencyAbbr);
-                    var stokSearch = await cerenApi.GetProductCode(ideaCatalog.StockCode);
-                   
-                    if (stokSearch.data.list.Length == 0)
-                    {
-                        ideaCatalog.Status = false;
-                        ApiHelper.InsertIdeaCatalog(ideaCatalog);
-                        var resultdisable = productHelperSale.DisableProduct(ideaCatalog.N11ProductId);
-                        ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
-                        {
-                            Id = ideaCatalog.Id,
-                            ShopName = "N11",
-                            ApprovalStatus = "2"
-                        });
-
-                    }
-                    else
-                    {
-                        var stokstate = stokSearch.data.list[0].StokDurumu.Any(s => s.StokState == "Var");
-                        if (!stokstate)
-                        {
-                            ideaCatalog.Status = false;
-                            ApiHelper.InsertIdeaCatalog(ideaCatalog);
-
-                            var resultdisable =   productHelperSale.DisableProduct(ideaCatalog.N11ProductId);
-                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
-                            {
-                                Id = ideaCatalog.Id,
-                                ShopName = "N11",
-                                ApprovalStatus = "2"
-                            });
-                        }
-
-                    }
-                }
-
-            }
-            catch (Exception ex)
-            {
-                FormMain.ShowException(ex);
-            }
+           
+                 
         }
 
         private void buttonDisableProduct_Click(object sender, EventArgs e)
@@ -256,7 +185,7 @@ namespace ETicaretWinApp
                 {
                     N11Export = "Aktif (Satışta)",
                     ProductStatus = "Pasif",
-                    StokSource = "Ceren"
+                    StokSource = "Tümü"
                 }
                 );
 
@@ -270,14 +199,57 @@ namespace ETicaretWinApp
 
                     if (ideaCatalog.N11ProductId != 0)
                     {
+                        System.Threading.Thread.Sleep(2000);
                         var update = productSaleService.DisableProduct(ideaCatalog.N11ProductId);
+                        if (update)
+                        {
+                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                            {
+                                Id = ideaCatalog.Id,
+                                ShopName = "N11",
+                                ApprovalStatus = "2"
+                            });
 
+                        }
+                        else
+                        {
+                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                            {
+                                Id = ideaCatalog.Id,
+                                ShopName = "N11",
+                                ApprovalStatus = "3"
+                            });
+
+                            System.Diagnostics.Debug.WriteLine("eee");
+                        }
 
                     }
                     else
                     {
+
                         var update = productSaleService.DisableProduct(ideaCatalog.StockCode);
 
+                        if (update)
+                        {
+                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                            {
+                                Id = ideaCatalog.Id,
+                                ShopName = "N11",
+                                ApprovalStatus = "2"
+                            });
+
+                        }
+                        else
+                        {
+                            ApiHelper.UpdateShopProductState(new EKirtasiye.Model.UpdateProductShopSaleRequest()
+                            {
+                                Id = ideaCatalog.Id,
+                                ShopName = "N11",
+                                ApprovalStatus = "3"
+                            });
+
+                            System.Diagnostics.Debug.WriteLine("eee");
+                        }
                     }
 
                 }
@@ -360,6 +332,42 @@ namespace ETicaretWinApp
                     }
                 }
 
+            }
+            catch (Exception ex)
+            {
+                FormMain.ShowException(ex);
+            }
+        }
+
+        private void buttonDeleteProduct_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var productListUpdate = ApiHelper.FilterCatalog(new EKirtasiye.Model.DocumentFilterRequest()
+                {
+                    N11Export = "Evet",
+                    PriceFilter = "90",
+                    PriceFilterType = "<",
+                    ProductStatus="Tümü"
+
+                }
+                );
+                string idList = "";
+                foreach (var ideaCatalog in productListUpdate)
+                {
+                    var _apiKey = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
+                    var _secretKey = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
+                    var productHelper = new ProductHelper(_apiKey, _secretKey);
+                    var deleteProduct = productHelper.DeleteProductBySellerCode(ideaCatalog.StockCode);
+                    if (!deleteProduct)
+                    {
+                        System.Diagnostics.Debug.WriteLine("Disable");
+                    }
+                    idList += ideaCatalog.N11ProductId.ToString() + ",";
+
+                    System.Threading.Thread.Sleep(new TimeSpan(0, 0, 1));
+                }
+                System.Diagnostics.Debug.WriteLine(idList);
             }
             catch (Exception ex)
             {

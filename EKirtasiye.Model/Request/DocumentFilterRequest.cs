@@ -13,6 +13,8 @@ namespace EKirtasiye.Model
             StokCodeList = new string[0];
         }
 
+        public string DateFilterType { get; set; }
+
         public string WebExportState { get; set; }
         public string StokSource { get; set; }
         public int MainCategoryId { get; set; }
@@ -29,6 +31,11 @@ namespace EKirtasiye.Model
 
         public string N11Export { get; set; } 
         public string HepsiBuradaExport { get; set; }
+
+        public string ExportTrendyol { get; set; }
+
+        public string IdeaExport { get; set; }
+
         public string[] StokCodeList { get; set; }
         public string PriceFilterType { get; set; }
         public string PriceFilter { get; set; }

@@ -77,7 +77,38 @@ public class IdeaCatalog
 
 
     public string ApprovalStatus { get; set; }
+
+    public int ApprovalStatusTrendYol { get; set; }
+
     public string MimimumPrice {
+        get {
+            try
+            {
+                float price = 0;
+                if (ProductSource == "Kadioglu")
+                {
+
+                    price = ((float.Parse(MarketPrice) * (float)1.18) * float.Parse("1,30") * float.Parse("1," + this.Tax));
+                }
+                else
+                {
+
+                    price =(float.Parse(MarketPrice) * float.Parse("1,30") * float.Parse("1," + this.Tax));
+                }
+
+                if (price>150)
+                {
+                    price += 20;
+                }
+                return price.ToString();
+            }
+            catch (Exception)
+            {
+                return string.Empty;
+            }
+        }
+    }
+    public string MimimumSellerPrice {
         get {
             try
             {
@@ -89,7 +120,7 @@ public class IdeaCatalog
                 else
                 {
 
-                    return (float.Parse(MarketPrice) * float.Parse("1,30") * float.Parse("1," + this.Tax)).ToString();
+                    return (float.Parse(MarketPrice) * float.Parse("1,1") * float.Parse("1," + this.Tax)).ToString();
                 }
             }
             catch (Exception)

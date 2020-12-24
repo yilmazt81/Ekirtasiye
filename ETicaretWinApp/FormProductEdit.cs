@@ -149,7 +149,7 @@ namespace ETicaretWinApp
 
                 ideaCatalog.Details = htmlTextboxDescription.Text;
                 ideaCatalog.Brand = HelperXmlRead.ConvertHtmlCodesToTurkish(comboBoxBrand.Text);
-         
+
                 ideaCatalog.WebPrice = textBoxWebPrice.Text;
                 if (string.IsNullOrEmpty(ideaCatalog.Picture1Path) && !string.IsNullOrEmpty(_localDownloadPicture))
                 {
@@ -314,7 +314,7 @@ namespace ETicaretWinApp
                 {
                     htmlTextboxDescription.Text = selectedProduct.Description;
                 }
-                
+
                 textBoxWebPrice.Text = selectedProduct.ProductPrice;
                 uProductPictures.ClearImages();
                 int counter = 1;
@@ -357,14 +357,20 @@ namespace ETicaretWinApp
             try
             {
                 MenuItemSave_Click(sender, e);
-                var returnMessage = N11Helper.ExportProduct(ideaCatalog);
+
+                if (ideaCatalog.Picture1Path == string.Empty)
+                {
+                    MessageBox.Show("En Az bir ürün resmi olması gerekmektetir", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                var returnMessage = ApiHelper.AddProductToShopExport(ideaCatalog.Id);
                 if (returnMessage != "ok")
                 {
                     MessageBox.Show(returnMessage, "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
                     return;
                 }
-                
+
 
 
                 if (OnSaveAndNextDocument != null)

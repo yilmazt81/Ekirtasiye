@@ -17,6 +17,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using EKirtasiye.N11;
+using ExcelDataReader;
 
 namespace ETicaretWinApp
 {
@@ -412,9 +413,278 @@ namespace ETicaretWinApp
 
         private void MenuItemImportCeren_Click(object sender, EventArgs e)
         {
-            FormCerenImport frFormCerenImport = new FormCerenImport();
+            FormCerenImport frFormCerenImport = new FormCerenImport("Ceren");
 
             frFormCerenImport.Show();
+        }
+
+        private void CreateUpdateExport()
+        {
+            var exportTargets = ApiHelper.GetIdeaExportTargets();
+
+            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+            if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+                return;
+
+            foreach (var exportTarget in exportTargets)
+            {
+                var updateExport = ApiHelper.GetUpdatedExportCatalog(exportTarget.Id);
+                if (updateExport.Length == 0)
+                    continue;
+                var updateList = new UpdateProductStatusRequest()
+                {
+                    ProductIdList = new List<IdeaCatalog>(),
+                    WebStatus = "Export Edildi"
+                };
+
+                if (exportTarget.ExcelExport)
+                {
+                    var files = Directory.GetFiles(folderBrowserDialog.SelectedPath, exportTarget.Name + "*.xls");
+                    string saveFileName = Path.Combine(folderBrowserDialog.SelectedPath, exportTarget.Name + "_" + (files.Length + 1) + ".xls");
+
+
+                    CreateIdeaExcelFile(updateExport, exportTarget.Id, saveFileName, updateList);
+
+                    UpdateExportList(updateList, exportTarget);
+                }
+                else if (exportTarget.Name == "N11")
+                {
+                    //N11 web servise gidecek
+                    UpdateN11Product(updateExport, exportTarget.Id, updateList);
+
+                    UpdateExportList(updateList, exportTarget);
+                }
+                else if (exportTarget.Name == "Trendyol")
+                {
+                    UpdateTrendYolProduct(updateExport, exportTarget.Id, updateList);
+                    UpdateExportList(updateList, exportTarget);
+                }
+            }
+        }
+        private void UpdateExportList(UpdateProductStatusRequest updateList, IdeaExportTarget exportTarget)
+        {
+            foreach (var ideaCatalog in updateList.ProductIdList)
+            {
+                ApiHelper.SaveLastProductExportProperty(new LastProductExportProperty()
+                {
+                    ProductId = ideaCatalog.Id,
+                    IdeaExportTargetId = exportTarget.Id,
+                    ProductPrice = ideaCatalog.MarketPrice,
+                    PicturePath1 = ideaCatalog.Picture1Path,
+                    PicturePath2 = ideaCatalog.Picture2Path,
+                    PicturePath3 = ideaCatalog.Picture3Path,
+                    PicturePath4 = ideaCatalog.Picture4Path,
+                    ProductState = ideaCatalog.Status
+                });
+            }
+
+        }
+
+        private void UpdateTrendYolProduct(IdeaCatalog[] ideaCatalogs, int exportTargetId, UpdateProductStatusRequest updateProductStatus)
+        {
+            var disableProducts = ideaCatalogs.Where(s => !s.Status && (s.ApprovalStatusTrendYol == 0 || s.ApprovalStatusTrendYol == 1)).ToArray();
+            var requestBatchId = TrendyolHelper.CloseProductAccepted(disableProducts);
+
+            foreach (var ideaCatalog in disableProducts)
+            {
+                updateProductStatus.ProductIdList.Add(ideaCatalog);
+            }
+
+            var enableProducts = ideaCatalogs.Where(s => s.Status).ToArray();
+
+            var openRequestBatch = TrendyolHelper.OpenProductAccepted(enableProducts);
+
+
+            foreach (var ideaCatalog in enableProducts)
+            {
+                updateProductStatus.ProductIdList.Add(ideaCatalog);
+            }
+
+
+        }
+        private void UpdateN11Product(IdeaCatalog[] ideaCatalogs, int exportTargetId, UpdateProductStatusRequest updateProductStatus)
+        {
+            var _apiKey = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
+            var _secretKey = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
+            var productHelper = new ProductSaleService(_apiKey, _secretKey);
+            var productHelperPrice = new ProductHelper(_apiKey, _secretKey);
+            string idList = "";
+            foreach (var product in ideaCatalogs)
+            {
+                if (!product.ExportN11)
+                    continue;
+
+                System.Threading.Thread.Sleep(new TimeSpan(0, 0, 2));
+                if (!product.Status)
+                {
+                    if (product.ApprovalStatus == "1")
+                    {
+                        var disableStatus = productHelper.DisableProduct(product.N11ProductId);
+                        if (disableStatus)
+                        {
+                            updateProductStatus.ProductIdList.Add(product);
+                        }
+                        else
+                        {
+                            disableStatus = productHelper.DisableProduct(product.StockCode);
+                            if (disableStatus)
+                            {
+                                updateProductStatus.ProductIdList.Add(product);
+                            }
+                            else
+                            {
+                                idList += product.N11ProductId.ToString() + ",";
+
+                                System.Diagnostics.Trace.WriteLine("ddd");
+                            }
+                        }
+                    }
+                    else
+                    {
+                        updateProductStatus.ProductIdList.Add(product);
+                    }
+                }
+                else
+                {
+                    float price = float.Parse(product.MimimumPrice) * (float)1.15;
+                    /*if (price > 150)
+                    {
+                        price = price + 20;
+                    }*/
+                    var updatePrice = productHelperPrice.UpdateProductPrice(product.N11ProductId, (decimal)price, product.CurrencyAbbr);
+                    if (updatePrice)
+                    {
+                        updateProductStatus.ProductIdList.Add(product);
+                    }
+                    else
+                    {
+                        idList += product.N11ProductId.ToString() + ",";
+
+                        System.Diagnostics.Trace.WriteLine("ddd");
+                    }
+                }
+            }
+            System.Diagnostics.Trace.WriteLine(idList);
+        }
+        private void CreateIdeaExcelFile(IdeaCatalog[] ideaCatalogs, int exportTargetId, string saveFileName, UpdateProductStatusRequest updateProductStatus)
+        {
+            IXlExporter exporter = XlExport.CreateExporter(XlDocumentFormat.Xls);
+
+            var allCategory = ApiHelper.GetAllProductCategories();
+
+
+            var columnHeaders = new string[] { "stockCode","label", "status","brand","brandDistCode","barcode",
+                    "mainCategory", "mainCategoryDistCode","category","categoryDistCode",
+                    "subCategory","subCategoryDistCode","rootProductStockCode","buyingPrice",
+                    "price1","price2","price3","price4","price5","tax","currencyAbbr","stockAmount","stockType",
+                    "warranty","picture1Path","picture2Path" ,"picture3Path","picture4Path","dm3","details","rebate","rebateType",
+                    "variantName1","variantValue1","variantName2","variantValue2","variantName3","variantValue3","variantName4",
+                    "variantValue4","variantName5","variantValue5"};
+
+            using (FileStream stream = new FileStream(saveFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {
+
+                XlCellFormatting cellFormatting = new XlCellFormatting();
+                cellFormatting.Font = new XlFont();
+                cellFormatting.Font.Name = "Century Gothic";
+                cellFormatting.Font.SchemeStyle = XlFontSchemeStyles.None;
+
+                XlCellFormatting headerRowFormatting = new XlCellFormatting();
+                headerRowFormatting.CopyFrom(cellFormatting);
+                headerRowFormatting.Font.Bold = true;
+                headerRowFormatting.Font.Color = XlColor.FromTheme(XlThemeColor.Light1, 0.0);
+                headerRowFormatting.Fill = XlFill.SolidFill(XlColor.FromTheme(XlThemeColor.Accent2, 0.0));
+
+
+                using (IXlDocument document = exporter.CreateDocument(stream))
+                {
+
+                    using (IXlSheet sheet = document.CreateSheet())
+                    {
+                        sheet.Name = "Worksheet";
+                        for (int i = 0; i < columnHeaders.Length; i++)
+                        {
+                            using (IXlColumn column = sheet.CreateColumn())
+                            {
+                                column.WidthInPixels = 200;
+
+                            }
+                        }
+
+                        using (IXlRow row = sheet.CreateRow())
+                        {
+                            foreach (var oneHeader in columnHeaders)
+                            {
+                                using (IXlCell cell = row.CreateCell())
+                                {
+                                    cell.Value = oneHeader;
+                                    cell.ApplyFormatting(headerRowFormatting);
+                                }
+                            }
+                        }
+
+                        foreach (var ideaCatalog in ideaCatalogs)
+                        {
+
+                            using (IXlRow row = sheet.CreateRow())
+                            {
+
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.StockCode);
+                                CreateCellWithValue(row, cellFormatting, HelperXmlRead.ConvertHtmlCodesToTurkish(ideaCatalog.Label));
+                                CreateCellWithValue(row, cellFormatting, (ideaCatalog.Status ? "1" : "0"));
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Brand);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Brand);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Barcode);
+                                CreateCellWithValue(row, cellFormatting, (ideaCatalog.MainCategoryId == 0 ? string.Empty : allCategory.SingleOrDefault(s => s.Id == ideaCatalog.MainCategoryId).CategoryName));
+                                CreateCellWithValue(row, cellFormatting, (ideaCatalog.MainCategoryId == 0 ? "" : ideaCatalog.MainCategoryId.ToString()));
+
+                                CreateCellWithValue(row, cellFormatting, (ideaCatalog.CategoryId == 0 ? string.Empty : allCategory.SingleOrDefault(s => s.Id == ideaCatalog.CategoryId).CategoryName));
+                                CreateCellWithValue(row, cellFormatting, (ideaCatalog.CategoryId == 0 ? "" : ideaCatalog.CategoryId.ToString()));
+
+                                CreateCellWithValue(row, cellFormatting, (ideaCatalog.SubCategoryId == 0 ? string.Empty : allCategory.SingleOrDefault(s => s.Id == ideaCatalog.SubCategoryId).CategoryName));
+                                CreateCellWithValue(row, cellFormatting, (ideaCatalog.SubCategoryId == 0 ? "" : ideaCatalog.SubCategoryId.ToString()));
+
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.RootProductStockCode);
+                                if (exportTargetId == 1)
+                                {
+
+                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.MarketPrice);
+                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.MimimumPrice);
+                                }
+                                else
+                                {
+
+                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.MimimumSellerPrice);
+                                    CreateCellWithValue(row, cellFormatting, "");
+                                }
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Price2);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Price3);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Price4);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Price5);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Tax);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.CurrencyAbbr);
+
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.StockAmount.ToString());
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.StockType);
+                                CreateCellWithValue(row, cellFormatting, (string.IsNullOrEmpty(ideaCatalog.Warrant) ? "24" : ideaCatalog.Warrant));
+
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Picture1Path);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Picture2Path);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Picture3Path);
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.Picture4Path);
+                                CreateCellWithValue(row, cellFormatting, (ideaCatalog.Dm3 == 0 ? "5" : ideaCatalog.Dm3.ToString()));
+                                CreateCellWithValue(row, cellFormatting, HelperXmlRead.ConvertHtmlCodesToTurkish(ideaCatalog.Details));
+                                CreateCellWithValue(row, cellFormatting, ideaCatalog.RebatePercent.ToString());
+                            }
+
+
+                            updateProductStatus.ProductIdList.Add(ideaCatalog);
+
+                        }
+                    }
+                }
+            }
+
         }
 
         private void MenuItemIdeaExport_Click(object sender, EventArgs e)
@@ -427,7 +697,6 @@ namespace ETicaretWinApp
                 if (formSelectProductSource.ShowDialog() == DialogResult.Cancel)
                     return;
 
-                var allCategory = ApiHelper.GetAllProductCategories();
 
 
                 var catalog = ApiHelper.FilterCatalog(formSelectProductSource.FilterRequest);
@@ -448,7 +717,6 @@ namespace ETicaretWinApp
                 }
 
 
-                IXlExporter exporter = XlExport.CreateExporter(XlDocumentFormat.Xls);
 
                 //FileInfo fileInfo = new FileInfo(Path.Combine(Application.StartupPath, "STANDART_KATALOG.xltx"));
                 //string sourceFile = Path.Combine(Application.StartupPath, "STANDART_KATALOG.xltx");
@@ -459,193 +727,34 @@ namespace ETicaretWinApp
                 string saveFileName = saveFileDialog.FileName;
                 var updateList = new UpdateProductStatusRequest()
                 {
-                    ProductIdList = new List<int>(),
+                    ProductIdList = new List<IdeaCatalog>(),
                     WebStatus = "Export Edildi"
                 };
                 var updatePriceListCheck = new UpdateProductStatusRequest()
                 {
-                    ProductIdList = new List<int>(),
+                    ProductIdList = new List<IdeaCatalog>(),
                     WebStatus = "Fiyat Kontrol"
                 };
-                var columnHeaders = new string[] { "stockCode","label", "status","brand","brandDistCode","barcode",
-                    "mainCategory",                    "mainCategoryDistCode",                    "category",                    "categoryDistCode",
-                    "subCategory",                    "subCategoryDistCode",                    "rootProductStockCode",                    "buyingPrice",
-                    "price1",                    "price2",                    "price3",                    "price4",                    "price5",
-                    "tax",                    "currencyAbbr",                    "stockAmount",                    "stockType",
-                    "warranty","picture1Path","picture2Path" ,"picture3Path","picture4Path","dm3","details","rebate","rebateType",
-                    "variantName1","variantValue1","variantName2","variantValue2","variantName3","variantValue3","variantName4",
-                    "variantValue4","variantName5","variantValue5"};
 
+                //
 
+                CreateIdeaExcelFile(ideaCatalogs.ToArray(), formSelectProductSource.ExportTarget.Id, saveFileName, updateList);
 
+                //
 
-                using (FileStream stream = new FileStream(saveFileName, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-                {
-
-                    XlCellFormatting cellFormatting = new XlCellFormatting();
-                    cellFormatting.Font = new XlFont();
-                    cellFormatting.Font.Name = "Century Gothic";
-                    cellFormatting.Font.SchemeStyle = XlFontSchemeStyles.None;
-
-                    XlCellFormatting headerRowFormatting = new XlCellFormatting();
-                    headerRowFormatting.CopyFrom(cellFormatting);
-                    headerRowFormatting.Font.Bold = true;
-                    headerRowFormatting.Font.Color = XlColor.FromTheme(XlThemeColor.Light1, 0.0);
-                    headerRowFormatting.Fill = XlFill.SolidFill(XlColor.FromTheme(XlThemeColor.Accent2, 0.0));
-
-
-                    using (IXlDocument document = exporter.CreateDocument(stream))
-                    {
-
-                        using (IXlSheet sheet = document.CreateSheet())
-                        {
-                            sheet.Name = "Worksheet";
-                            for (int i = 0; i < columnHeaders.Length; i++)
-                            {
-                                using (IXlColumn column = sheet.CreateColumn())
-                                {
-                                    column.WidthInPixels = 200;
-
-                                }
-                            }
-
-                            using (IXlRow row = sheet.CreateRow())
-                            {
-                                foreach (var oneHeader in columnHeaders)
-                                {
-                                    using (IXlCell cell = row.CreateCell())
-                                    {
-                                        cell.Value = oneHeader;
-                                        cell.ApplyFormatting(headerRowFormatting);
-                                    }
-                                }
-                            }
-
-                            foreach (var ideaCatalog in ideaCatalogs)
-                            {
-                                if (!formSelectProductSource.WorkAllRecord)
-                                {
-
-
-                                    double priceMaliyet, webPrice, productProfitPercent;
-
-                                    if (ideaCatalog.Status)
-                                    {
-                                      /*  if (string.IsNullOrEmpty(ideaCatalog.WebPrice))
-                                            continue;
-                                        */
-
-                                        if (ideaCatalog.ProductSource == "Stok")
-                                        {
-                                            priceMaliyet = string.IsNullOrEmpty(ideaCatalog.MarketPrice) ? 0 : double.Parse(ideaCatalog.MarketPrice);
-                                            webPrice = double.Parse(ideaCatalog.WebPrice);
-                                            ideaCatalog.Status = (priceMaliyet > webPrice) ? false : true;
-
-                                            productProfitPercent = webPrice / priceMaliyet;
-                                            if (productProfitPercent > 5 && string.IsNullOrEmpty(ideaCatalog.LastEdited))
-                                            {
-                                                // Cok pahali
-                                                updatePriceListCheck.ProductIdList.Add(ideaCatalog.Id);
-
-                                                continue;
-
-                                            }
-                                        }
-                                        else if (ideaCatalog.ProductSource == "Ceren")
-                                        {
-                                        /*    priceMaliyet = double.Parse(ideaCatalog.MarketPrice);
-                                            webPrice = double.Parse(ideaCatalog.WebPrice);
-                                            ideaCatalog.Status = (priceMaliyet > webPrice) ? false : true;
-
-                                            productProfitPercent = webPrice / priceMaliyet;
-                                            if (productProfitPercent < (double)1.2)
-                                            {
-                                                //Cok ucuz
-                                                updatePriceListCheck.ProductIdList.Add(ideaCatalog.Id);
-
-                                                continue;
-
-                                            }
-                                            else if (productProfitPercent > 6 && string.IsNullOrEmpty(ideaCatalog.LastEdited))
-                                            {
-                                                // Cok pahali
-                                                updatePriceListCheck.ProductIdList.Add(ideaCatalog.Id);
-
-                                                continue;
-
-                                            }*/
-
-                                        }
-                                        else
-                                        {
-                                           // priceMaliyet = double.Parse(ideaCatalog.MarketPrice) * double.Parse("1," + ideaCatalog.Tax);
-                                           // webPrice = double.Parse(ideaCatalog.WebPrice);
-                                           // ideaCatalog.Status = (priceMaliyet > webPrice) ? false : true;
-                                        }
-                                    }
-                                }
-                                using (IXlRow row = sheet.CreateRow())
-                                {
-
-
-
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.StockCode);
-                                    CreateCellWithValue(row, cellFormatting, HelperXmlRead.ConvertHtmlCodesToTurkish(ideaCatalog.Label));
-                                    CreateCellWithValue(row, cellFormatting, (ideaCatalog.Status ? "1" : "0"));
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Brand);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Brand);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Barcode);
-                                    CreateCellWithValue(row, cellFormatting, (ideaCatalog.MainCategoryId == 0 ? string.Empty : allCategory.SingleOrDefault(s => s.Id == ideaCatalog.MainCategoryId).CategoryName));
-                                    CreateCellWithValue(row, cellFormatting, (ideaCatalog.MainCategoryId == 0 ? "" : ideaCatalog.MainCategoryId.ToString()));
-
-                                    CreateCellWithValue(row, cellFormatting, (ideaCatalog.CategoryId == 0 ? string.Empty : allCategory.SingleOrDefault(s => s.Id == ideaCatalog.CategoryId).CategoryName));
-                                    CreateCellWithValue(row, cellFormatting, (ideaCatalog.CategoryId == 0 ? "" : ideaCatalog.CategoryId.ToString()));
-
-                                    CreateCellWithValue(row, cellFormatting, (ideaCatalog.SubCategoryId == 0 ? string.Empty : allCategory.SingleOrDefault(s => s.Id == ideaCatalog.SubCategoryId).CategoryName));
-                                    CreateCellWithValue(row, cellFormatting, (ideaCatalog.SubCategoryId == 0 ? "" : ideaCatalog.SubCategoryId.ToString()));
-
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.RootProductStockCode);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.MarketPrice);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.MimimumPrice);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Price2);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Price3);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Price4);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Price5);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Tax);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.CurrencyAbbr);
-
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.StockAmount.ToString());
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.StockType);
-                                    CreateCellWithValue(row, cellFormatting, (string.IsNullOrEmpty(ideaCatalog.Warrant) ? "24" : ideaCatalog.Warrant));
-
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Picture1Path);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Picture2Path);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Picture3Path);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.Picture4Path);
-                                    CreateCellWithValue(row, cellFormatting, (ideaCatalog.Dm3 == 0 ? "5" : ideaCatalog.Dm3.ToString()));
-                                    CreateCellWithValue(row, cellFormatting, HelperXmlRead.ConvertHtmlCodesToTurkish(ideaCatalog.Details));
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.RebatePercent.ToString());
-                                }
-
-
-                                updateList.ProductIdList.Add(ideaCatalog.Id);
-
-                            }
-                        }
-                    }
-                }
-
-                foreach (var id in updateList.ProductIdList)
+                foreach (var ideaCatalog in updateList.ProductIdList)
                 {
                     var updateDB = ApiHelper.UpdateProductShopId(new EKirtasiye.Model.UpdateProductShopRequest()
                     {
                         Exported = true,
-                        Id = id,
+                        Id = ideaCatalog.Id,
                         ShopName = "Idea",
                         ShopPrice = ""
                     });
 
                 }
+
+                UpdateExportList(updateList, formSelectProductSource.ExportTarget);
 
                 /*
                 ApiHelper.UpdateProductWebExportState(updatePriceListCheck);
@@ -831,6 +940,7 @@ namespace ETicaretWinApp
             catch (Exception exception)
             {
                 ShowException(exception);
+
             }
 
         }
@@ -839,6 +949,132 @@ namespace ETicaretWinApp
         {
             FormTrendyolExport formTrendyol = new FormTrendyolExport();
             formTrendyol.Show();
+        }
+
+        private void MenuItemCreateUpdateExport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CreateUpdateExport();
+
+            }
+            catch (Exception exception)
+            {
+                ShowException(exception);
+            }
+        }
+
+        private void MenuItemImportExcel_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                OpenFileDialog openFileDialog = new OpenFileDialog()
+                {
+                    Filter = "Excel File|*.xlsx"
+                };
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    using (var stream = File.Open(openFileDialog.FileName, FileMode.Open, FileAccess.Read))
+                    {
+                        // Auto-detect format, supports:
+                        //  - Binary Excel files (2.0-2003 format; *.xls)
+                        //  - OpenXml Excel files (2007 format; *.xlsx, *.xlsb)
+                        using (var reader = ExcelReaderFactory.CreateReader(stream))
+                        {
+                            // Choose one of either 1 or 2:
+
+                            // 1. Use the reader methods
+                            do
+                            {
+                                while (reader.Read())
+                                {
+                                    IdeaCatalog ideaCatalog = new IdeaCatalog();
+
+                                    ideaCatalog.StockCode = reader[0].ToString();
+                                    if (ideaCatalog.StockCode == "stockCode")
+                                        continue;
+                                    if (string.IsNullOrEmpty(ideaCatalog.StockCode))
+                                        continue;
+
+
+                                    var catalogs = ApiHelper.FilterCatalog(new EKirtasiye.Model.DocumentFilterRequest()
+                                    {
+
+                                        StokSource = "robotelektronik",
+                                        ProductStatus="Tümü",
+                                        StokCodeList = new string[] { ideaCatalog.StockCode }
+                                    });
+
+                                    if (catalogs.Count == 1)
+                                    {
+                                        ideaCatalog = catalogs[0];
+                                        ideaCatalog.MarketPrice = reader[15].ToString();
+                                        ideaCatalog.Price1 = reader[15].ToString();
+                                        ideaCatalog.Details = (reader[30] == null ? string.Empty : reader[30].ToString());
+                                        ideaCatalog.StockAmount = int.Parse(reader[22].ToString());
+                                        ideaCatalog.Status = (reader[2].ToString() == "1");
+                                        ApiHelper.InsertIdeaCatalog(ideaCatalog);
+                                    }
+                                    else
+                                    {
+
+
+
+                                        ideaCatalog.Label = reader[1].ToString();
+                                        ideaCatalog.Title = ideaCatalog.Label;
+                                        ideaCatalog.Status = (reader[2].ToString() == "1");
+                                        ideaCatalog.Brand = reader[3].ToString();
+                                        ideaCatalog.Barcode = reader[6].ToString();
+                                        ideaCatalog.MainCategory = reader[7].ToString();
+                                        ideaCatalog.Category = (reader[9] == null ? string.Empty : reader[9].ToString());
+                                        ideaCatalog.SubCategory = (reader[11] == null ? string.Empty : reader[11].ToString());
+                                        ideaCatalog.RootProductStockCode = (reader[13] == null ? string.Empty : reader[13].ToString());
+                                        ideaCatalog.MarketPrice = reader[15].ToString();
+                                        ideaCatalog.Price1 = reader[15].ToString();
+                                        ideaCatalog.CurrencyAbbr = reader[21].ToString();
+                                        ideaCatalog.Tax = reader[20].ToString();
+                                        ideaCatalog.StockAmount = int.Parse(reader[22].ToString());
+                                        ideaCatalog.StockType = reader[23].ToString();
+                                        ideaCatalog.Picture1Path = (reader[25] == null ? string.Empty : reader[25].ToString());
+                                        ideaCatalog.Picture2Path = (reader[26] == null ? string.Empty : reader[26].ToString());
+                                        ideaCatalog.Picture3Path = (reader[27] == null ? string.Empty : reader[27].ToString());
+                                        ideaCatalog.Picture4Path = (reader[28] == null ? string.Empty : reader[28].ToString());
+                                        ideaCatalog.Details = (reader[30] == null ? string.Empty : reader[30].ToString());
+                                        ideaCatalog.RebatePercent = int.Parse(reader[31].ToString());
+                                        ideaCatalog.Dm3 = (int)decimal.Parse(reader[29].ToString().Replace(",", "."));
+                                        ideaCatalog.ProductSource = "robotelektronik";
+                                        ideaCatalog.WebExportStatus = "Hazir";
+                                        ApiHelper.InsertIdeaCatalog(ideaCatalog);
+
+                                    }
+                                }
+                            } while (reader.NextResult());
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ShowException(ex);
+            }
+        }
+
+        private void MenuItemExportTrendYol_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void MenuItemTedarikciPasswords_Click(object sender, EventArgs e)
+        {
+            FormProviderPassword formProvider = new FormProviderPassword();
+            formProvider.ShowDialog();
+        }
+
+        private void MenuItemDerya_Click(object sender, EventArgs e)
+        {
+            FormCerenImport frFormCerenImport = new FormCerenImport("Derya");
+
+            frFormCerenImport.Show();
         }
     }
 }

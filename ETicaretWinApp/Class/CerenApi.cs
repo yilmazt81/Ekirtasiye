@@ -12,9 +12,11 @@ namespace ETicaretWinApp
     public class CerenApi
     {
         private HttpClient client = null;
-        string rootUrl = "http://www.cerenb2b.com/";
-        public CerenApi()
+        string rootUrl = "";
+
+        public CerenApi(string productUrl)
         {
+            rootUrl = productUrl;
             client = new HttpClient();
             System.Net.Http.Headers.ProductHeaderValue productInfoHeaderValue = new System.Net.Http.Headers.ProductHeaderValue("EKirtasiye", "1.0.0.1");
             client.DefaultRequestHeaders.UserAgent.Add(new System.Net.Http.Headers.ProductInfoHeaderValue(productInfoHeaderValue));
@@ -62,7 +64,7 @@ namespace ETicaretWinApp
                    {"stock_id",productId.ToString()}
                };
 
-            string serviceUrl = rootUrl + "/product/get_product_detail";
+            string serviceUrl = rootUrl + "product/get_product_detail";
 
             var result = await client.PostAsync(serviceUrl, new FormUrlEncodedContent(form));
             Class.CerenProduct cerenProduct = null;
@@ -135,12 +137,12 @@ namespace ETicaretWinApp
 
                 cerenProduct = JsonConvert.DeserializeObject<Class.CategoryResult>(serviceReturn);
                 // client.DefaultRequestHeaders.Add("Authorization", "Bearer " + token.AccessToken);
-              
+
             }
             else
             {
                 var statusCode = result.StatusCode;
-                
+
             }
 
             return cerenProduct;

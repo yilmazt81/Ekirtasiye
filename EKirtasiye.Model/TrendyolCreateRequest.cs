@@ -13,5 +13,8 @@ namespace EKirtasiye.Model
 
         public DateTime RequestDate { get; set; }
 
+        public string RequestType { get; set; }
+
+
     }
 }

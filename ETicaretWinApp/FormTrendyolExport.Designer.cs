@@ -35,6 +35,7 @@
             this.MenuStripProduct = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemBulkExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemPriceUpdate = new System.Windows.Forms.ToolStripMenuItem();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStockCode = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -55,7 +56,7 @@
             this.colLastEditedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colN11ProductId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colExportN11 = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.MenuItemPriceUpdate = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             this.MenuStripProduct.SuspendLayout();
@@ -90,20 +91,27 @@
             this.MenuItemBulkExport,
             this.MenuItemPriceUpdate});
             this.MenuStripProduct.Name = "MenuStripProduct";
-            this.MenuStripProduct.Size = new System.Drawing.Size(181, 92);
+            this.MenuStripProduct.Size = new System.Drawing.Size(149, 70);
             // 
             // MenuItemEdit
             // 
             this.MenuItemEdit.Name = "MenuItemEdit";
-            this.MenuItemEdit.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemEdit.Size = new System.Drawing.Size(148, 22);
             this.MenuItemEdit.Text = "Özellikler";
             // 
             // MenuItemBulkExport
             // 
             this.MenuItemBulkExport.Name = "MenuItemBulkExport";
-            this.MenuItemBulkExport.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemBulkExport.Size = new System.Drawing.Size(148, 22);
             this.MenuItemBulkExport.Text = "Toplu Export";
             this.MenuItemBulkExport.Click += new System.EventHandler(this.MenuItemBulkExport_Click);
+            // 
+            // MenuItemPriceUpdate
+            // 
+            this.MenuItemPriceUpdate.Name = "MenuItemPriceUpdate";
+            this.MenuItemPriceUpdate.Size = new System.Drawing.Size(148, 22);
+            this.MenuItemPriceUpdate.Text = "Fiyat Güncelle";
+            this.MenuItemPriceUpdate.Click += new System.EventHandler(this.MenuItemPriceUpdate_Click);
             // 
             // gridView1
             // 
@@ -263,18 +271,22 @@
             this.colExportN11.Visible = true;
             this.colExportN11.VisibleIndex = 18;
             // 
-            // MenuItemPriceUpdate
+            // button1
             // 
-            this.MenuItemPriceUpdate.Name = "MenuItemPriceUpdate";
-            this.MenuItemPriceUpdate.Size = new System.Drawing.Size(180, 22);
-            this.MenuItemPriceUpdate.Text = "Fiyat Güncelle";
-            this.MenuItemPriceUpdate.Click += new System.EventHandler(this.MenuItemPriceUpdate_Click);
+            this.button1.Location = new System.Drawing.Point(58, 194);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FormTrendyolExport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(982, 415);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.gridControl1);
             this.Controls.Add(this.pictureBox1);
             this.Name = "FormTrendyolExport";
@@ -316,5 +328,6 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemEdit;
         private System.Windows.Forms.ToolStripMenuItem MenuItemBulkExport;
         private System.Windows.Forms.ToolStripMenuItem MenuItemPriceUpdate;
+        private System.Windows.Forms.Button button1;
     }
 }

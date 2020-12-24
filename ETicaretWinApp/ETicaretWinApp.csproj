@@ -71,7 +71,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
@@ -91,6 +91,9 @@
     <Reference Include="DevExpress.XtraLayout.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraPrinting.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
     <Reference Include="DevExpress.XtraTreeList.v17.2, Version=17.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="ExcelDataReader, Version=3.6.0.0, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <HintPath>..\packages\ExcelDataReader.3.6.0\lib\net45\ExcelDataReader.dll</HintPath>
+    </Reference>
     <Reference Include="FluentFTP, Version=29.0.3.0, Culture=neutral, PublicKeyToken=f4af092b1d8df44f, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentFTP.29.0.3\lib\net45\FluentFTP.dll</HintPath>
     </Reference>
@@ -116,6 +119,7 @@
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
     <Reference Include="System.Runtime" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -253,6 +257,12 @@
     <Compile Include="FormProperty.Designer.cs">
       <DependentUpon>FormProperty.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormProviderPassword.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormProviderPassword.Designer.cs">
+      <DependentUpon>FormProviderPassword.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSelectProductSource.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -365,6 +375,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProperty.resx">
       <DependentUpon>FormProperty.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormProviderPassword.resx">
+      <DependentUpon>FormProviderPassword.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSelectProductSource.resx">
       <DependentUpon>FormSelectProductSource.cs</DependentUpon>

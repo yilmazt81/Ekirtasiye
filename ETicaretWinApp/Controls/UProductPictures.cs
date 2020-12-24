@@ -89,7 +89,10 @@ namespace ETicaretWinApp.Controls
                     {
                         using (WebClient webClient = new WebClient())
                         {
+                            System.Net.Http.Headers.ProductHeaderValue productInfoHeaderValue = new System.Net.Http.Headers.ProductHeaderValue("EKirtasiye", "1.0.0.1");
+            
                             webClient.Headers.Add(HttpRequestHeader.UserAgent, "EKirtasiye");
+                            
 
                             webClient.DownloadFile(picturePath, tmpPath);
 

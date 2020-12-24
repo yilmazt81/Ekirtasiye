@@ -97,7 +97,7 @@ namespace EKirtasiye.DBLayer
                             var status = (documentFilter.N11Export == "Hayır" ? "0" : "1");
                             query += $" isnull(ExportN11,0) ={status} and ";
 
-                            if (status=="1")
+                            if (status == "1")
                             {
                                 string appStatus = "";
                                 if (documentFilter.N11Export == "Aktif (Satışta)")
@@ -140,6 +140,26 @@ namespace EKirtasiye.DBLayer
                             query += $" ExportHepsiBurada ={status} and ";
                         }
                     }
+
+
+                    if (!string.IsNullOrEmpty(documentFilter.ExportTrendyol))
+                    {
+                        if (documentFilter.ExportTrendyol != "Tümü")
+                        {
+                            var status = (documentFilter.ExportTrendyol == "Evet" ? "1" : "0");
+                            query += $" ExportTrendyol ={status} and ";
+                        }
+                    }
+
+
+                    if (!string.IsNullOrEmpty(documentFilter.IdeaExport))
+                    {
+                        if (documentFilter.IdeaExport != "Tümü")
+                        {
+                            var status = (documentFilter.IdeaExport == "Evet" ? "1" : "0");
+                            query += $" ExportIdea ={status} and ";
+                        }
+                    }
                     if (!string.IsNullOrEmpty(documentFilter.HaveInternetPrice))
                     {
                         if (documentFilter.HaveInternetPrice != "Tümü")
@@ -174,7 +194,8 @@ namespace EKirtasiye.DBLayer
 
                     if (documentFilter.CreatedDate != null)
                     {
-                        query += $" CAST(CreatedDate AS DATE) = CAST('{documentFilter.CreatedDate.Value.ToString("yyyyMMdd")} 00:00:00' AS DATE) and ";
+                        
+                        query += $" CAST(CreatedDate AS DATE) {documentFilter.DateFilterType} CAST('{documentFilter.CreatedDate.Value.ToString("yyyyMMdd")} 00:00:00' AS DATE) and ";
                     }
 
                     if (!string.IsNullOrEmpty(query))
@@ -202,6 +223,37 @@ namespace EKirtasiye.DBLayer
 
                 }
             }
+        }
+
+        public static List<IdeaCatalog> GetUpdatedExportCatalog(int targetExportId)
+        {
+            using (SqlConnection sqlConnection = DBHelper.GetOpenConnection())
+            {
+                using (SqlCommand scom = sqlConnection.CreateCommand())
+                {
+                    scom.CommandText = "pGetUpdatedExports";
+                    scom.CommandType = CommandType.StoredProcedure;
+                    scom.Parameters.AddWithValue("@TargetExportId", targetExportId);
+                    List<IdeaCatalog> ideaCatalogs = new List<IdeaCatalog>();
+                    using (SqlDataReader reader = scom.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            var ideaC = GetProductWithId(Convert.ToInt32(reader["Id"]));
+                            ideaCatalogs.Add(ideaC);
+                        }
+                    }
+
+                    return ideaCatalogs;
+                }
+            }
+        }
+
+        public static bool AddProductToShopExport(int productId)
+        {
+            DBHelper.ExecuteCommand($"INSERT INTO ProductShopExport(ProductId) VALUES ({productId})");
+
+            return true;
         }
 
         public static void UpdateProductPictures(UpdateProductPictureRequest updateProductPicture)
@@ -358,6 +410,30 @@ namespace EKirtasiye.DBLayer
             }
         }
 
+        public static IdeaExportTarget[] GetIdeaExportTargets()
+        {
+            var dtRows = DBHelper.GetQuery("select * from IdeaExportTarget");
+
+
+            return dtRows.Rows.Cast<DataRow>().Select(s => new IdeaExportTarget() { Id = Convert.ToInt32(s["Id"]), Name = s["Name"].ToString(), ExcelExport=(bool)s["ExcelExport"] }).ToArray();
+        }
+
+
+        public static void SaveLastProductExportProperty(LastProductExportProperty lastProductExport)
+        {
+            DBHelper.ExecuteCommand("pSaveLastProductExportProperty", new SqlParameter[] {
+                    new SqlParameter("@ProductId", lastProductExport.ProductId),
+                    new SqlParameter("@IdeaExportTargetId",lastProductExport.IdeaExportTargetId),
+                    new SqlParameter("@ProductPrice",lastProductExport.ProductPrice),
+                    new SqlParameter("@ProductState",lastProductExport.ProductState),
+                    new SqlParameter("@PicturePath1",(string.IsNullOrEmpty(lastProductExport.PicturePath1)?DBNull.Value:(object)lastProductExport.PicturePath1)),
+                    new SqlParameter("@PicturePath2",(string.IsNullOrEmpty(lastProductExport.PicturePath2)?DBNull.Value:(object)lastProductExport.PicturePath2)),
+                    new SqlParameter("@PicturePath3",(string.IsNullOrEmpty(lastProductExport.PicturePath3)?DBNull.Value:(object)lastProductExport.PicturePath3)),
+                    new SqlParameter("@PicturePath4",(string.IsNullOrEmpty(lastProductExport.PicturePath4)?DBNull.Value:(object)lastProductExport.PicturePath4))
+
+
+            });
+        }
 
         private static IdeaCatalog ConvertToIdeaCatalog(DataRow row)
         {
@@ -408,7 +484,7 @@ namespace EKirtasiye.DBLayer
             idep.ProductUrl = row["ProductUrl"].ToString();
             idep.RebatePercent = (row["RebatePercent"] == DBNull.Value ? 0 : Convert.ToInt32(row["RebatePercent"]));
             idep.RootProductStockCode = row["RootProductStockCode"].ToString();
-
+            idep.ApprovalStatusTrendYol = (row["ApprovalStatusTrendYol"] == DBNull.Value ? 0 : Convert.ToInt32(row["ApprovalStatusTrendYol"]));
 
             idep.Web_Category = (idep.CategoryId == 0 ? "" : ProductCategory(idep.CategoryId).CategoryName);
             idep.Web_MainCategory = (idep.MainCategoryId == 0 ? "" : ProductCategory(idep.MainCategoryId).CategoryName);

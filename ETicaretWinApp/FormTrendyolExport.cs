@@ -29,20 +29,19 @@ namespace ETicaretWinApp
         {
 
 
-            foreach (var ideaCatalog in lSearchCatalogList)
+
+
+            try
             {
 
-                try
-                {
+                TrendyolHelper.ExportProduct(lSearchCatalogList.ToArray());
 
-                    TrendyolHelper.ExportProduct(ideaCatalog);
-
-                }
-                catch (Exception ex)
-                {
-                    System.Diagnostics.Trace.WriteLine(ex);
-                }
             }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Trace.WriteLine(ex);
+            }
+
 
         }
 
@@ -51,12 +50,35 @@ namespace ETicaretWinApp
             try
             {
 
-                TrendyolHelper.OpenProductAccepted("5010993447503");
+                //TrendyolHelper.OpenProductAccepted("5010993447503");
 
-              //  var batchResult = TrendyolHelper.UpdatePriceAndEnvantor();
+                //  var batchResult = TrendyolHelper.UpdatePriceAndEnvantor();
             }
             catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var productListUpdate = ApiHelper.FilterCatalog(new EKirtasiye.Model.DocumentFilterRequest()
+                {
+                    ExportTrendyol = "Evet",
+                    ProductStatus = "Aktif"
+                });
+
+
+                TrendyolHelper.OpenProductAccepted(productListUpdate.ToArray());
+                System.Threading.Thread.Sleep(100);
+
+
+            }
+            catch (Exception ex)
+            {
+
                 MessageBox.Show(ex.Message);
             }
         }

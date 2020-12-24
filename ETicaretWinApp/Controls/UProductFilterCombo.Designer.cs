@@ -47,6 +47,9 @@
             this.textBoxPrice = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dTimePickerCreated = new System.Windows.Forms.DateTimePicker();
+            this.comboBoxExportIdea = new System.Windows.Forms.ComboBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.comboBoxDateFilterType = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // comboBoxInternetFiyat
@@ -240,16 +243,56 @@
             // dTimePickerCreated
             // 
             this.dTimePickerCreated.Checked = false;
-            this.dTimePickerCreated.Location = new System.Drawing.Point(591, 91);
+            this.dTimePickerCreated.Location = new System.Drawing.Point(657, 91);
             this.dTimePickerCreated.Name = "dTimePickerCreated";
             this.dTimePickerCreated.ShowCheckBox = true;
-            this.dTimePickerCreated.Size = new System.Drawing.Size(137, 20);
+            this.dTimePickerCreated.Size = new System.Drawing.Size(111, 20);
             this.dTimePickerCreated.TabIndex = 36;
+            // 
+            // comboBoxExportIdea
+            // 
+            this.comboBoxExportIdea.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxExportIdea.FormattingEnabled = true;
+            this.comboBoxExportIdea.Items.AddRange(new object[] {
+            "Tümü",
+            "Evet",
+            "Hayır"});
+            this.comboBoxExportIdea.Location = new System.Drawing.Point(438, 133);
+            this.comboBoxExportIdea.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxExportIdea.Name = "comboBoxExportIdea";
+            this.comboBoxExportIdea.Size = new System.Drawing.Size(78, 21);
+            this.comboBoxExportIdea.TabIndex = 38;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(362, 138);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(61, 13);
+            this.label9.TabIndex = 37;
+            this.label9.Text = "Export Idea";
+            // 
+            // comboBoxDateFilterType
+            // 
+            this.comboBoxDateFilterType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxDateFilterType.FormattingEnabled = true;
+            this.comboBoxDateFilterType.Items.AddRange(new object[] {
+            "=",
+            ">",
+            "<"});
+            this.comboBoxDateFilterType.Location = new System.Drawing.Point(590, 90);
+            this.comboBoxDateFilterType.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxDateFilterType.Name = "comboBoxDateFilterType";
+            this.comboBoxDateFilterType.Size = new System.Drawing.Size(61, 21);
+            this.comboBoxDateFilterType.TabIndex = 39;
             // 
             // UProductFilterCombo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.comboBoxDateFilterType);
+            this.Controls.Add(this.comboBoxExportIdea);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.dTimePickerCreated);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.textBoxPrice);
@@ -270,7 +313,7 @@
             this.Controls.Add(this.comboBoxWebExportState);
             this.Controls.Add(this.label4);
             this.Name = "UProductFilterCombo";
-            this.Size = new System.Drawing.Size(745, 127);
+            this.Size = new System.Drawing.Size(785, 172);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,5 +340,8 @@
         private System.Windows.Forms.TextBox textBoxPrice;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.DateTimePicker dTimePickerCreated;
+        private System.Windows.Forms.ComboBox comboBoxExportIdea;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.ComboBox comboBoxDateFilterType;
     }
 }

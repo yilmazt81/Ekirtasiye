@@ -30,6 +30,7 @@
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageProductManager = new System.Windows.Forms.TabPage();
+            this.buttonOpenProduct = new System.Windows.Forms.Button();
             this.buttonDisableProduct = new System.Windows.Forms.Button();
             this.buttonUpdateProductPrice = new System.Windows.Forms.Button();
             this.buttonCheckStok = new System.Windows.Forms.Button();
@@ -40,7 +41,7 @@
             this.gridControlProducts = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.buttonOpenProduct = new System.Windows.Forms.Button();
+            this.buttonDeleteProduct = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPageProductManager.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlProducts)).BeginInit();
@@ -62,6 +63,7 @@
             // 
             // tabPageProductManager
             // 
+            this.tabPageProductManager.Controls.Add(this.buttonDeleteProduct);
             this.tabPageProductManager.Controls.Add(this.buttonOpenProduct);
             this.tabPageProductManager.Controls.Add(this.buttonDisableProduct);
             this.tabPageProductManager.Controls.Add(this.buttonUpdateProductPrice);
@@ -78,6 +80,16 @@
             this.tabPageProductManager.TabIndex = 0;
             this.tabPageProductManager.Text = "Ürün Yönetimi";
             this.tabPageProductManager.UseVisualStyleBackColor = true;
+            // 
+            // buttonOpenProduct
+            // 
+            this.buttonOpenProduct.Location = new System.Drawing.Point(641, 67);
+            this.buttonOpenProduct.Name = "buttonOpenProduct";
+            this.buttonOpenProduct.Size = new System.Drawing.Size(229, 37);
+            this.buttonOpenProduct.TabIndex = 8;
+            this.buttonOpenProduct.Text = "Ürünleri Satışa Aç";
+            this.buttonOpenProduct.UseVisualStyleBackColor = true;
+            this.buttonOpenProduct.Click += new System.EventHandler(this.buttonOpenProduct_Click);
             // 
             // buttonDisableProduct
             // 
@@ -177,15 +189,15 @@
             this.tabPage2.Text = "tabPage2";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // buttonOpenProduct
+            // buttonDeleteProduct
             // 
-            this.buttonOpenProduct.Location = new System.Drawing.Point(641, 67);
-            this.buttonOpenProduct.Name = "buttonOpenProduct";
-            this.buttonOpenProduct.Size = new System.Drawing.Size(229, 37);
-            this.buttonOpenProduct.TabIndex = 8;
-            this.buttonOpenProduct.Text = "Ürünleri Satışa Aç";
-            this.buttonOpenProduct.UseVisualStyleBackColor = true;
-            this.buttonOpenProduct.Click += new System.EventHandler(this.buttonOpenProduct_Click);
+            this.buttonDeleteProduct.Location = new System.Drawing.Point(888, 67);
+            this.buttonDeleteProduct.Name = "buttonDeleteProduct";
+            this.buttonDeleteProduct.Size = new System.Drawing.Size(229, 37);
+            this.buttonDeleteProduct.TabIndex = 9;
+            this.buttonDeleteProduct.Text = "Ürün Sil";
+            this.buttonDeleteProduct.UseVisualStyleBackColor = true;
+            this.buttonDeleteProduct.Click += new System.EventHandler(this.buttonDeleteProduct_Click);
             // 
             // FormShopManagerN11
             // 
@@ -221,5 +233,6 @@
         private System.Windows.Forms.Button buttonUpdateProductPrice;
         private System.Windows.Forms.Button buttonDisableProduct;
         private System.Windows.Forms.Button buttonOpenProduct;
+        private System.Windows.Forms.Button buttonDeleteProduct;
     }
 }

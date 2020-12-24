@@ -105,6 +105,7 @@
           <xs:element name="saleStatus" type="xs:integer" />
           <xs:element name="currencyAmount" type="xs:decimal" />
           <xs:element name="currencyType" type="xs:integer" />
+          <xs:element name="unitInfo" type="n11:ProductUnitInfoModel" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="SpecialProductInfoList">
@@ -143,6 +144,7 @@
           <xs:element name="discount" type="n11:ProductDiscountRequest" />
           <xs:element name="shipmentTemplate" type="xs:string" />
           <xs:element name="stockItems" type="n11:ProductSkuRequestList" />
+          <xs:element name="unitInfo" type="n11:ProductUnitInfoModel" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="ProductBasic">
@@ -576,6 +578,12 @@
       <xs:complexType name="ProductIdList">
         <xs:sequence>
           <xs:element maxOccurs="unbounded" name="productId" type="xs:long" />
+        </xs:sequence>
+      </xs:complexType>
+      <xs:complexType name="ProductUnitInfoModel">
+        <xs:sequence>
+          <xs:element name="unitType" type="xs:integer" />
+          <xs:element name="unitWeight" type="xs:integer" />
         </xs:sequence>
       </xs:complexType>
       <xs:complexType name="BaseResponse">

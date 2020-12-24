@@ -42,11 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddProductToShopExportRequest.cs" />
     <Compile Include="ApplicationSetting.cs" />
     <Compile Include="HepsiBuradaCategory.cs" />
     <Compile Include="IdeaCatalog_Barcode.cs" />
+    <Compile Include="IdeaExportTarget.cs" />
     <Compile Include="InstagramShareType.cs" />
     <Compile Include="InstagramUserFollowing.cs" />
+    <Compile Include="LastProductExportProperty.cs" />
     <Compile Include="N11Category.cs" />
     <Compile Include="N11ExportTemplate.cs" />
     <Compile Include="ProductWebSearchResult.cs" />

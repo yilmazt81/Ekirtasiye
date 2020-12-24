@@ -180,3 +180,7 @@ D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\bin\Debug\E
 D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.FormTrendyoldefaultAttribute.resources
 D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.Controls.UTrendyolAttribute.resources
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.FormTrendyolExport.resources
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\bin\Debug\ExcelDataReader.dll
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\bin\Debug\ExcelDataReader.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\bin\Debug\ExcelDataReader.xml
+D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.FormProviderPassword.resources

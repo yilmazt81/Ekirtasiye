@@ -25,7 +25,8 @@ namespace ETicaretWinApp.Controls
 
                 comboBoxInternetFiyat.DataSource = ApiHelper.GetInternetPrice();
                 comboBoxStatus.DataSource = new string[] { "Tümü", "Aktif", "Pasif" };
-
+                comboBoxExportIdea.DataSource = "Tümü";
+                comboBoxDateFilterType.Text = "=";
                 comboBoxExportHB.Text = "Tümü";
                 comboBoxExportN11.Text = "Tümü";
             }
@@ -51,7 +52,8 @@ namespace ETicaretWinApp.Controls
                 documentFilter.PriceFilter = this.PriceFilter;
                 documentFilter.PriceFilterType = this.PriceFilterType;
                 documentFilter.CreatedDate = (!dTimePickerCreated.Checked ? null : (DateTime?)dTimePickerCreated.Value);
-
+                documentFilter.DateFilterType = comboBoxDateFilterType.Text;
+                documentFilter.IdeaExport = this.ExportIdea;
                 return documentFilter;
             }
         }
@@ -119,6 +121,11 @@ namespace ETicaretWinApp.Controls
         public string ExportHB {
             get => comboBoxExportHB.Text;
             set => comboBoxExportHB.Text = value;
+        }
+
+        public string ExportIdea {
+            get => comboBoxExportIdea.Text;
+            set => comboBoxExportIdea.Text = value;
         }
 
         public string ExportN11 {

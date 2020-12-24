@@ -55,8 +55,8 @@ namespace ETicaretWinApp
                 {
                     item.MainCategoryId = selectedCategory.UpId;
                     item.Web_MainCategory = ApiHelper.GetCategory(selectedCategory.UpId).CategoryName;
-                    item.SubCategoryId = selectedCategory.Id;
-                    item.Web_SubCategory = selectedCategory.CategoryName;
+                    item.CategoryId = selectedCategory.Id;
+                    item.Web_Category = selectedCategory.CategoryName;
                 }
                 else if (selectedNode.Level > 1)
                 {

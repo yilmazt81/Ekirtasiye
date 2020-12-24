@@ -79,7 +79,7 @@ namespace ETicaretWinApp
 
                 productCategories = JsonConvert.DeserializeObject<List<ProductCategory>>(str);
             }
-;
+
             return productCategories;
         }
 
@@ -90,7 +90,7 @@ namespace ETicaretWinApp
             {
                 GetAllProductCategories();
             }
-          
+
             return productCategories.Where(s => s.UpId == upId).ToList();
         }
 
@@ -193,40 +193,6 @@ namespace ETicaretWinApp
         {
 
             return lProductBrand;
-        }
-
-        public static bool IsExistImageUrl(string imageUrl)
-        {
-            if (string.IsNullOrEmpty(imageUrl))
-                return false;
-
-            if (!imageUrl.StartsWith("http"))
-            {
-                return System.IO.File.Exists(imageUrl);
-            }
-
-            bool exists;
-            try
-            {
-
-                var result = client.GetAsync(imageUrl).Result;
-
-                if (result.StatusCode == HttpStatusCode.NotFound)
-                {
-                    exists = true;
-                }
-                else
-                {
-                    exists = true;
-                }
-
-            }
-            catch (Exception ex)
-            {
-                exists = false;
-            }
-
-            return exists;
         }
 
         public static string[] GetInternetPrice()
@@ -625,7 +591,7 @@ namespace ETicaretWinApp
         {
 
             string url = baseUrl + $"api/N11";
-            
+
             List<N11Category> n11Categories = null;
 
             var result = client.GetAsync(url).Result;
@@ -643,7 +609,7 @@ namespace ETicaretWinApp
         public static List<HepsiBuradaCategory> GetHepsiBuradaCategories()
         {
             string url = baseUrl + $"api/HepsiBurada/";
-             
+
             return GetRequest<List<HepsiBuradaCategory>>(url);
         }
 
@@ -652,7 +618,7 @@ namespace ETicaretWinApp
             string url = baseUrl + $"api/IdeaCatalog/exportexternalshop/{shopName}";
 
             return GetRequest<IdeaCatalog[]>(url);
-            
+
         }
 
 
@@ -660,8 +626,8 @@ namespace ETicaretWinApp
         public static bool UpdateProductShopId(UpdateProductShopRequest updateProductShopRequest)
         {
 
-            string url = baseUrl + $"api/IdeaCatalog/exportexternalshop/UpdateProductShop";            
-             
+            string url = baseUrl + $"api/IdeaCatalog/exportexternalshop/UpdateProductShop";
+
             var saveOk = PostRequest<string, UpdateProductShopRequest>(url, updateProductShopRequest);
             return (saveOk == "ok");
         }
@@ -698,13 +664,13 @@ namespace ETicaretWinApp
             string url = baseUrl + $"api/trendyol/SaveTrendyolAttribute";
             var saveOk = PostRequest<string, TrendyolAttribute>(url, trendyolAttribute);
             return (saveOk == "ok");
-       
+
         }
         public static bool SaveTrendyolAttributes(List<TrendyolProductAttribute> trendyolAttributes)
         {
             string url = baseUrl + $"api/trendyol/SaveTrendyolAttributes";
             var saveOk = PostRequest<string, List<TrendyolProductAttribute>>(url, trendyolAttributes);
-            return (saveOk == "ok"); 
+            return (saveOk == "ok");
         }
 
         public static List<TrendyolCategory> GetTrendyolCategories()
@@ -712,7 +678,7 @@ namespace ETicaretWinApp
             string url = baseUrl + $"api/trendyol/";
 
             return GetRequest<List<TrendyolCategory>>(url);
-            
+
         }
         public static List<TrendyolAttribute> GetTrendyolCategorieAttributes(int categoryId)
         {
@@ -722,7 +688,7 @@ namespace ETicaretWinApp
             //GetCategoryAttribute
         }
 
-        public static TrendyolCategoryDefaultAttribute GetTrendyolCategoryDefaultAttribute(int categoryId,int attributeId)
+        public static TrendyolCategoryDefaultAttribute GetTrendyolCategoryDefaultAttribute(int categoryId, int attributeId)
         {
             string url = baseUrl + $"api/trendyol/GetTrendyolCategoryDefaultAttribute/{categoryId}/{attributeId}";
 
@@ -744,20 +710,48 @@ namespace ETicaretWinApp
             return (saveOk == "ok");
         }
 
-        public static ApplicationSetting GetApplicationSetting(string sectionName,string settingName)
-        { 
+        public static ApplicationSetting GetApplicationSetting(string sectionName, string settingName)
+        {
 
             string url = baseUrl + $"api/ApplicationSetting/GetApplication/{sectionName}/{settingName}";
 
             return GetRequest<ApplicationSetting>(url);
         }
 
+        public static IdeaExportTarget[] GetIdeaExportTargets()
+        {
+            string url = baseUrl + "api/IdeaCatalog/GetIdeaExportTargets";
+
+            return GetRequest<IdeaExportTarget[]>(url);
+            //
+        }
+
+        public static IdeaCatalog[] GetUpdatedExportCatalog(int exportTargetId)
+        {
+            string url = baseUrl + $"api/IdeaCatalog/GetUpdatedExportCatalog/{exportTargetId}";
+
+            return GetRequest<IdeaCatalog[]>(url);
+        }
+        public static bool SaveLastProductExportProperty(LastProductExportProperty lastProductExport)
+        {
+            string url = baseUrl + $"api/IdeaCatalog/SaveLastProductExportProperty/";
+
+            var saveOk = PostRequest<string, LastProductExportProperty>(url, lastProductExport);
+            return (saveOk == "ok");
+        }
         public static bool SaveApplicationSetting(ApplicationSetting applicationSetting)
         {
             string url = baseUrl + $"api/ApplicationSetting/";
 
             var saveOk = PostRequest<string, ApplicationSetting>(url, applicationSetting);
             return (saveOk == "ok");
+        }
+
+        public static string AddProductToShopExport(int productId)
+        {
+            string url = baseUrl + $"api/IdeaCatalog/addproducttoshopexport";
+            var saveOk = PostRequest<string, AddProductToShopExportRequest>(url, new AddProductToShopExportRequest() { ProductId = productId });
+            return saveOk;
         }
         public static T PostRequest<T, K>(string url, K obj)
         {
@@ -782,7 +776,7 @@ namespace ETicaretWinApp
 
         public static T GetRequest<T>(string url)
         {
-             
+
             T requestReturn;
             var result = client.GetAsync(url).Result;
             if (result.IsSuccessStatusCode)

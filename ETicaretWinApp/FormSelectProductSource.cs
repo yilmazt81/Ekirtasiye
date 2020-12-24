@@ -15,7 +15,21 @@ namespace ETicaretWinApp
         public FormSelectProductSource()
         {
             InitializeComponent();
-             
+
+           var targetExport= ApiHelper.GetIdeaExportTargets();
+
+            comboBoxTargetExport.DisplayMember = "Name";
+            comboBoxTargetExport.ValueMember = "Id";
+            comboBoxTargetExport.DataSource = targetExport;
+
+
+
+        }
+
+        public IdeaExportTarget ExportTarget { get {
+
+                return (IdeaExportTarget)comboBoxTargetExport.SelectedItem;
+            }
         }
 
 
@@ -35,20 +49,8 @@ namespace ETicaretWinApp
         public DocumentFilterRequest FilterRequest {
             get {
 
-                DocumentFilterRequest documentFilterRequest = new DocumentFilterRequest()
-                {
-                   
-                    StokSource = uProductFilterCombo1.StokSource,
-                    WebExportState = uProductFilterCombo1.WebExportState,
-                    HaveInternetPrice = uProductFilterCombo1.WebPrice,
-                    ProductStatus= uProductFilterCombo1.ProductStatus,
-                    StokCodeList = uProductFilterCombo1.StokCodeList.ToArray(),
-                    HepsiBuradaExport = uProductFilterCombo1.ExportHB,
-                    N11Export = uProductFilterCombo1.ExportN11,
-                    PriceFilter = uProductFilterCombo1.PriceFilter,
-                    PriceFilterType = uProductFilterCombo1.PriceFilterType
-
-                };
+                DocumentFilterRequest documentFilterRequest = uProductFilterCombo1.DocumentFilterRequest;
+ 
 
                 return documentFilterRequest;
             }

@@ -68,7 +68,7 @@ namespace ETicaretWinApp
                     ApiHelper.UpdateProductWebExportState(new EKirtasiye.Model.UpdateProductStatusRequest()
                     {
                         WebStatus = "Bilgi Yok",
-                        ProductIdList = new List<int> { ideaCatalog.Id }
+                        ProductIdList = new List<IdeaCatalog> { ideaCatalog }
                     });
                 }
                 var productLink = productLinks.OrderBy(s => s.PageOrder).FirstOrDefault();
@@ -112,7 +112,7 @@ namespace ETicaretWinApp
                         ApiHelper.UpdateProductWebExportState(new EKirtasiye.Model.UpdateProductStatusRequest()
                         {
                             WebStatus = webStatus,
-                            ProductIdList = new List<int>() { ideaCatalog.Id }
+                            ProductIdList = new List<IdeaCatalog>() { ideaCatalog }
                         });
                     }
                     catch (Exception ex)

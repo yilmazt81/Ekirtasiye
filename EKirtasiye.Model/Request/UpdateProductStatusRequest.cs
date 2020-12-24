@@ -7,7 +7,7 @@ namespace EKirtasiye.Model
 {
     public class UpdateProductStatusRequest
     {
-        public List<int> ProductIdList { get; set; }
+        public List<IdeaCatalog> ProductIdList { get; set; }
 
         public string WebStatus { get; set; }
 

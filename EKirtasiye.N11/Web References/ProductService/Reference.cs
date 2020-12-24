@@ -1361,6 +1361,8 @@ namespace EKirtasiye.N11.ProductService {
         
         private string gtinField;
         
+        private long n11CatalogIdField;
+        
         private string oemField;
         
         private string quantityField;
@@ -1401,6 +1403,17 @@ namespace EKirtasiye.N11.ProductService {
             }
             set {
                 this.gtinField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long n11CatalogId {
+            get {
+                return this.n11CatalogIdField;
+            }
+            set {
+                this.n11CatalogIdField = value;
             }
         }
         
@@ -1634,6 +1647,8 @@ namespace EKirtasiye.N11.ProductService {
         private string shipmentTemplateField;
         
         private ProductSkuRequest[] stockItemsField;
+        
+        private ProductUnitInfoModel unitInfoField;
         
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
@@ -1902,6 +1917,17 @@ namespace EKirtasiye.N11.ProductService {
                 this.stockItemsField = value;
             }
         }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ProductUnitInfoModel unitInfo {
+            get {
+                return this.unitInfoField;
+            }
+            set {
+                this.unitInfoField = value;
+            }
+        }
     }
     
     /// <remarks/>
@@ -1970,6 +1996,41 @@ namespace EKirtasiye.N11.ProductService {
             }
             set {
                 this.orderField = value;
+            }
+        }
+    }
+    
+    /// <remarks/>
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Xml", "4.8.3761.0")]
+    [System.SerializableAttribute()]
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.ComponentModel.DesignerCategoryAttribute("code")]
+    [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.n11.com/ws/schemas")]
+    public partial class ProductUnitInfoModel {
+        
+        private string unitTypeField;
+        
+        private string unitWeightField;
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="integer")]
+        public string unitType {
+            get {
+                return this.unitTypeField;
+            }
+            set {
+                this.unitTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="integer")]
+        public string unitWeight {
+            get {
+                return this.unitWeightField;
+            }
+            set {
+                this.unitWeightField = value;
             }
         }
     }
@@ -2123,6 +2184,15 @@ namespace EKirtasiye.N11.ProductService {
         
         /// <remarks/>
         Prohibited,
+        
+        /// <remarks/>
+        WaitingForApproval,
+        
+        /// <remarks/>
+        Rejected,
+        
+        /// <remarks/>
+        UnapprovedUpdate,
     }
     
     /// <remarks/>
@@ -2539,6 +2609,8 @@ namespace EKirtasiye.N11.ProductService {
         
         private string gtinField;
         
+        private long n11CatalogIdField;
+        
         private string mpnField;
         
         private string oemField;
@@ -2586,6 +2658,17 @@ namespace EKirtasiye.N11.ProductService {
             }
             set {
                 this.gtinField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public long n11CatalogId {
+            get {
+                return this.n11CatalogIdField;
+            }
+            set {
+                this.n11CatalogIdField = value;
             }
         }
         
@@ -2877,6 +2960,8 @@ namespace EKirtasiye.N11.ProductService {
         
         private string currencyTypeField;
         
+        private ProductUnitInfoModel unitInfoField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public long id {
@@ -3163,6 +3248,17 @@ namespace EKirtasiye.N11.ProductService {
             }
             set {
                 this.currencyTypeField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
+        public ProductUnitInfoModel unitInfo {
+            get {
+                return this.unitInfoField;
+            }
+            set {
+                this.unitInfoField = value;
             }
         }
     }
@@ -4592,6 +4688,10 @@ namespace EKirtasiye.N11.ProductService {
         
         private ResultInfo resultField;
         
+        private string successProductCountField;
+        
+        private string failedProductCountField;
+        
         /// <remarks/>
         [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified)]
         public ResultInfo result {
@@ -4600,6 +4700,28 @@ namespace EKirtasiye.N11.ProductService {
             }
             set {
                 this.resultField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="integer")]
+        public string successProductCount {
+            get {
+                return this.successProductCountField;
+            }
+            set {
+                this.successProductCountField = value;
+            }
+        }
+        
+        /// <remarks/>
+        [System.Xml.Serialization.XmlElementAttribute(Form=System.Xml.Schema.XmlSchemaForm.Unqualified, DataType="integer")]
+        public string failedProductCount {
+            get {
+                return this.failedProductCountField;
+            }
+            set {
+                this.failedProductCountField = value;
             }
         }
     }
