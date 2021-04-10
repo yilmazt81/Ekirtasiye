@@ -44,6 +44,10 @@
   <ItemGroup>
     <Compile Include="AddProductToShopExportRequest.cs" />
     <Compile Include="ApplicationSetting.cs" />
+    <Compile Include="CicekSepetiAttribute.cs" />
+    <Compile Include="CicekSepetiAttributeValue.cs" />
+    <Compile Include="CicekSepetiCategory.cs" />
+    <Compile Include="CicekSepetiCategoryDefaultAttribute.cs" />
     <Compile Include="HepsiBuradaCategory.cs" />
     <Compile Include="IdeaCatalog_Barcode.cs" />
     <Compile Include="IdeaExportTarget.cs" />

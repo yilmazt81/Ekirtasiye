@@ -40,20 +40,22 @@ namespace ETicaretWinApp.Controls
 
         public DocumentFilterRequest DocumentFilterRequest {
             get {
-                documentFilter = new DocumentFilterRequest();
-
-                documentFilter.StokSource = this.StokSource;
-                documentFilter.WebExportState = this.WebExportState;
-                documentFilter.HaveInternetPrice = this.WebPrice;
-                documentFilter.ProductStatus = this.ProductStatus;
-                documentFilter.StokCodeList = this.StokCodeList.ToArray();
-                documentFilter.HepsiBuradaExport = this.ExportHB;
-                documentFilter.N11Export = this.ExportN11;
-                documentFilter.PriceFilter = this.PriceFilter;
-                documentFilter.PriceFilterType = this.PriceFilterType;
-                documentFilter.CreatedDate = (!dTimePickerCreated.Checked ? null : (DateTime?)dTimePickerCreated.Value);
-                documentFilter.DateFilterType = comboBoxDateFilterType.Text;
-                documentFilter.IdeaExport = this.ExportIdea;
+                documentFilter = new DocumentFilterRequest
+                {
+                    StokSource = this.StokSource,
+                    WebExportState = this.WebExportState,
+                    HaveInternetPrice = this.WebPrice,
+                    ProductStatus = this.ProductStatus,
+                    StokCodeList = this.StokCodeList.ToArray(),
+                    HepsiBuradaExport = this.ExportHB,
+                    N11Export = this.ExportN11,
+                    PriceFilter = this.PriceFilter,
+                    PriceFilterType = this.PriceFilterType,
+                    CreatedDate = (!dTimePickerCreated.Checked ? null : (DateTime?)dTimePickerCreated.Value),
+                    DateFilterType = comboBoxDateFilterType.Text,
+                    IdeaExport = this.ExportIdea,
+                    ExportTrendyol=comboBoxExportTrend.Text
+                };
                 return documentFilter;
             }
         }

@@ -28,6 +28,11 @@ public class ProductCategory
 
     public int TrendyolCategoryId { get; set; }
 
+    public int CicekSepetiCategoryId { get; set; }
+
+    public string CicekSepetiCategoryName { get; set; }
+
+
 
     public override string ToString()
     {

@@ -312,7 +312,7 @@ namespace ETicaretWinApp
 
                 if (!string.IsNullOrEmpty(selectedProduct.Description))
                 {
-                    htmlTextboxDescription.Text = selectedProduct.Description;
+                    htmlTextboxDescription.Text = "<font size=\"5\">" +selectedProduct.Description+ "</font>";
                 }
 
                 textBoxWebPrice.Text = selectedProduct.ProductPrice;

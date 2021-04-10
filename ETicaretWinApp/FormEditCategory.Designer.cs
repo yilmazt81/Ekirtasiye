@@ -50,6 +50,10 @@
             this.buttonOk = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.buttonN11Attribute = new System.Windows.Forms.Button();
+            this.buttonCicekSepetiAttribute = new System.Windows.Forms.Button();
+            this.buttonBrowseCicekSepeti = new System.Windows.Forms.Button();
+            this.textBoxCicekSepetiCategoryName = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -214,7 +218,7 @@
             // 
             this.buttonCancel.Image = global::ETicaretWinApp.Properties.Resources._50;
             this.buttonCancel.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonCancel.Location = new System.Drawing.Point(455, 398);
+            this.buttonCancel.Location = new System.Drawing.Point(484, 474);
             this.buttonCancel.Name = "buttonCancel";
             this.buttonCancel.Size = new System.Drawing.Size(129, 37);
             this.buttonCancel.TabIndex = 2;
@@ -226,7 +230,7 @@
             // 
             this.buttonOk.Image = global::ETicaretWinApp.Properties.Resources.Accept;
             this.buttonOk.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonOk.Location = new System.Drawing.Point(606, 398);
+            this.buttonOk.Location = new System.Drawing.Point(635, 474);
             this.buttonOk.Name = "buttonOk";
             this.buttonOk.Size = new System.Drawing.Size(129, 37);
             this.buttonOk.TabIndex = 1;
@@ -254,11 +258,54 @@
             this.buttonN11Attribute.UseVisualStyleBackColor = true;
             this.buttonN11Attribute.Click += new System.EventHandler(this.buttonN11Attribute_Click);
             // 
+            // buttonCicekSepetiAttribute
+            // 
+            this.buttonCicekSepetiAttribute.Image = ((System.Drawing.Image)(resources.GetObject("buttonCicekSepetiAttribute.Image")));
+            this.buttonCicekSepetiAttribute.Location = new System.Drawing.Point(496, 393);
+            this.buttonCicekSepetiAttribute.Name = "buttonCicekSepetiAttribute";
+            this.buttonCicekSepetiAttribute.Size = new System.Drawing.Size(38, 26);
+            this.buttonCicekSepetiAttribute.TabIndex = 23;
+            this.buttonCicekSepetiAttribute.Text = "...";
+            this.buttonCicekSepetiAttribute.UseVisualStyleBackColor = true;
+            this.buttonCicekSepetiAttribute.Click += new System.EventHandler(this.buttonCicekSepetiAttribute_Click);
+            // 
+            // buttonBrowseCicekSepeti
+            // 
+            this.buttonBrowseCicekSepeti.Location = new System.Drawing.Point(445, 393);
+            this.buttonBrowseCicekSepeti.Name = "buttonBrowseCicekSepeti";
+            this.buttonBrowseCicekSepeti.Size = new System.Drawing.Size(38, 26);
+            this.buttonBrowseCicekSepeti.TabIndex = 22;
+            this.buttonBrowseCicekSepeti.Text = "...";
+            this.buttonBrowseCicekSepeti.UseVisualStyleBackColor = true;
+            this.buttonBrowseCicekSepeti.Click += new System.EventHandler(this.buttonBrowseCicekSepeti_Click);
+            // 
+            // textBoxCicekSepetiCategoryName
+            // 
+            this.textBoxCicekSepetiCategoryName.BackColor = System.Drawing.Color.White;
+            this.textBoxCicekSepetiCategoryName.Location = new System.Drawing.Point(121, 393);
+            this.textBoxCicekSepetiCategoryName.Name = "textBoxCicekSepetiCategoryName";
+            this.textBoxCicekSepetiCategoryName.ReadOnly = true;
+            this.textBoxCicekSepetiCategoryName.Size = new System.Drawing.Size(318, 26);
+            this.textBoxCicekSepetiCategoryName.TabIndex = 21;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(118, 357);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(83, 18);
+            this.label7.TabIndex = 20;
+            this.label7.Text = "Çiçek Sepeti";
+            // 
             // FormEditCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 18F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(778, 447);
+            this.ClientSize = new System.Drawing.Size(776, 523);
+            this.Controls.Add(this.buttonCicekSepetiAttribute);
+            this.Controls.Add(this.buttonBrowseCicekSepeti);
+            this.Controls.Add(this.textBoxCicekSepetiCategoryName);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.buttonN11Attribute);
             this.Controls.Add(this.buttonTrendyolAttributes);
             this.Controls.Add(this.buttonBrowsTrendyol);
@@ -316,5 +363,9 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button buttonTrendyolAttributes;
         private System.Windows.Forms.Button buttonN11Attribute;
+        private System.Windows.Forms.Button buttonCicekSepetiAttribute;
+        private System.Windows.Forms.Button buttonBrowseCicekSepeti;
+        private System.Windows.Forms.TextBox textBoxCicekSepetiCategoryName;
+        private System.Windows.Forms.Label label7;
     }
 }

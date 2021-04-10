@@ -236,7 +236,8 @@ namespace ETicaretWinApp
                 {
                     items = ideaCatalogs.Select(s => CreateTrendyolProduct(s)).Where(k => k != null).ToArray()
                 };
-
+                if (requestList.items.Length == 0)
+                    return "";
                 var returnV = productHelper.CreateProduct(requestList);
 
                 if (returnV == null)

@@ -179,6 +179,12 @@
     <Compile Include="Controls\UProductPictures.Designer.cs">
       <DependentUpon>UProductPictures.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UCicekSepetiAttribute.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UCicekSepetiAttribute.Designer.cs">
+      <DependentUpon>UCicekSepetiAttribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UTrendyolAttribute.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -305,6 +311,12 @@
     <Compile Include="FormTester.Designer.cs">
       <DependentUpon>FormTester.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormCicekSepetidefaultAttribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormCicekSepetidefaultAttribute.Designer.cs">
+      <DependentUpon>FormCicekSepetidefaultAttribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormTrendyoldefaultAttribute.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -336,6 +348,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UProductPictures.resx">
       <DependentUpon>UProductPictures.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UCicekSepetiAttribute.resx">
+      <DependentUpon>UCicekSepetiAttribute.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Controls\UTrendyolAttribute.resx">
       <DependentUpon>UTrendyolAttribute.cs</DependentUpon>
@@ -399,6 +414,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormTester.resx">
       <DependentUpon>FormTester.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormCicekSepetidefaultAttribute.resx">
+      <DependentUpon>FormCicekSepetidefaultAttribute.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTrendyoldefaultAttribute.resx">
       <DependentUpon>FormTrendyoldefaultAttribute.cs</DependentUpon>
@@ -488,6 +506,10 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\EKirtasiye.CicekSepeti\EKirtasiye.CicekSepeti.csproj">
+      <Project>{95fa3d55-aea3-4922-8e88-79584eadda8e}</Project>
+      <Name>EKirtasiye.CicekSepeti</Name>
+    </ProjectReference>
     <ProjectReference Include="..\EKirtasiye.Controls\EKirtasiye.Controls.csproj">
       <Project>{bcc4dce5-43d0-4908-ac40-b51ba27ceb70}</Project>
       <Name>EKirtasiye.Controls</Name>

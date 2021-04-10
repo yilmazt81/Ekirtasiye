@@ -25,7 +25,7 @@ namespace EKirtasiye.DBLayer
 
         private static ProductCategory ConvertCategory(DataRow reader)
         {
-          return  new ProductCategory()
+            return new ProductCategory()
             {
                 CategoryName = reader["CategoryName"].ToString(),
                 CategoryUrl = reader["CategoryUrl"].ToString(),
@@ -36,14 +36,16 @@ namespace EKirtasiye.DBLayer
                 HepsiBuradaCategoryName = reader["HepsiBuradaCategoryName"].ToString(),
                 N11CategoryName = reader["N11CategoryName"].ToString(),
                 N11ExportTemplateId = reader["N11ExportTemplateId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["N11ExportTemplateId"]),
-                N11ExportTemplateName = reader["N11ExportTemplateName"].ToString() ,
-                TrendyolCategoryId= reader["TrendyolCategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TrendyolCategoryId"]),
-                TrendyolCategoryName=reader["TrendyolCategoryName"].ToString()
-          };
+                N11ExportTemplateName = reader["N11ExportTemplateName"].ToString(),
+                TrendyolCategoryId = reader["TrendyolCategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TrendyolCategoryId"]),
+                TrendyolCategoryName = reader["TrendyolCategoryName"].ToString(),
+                CicekSepetiCategoryId = reader["CicekSepetiCategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["CicekSepetiCategoryId"]),
+                CicekSepetiCategoryName=reader["CicekSepetiCategoryName"].ToString()
+            };
         }
         public static List<ProductCategory> GetProductCategoriesAll()
         {
-            var dtTable = DBHelper.GetQuery($"SELECT * FROM dbo.ProductCategory ");
+            var dtTable = DBHelper.GetQuery($"SELECT * FROM  ProductCategory ");
 
 
             return dtTable.Rows.Cast<DataRow>().Select(s => ConvertCategory(s)).ToList();
@@ -58,7 +60,7 @@ namespace EKirtasiye.DBLayer
             return dtTable.Rows.Cast<DataRow>().Select(s => ConvertCategory(s)).FirstOrDefault();
         }
 
-        public static void InsertCategory(ProductCategory productCategory)
+        public static void SaveCategory(ProductCategory productCategory)
         {
             using (SqlConnection sqlConnection = DBHelper.GetOpenConnection())
             {
@@ -77,6 +79,10 @@ namespace EKirtasiye.DBLayer
                     scom.Parameters.AddWithValue("@N11CategoryName", (string.IsNullOrEmpty(productCategory.N11CategoryName) ? DBNull.Value : (object)productCategory.N11CategoryName));
                     scom.Parameters.AddWithValue("@HepsiBuradaCategoryName", (string.IsNullOrEmpty(productCategory.HepsiBuradaCategoryName) ? DBNull.Value : (object)productCategory.HepsiBuradaCategoryName));
                     scom.Parameters.AddWithValue("@TrendyolCategoryName", (string.IsNullOrEmpty(productCategory.TrendyolCategoryName) ? DBNull.Value : (object)productCategory.TrendyolCategoryName));
+
+                    scom.Parameters.AddWithValue("@CicekSepetiCategoryId", productCategory.CicekSepetiCategoryId);
+                    scom.Parameters.AddWithValue("@CicekSepetiCategoryName", (string.IsNullOrEmpty(productCategory.CicekSepetiCategoryName) ? DBNull.Value : (object)productCategory.CicekSepetiCategoryName));
+
 
                     productCategory.Id = Convert.ToInt32(scom.ExecuteScalar());
                 }

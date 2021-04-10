@@ -54,6 +54,8 @@ namespace ETicaretWinApp
                 productCategory.TrendyolCategoryName = textBoxTrendyolCategory.Text;
                 productCategory.N11CategoryName = textBoxN11Category.Text;
                 productCategory.HepsiBuradaCategoryName = textBoxHepsiBuradaCategory.Text;
+                productCategory.CicekSepetiCategoryName = textBoxCicekSepetiCategoryName.Text;
+                productCategory.CicekSepetiCategoryId = (textBoxCicekSepetiCategoryName.Tag == null ? 0 : (int)textBoxCicekSepetiCategoryName.Tag);
 
                 return productCategory;
             }
@@ -67,6 +69,10 @@ namespace ETicaretWinApp
                 textBoxN11Category.Tag = productCategory.N11CategoryId;
                 textBoxHepsiBuradaCategory.Tag = productCategory.HepsiBuradaCategoryId;
                 textBoxTrendyolCategory.Tag = productCategory.TrendyolCategoryId;
+
+
+                textBoxCicekSepetiCategoryName.Text = productCategory.CicekSepetiCategoryName;
+                textBoxCicekSepetiCategoryName.Tag =  productCategory.CicekSepetiCategoryId;
 
 
             }
@@ -182,6 +188,37 @@ namespace ETicaretWinApp
             {
 
             }*/
+        }
+
+        private void buttonBrowseCicekSepeti_Click(object sender, EventArgs e)
+        {
+            var trendyolCategoryList = ApiHelper.GetCicekSepetiCategories();
+            if (trendyolCategoryList == null)
+            {
+                MessageBox.Show("Category Listesi Alınamadı.", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            FormShopEntegrationCategory formShopEntegrationCategory = new FormShopEntegrationCategory();
+            formShopEntegrationCategory.ShowCheckBoxes = false;
+            formShopEntegrationCategory.LoadData(trendyolCategoryList);
+            if (formShopEntegrationCategory.ShowDialog() == DialogResult.OK)
+            {
+                var tmpCateg = ProductCategory;
+                tmpCateg.CicekSepetiCategoryId = formShopEntegrationCategory.SelectedCategory.Id;
+                tmpCateg.CicekSepetiCategoryName = formShopEntegrationCategory.SelectedCategory.CategoryName;
+                ProductCategory = tmpCateg;
+            }
+        }
+
+        private void buttonCicekSepetiAttribute_Click(object sender, EventArgs e)
+        {
+            if (textBoxCicekSepetiCategoryName.Text == string.Empty)
+                return;
+            FormCicekSepetidefaultAttribute formCicekSepetidefaultAttribute = new FormCicekSepetidefaultAttribute(this.ProductCategory.Id, this.ProductCategory.CicekSepetiCategoryId);
+            if (formCicekSepetidefaultAttribute.ShowDialog() == DialogResult.OK)
+            {
+
+            }
         }
     }
 }

@@ -147,7 +147,7 @@ namespace EKirtasiye.DBLayer
                         if (documentFilter.ExportTrendyol != "Tümü")
                         {
                             var status = (documentFilter.ExportTrendyol == "Evet" ? "1" : "0");
-                            query += $" ExportTrendyol ={status} and ";
+                            query += $" isnull(ExportTrendyol,0) ={status} and ";
                         }
                     }
 
@@ -495,6 +495,7 @@ namespace EKirtasiye.DBLayer
             idep.ExportN11 = (row["ExportN11"] == DBNull.Value ? false : (bool)row["ExportN11"]);
             idep.LastStockCheckDate = (row["LastStockCheckDate"] == DBNull.Value ? DateTime.MinValue : (DateTime)row["LastStockCheckDate"]);
             idep.ApprovalStatus = row["ApprovalStatus"].ToString();
+           
             return idep;
         }
         private static ProductCategory ProductCategory(int id)

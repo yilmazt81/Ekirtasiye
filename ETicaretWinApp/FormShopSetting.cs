@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using EKirtasiye.CicekSepeti;
 using EKirtasiye.Model;
 
 namespace ETicaretWinApp
@@ -31,6 +32,17 @@ namespace ETicaretWinApp
             textBoxTyPassword.Text = ApplicationSettingHelper.ReadValue("Trendyol", "Password");
             textBoxTySupplierId.Text = ApplicationSettingHelper.ReadValue("Trendyol", "SupplierId");
             textBoxTyUserName.Text = ApplicationSettingHelper.ReadValue("Trendyol", "UserName");
+
+            checkBoxUseTrend.Checked = bool.Parse(ApplicationSettingHelper.ReadValue("Trendyol", "UseTrend", "false"));
+            checkBoxUseN11.Checked = bool.Parse(ApplicationSettingHelper.ReadValue("N11", "UseN11", "false"));
+            checkBoxUseHb.Checked = bool.Parse(ApplicationSettingHelper.ReadValue("HepsiBurada", "HepsiBurada", "false"));
+            checkBoxUseCicekSepeti.Checked = bool.Parse(ApplicationSettingHelper.ReadValue("CicekSepeti", "UseCicekSepeti", "false"));
+
+            textBoxCicekSepetiSupplierId.Text = ApplicationSettingHelper.ReadValue("CicekSepeti", "SupplierId");
+            textBoxCicekSepetiApiKey.Text = ApplicationSettingHelper.ReadValue("CicekSepeti", "ApiKey");
+            textBoxCicekSepetiUrl.Text = ApplicationSettingHelper.ReadValue("CicekSepeti", "EndPoint");
+
+
             buttonTrendyolRefresh_Click(null, null);
             var selectedCargo = ApplicationSettingHelper.ReadValue("Trendyol", "SelectedCargo");
             if (!string.IsNullOrEmpty(selectedCargo))
@@ -49,27 +61,42 @@ namespace ETicaretWinApp
         private void buttonOk_Click(object sender, EventArgs e)
         {
             ApplicationSettingHelper.AddValue("HepsiBurada", "HBProductAdress", textBoxHBProductAdress.Text);
+            ApplicationSettingHelper.AddValue("HepsiBurada", "UseHB", checkBoxUseHb.Checked.ToString());
+
+
 
             ApplicationSettingHelper.AddValue("HepsiBurada", "HBMerchandId", textBoxHBMerchandId.Text);
             ApplicationSettingHelper.AddValue("HepsiBurada", "HBPassword", textBoxHBPassword.Text);
             ApplicationSettingHelper.AddValue("HepsiBurada", "HBUserName", textBoxHBUserName.Text);
+
             ApplicationSettingHelper.AddValue("N11", "N11AppKey", textBoxN11AppKey.Text);
+            ApplicationSettingHelper.AddValue("N11", "UseN11", checkBoxUseN11.Checked.ToString());
+
             ApplicationSettingHelper.AddValue("N11", "N11SecretKey", textBoxN11SecretKey.Text);
             ApplicationSettingHelper.AddValue("HepsiBurada", "HBListingAdress", textBoxHBListingAdress.Text);
 
+            ApplicationSettingHelper.AddValue("Trendyol", "UseTrend", checkBoxUseTrend.Checked.ToString());
 
             ApplicationSettingHelper.AddValue("Trendyol", "EndPoint", textBoxTyEndPoint.Text);
             ApplicationSettingHelper.AddValue("Trendyol", "Password", textBoxTyPassword.Text);
             ApplicationSettingHelper.AddValue("Trendyol", "SupplierId", textBoxTySupplierId.Text);
             ApplicationSettingHelper.AddValue("Trendyol", "UserName", textBoxTyUserName.Text);
-            ApplicationSettingHelper.AddValue("Trendyol", "SelectedCargo",comboBoxTrendyolCargo.SelectedValue==null?"": comboBoxTrendyolCargo.SelectedValue.ToString());
+            ApplicationSettingHelper.AddValue("Trendyol", "SelectedCargo", comboBoxTrendyolCargo.SelectedValue == null ? "" : comboBoxTrendyolCargo.SelectedValue.ToString());
+
+
+            ApplicationSettingHelper.AddValue("CicekSepeti", "UseCicekSepeti", checkBoxUseCicekSepeti.Checked.ToString());
+            ApplicationSettingHelper.AddValue("CicekSepeti", "SupplierId", textBoxCicekSepetiSupplierId.Text);
+            ApplicationSettingHelper.AddValue("CicekSepeti", "ApiKey", textBoxCicekSepetiApiKey.Text);
+            ApplicationSettingHelper.AddValue("CicekSepeti", "EndPoint", textBoxCicekSepetiUrl.Text);
+
+
 
             DialogResult = DialogResult.OK;
         }
 
         private void Save11Category(EKirtasiye.N11.N11Category n11Category)
         {
-            ApiHelper.SaveN11Category(new N11Category()
+           /* ApiHelper.SaveN11Category(new N11Category()
             {
                 Id = n11Category.Id,
                 Name = n11Category.Name,
@@ -80,7 +107,7 @@ namespace ETicaretWinApp
             foreach (var item in subCategory)
             {
                 Save11Category(item);
-            }
+            }*/
 
         }
         private void buttonN11CategoryGet_Click(object sender, EventArgs e)
@@ -244,6 +271,77 @@ namespace ETicaretWinApp
                 comboBoxTrendyolCargo.ValueMember = "id";
                 comboBoxTrendyolCargo.DisplayMember = "name";
                 comboBoxTrendyolCargo.DataSource = cargoCompany;
+            }
+            catch (Exception ex)
+            {
+
+                FormMain.ShowException(ex);
+            }
+
+        }
+
+        private void SaveCicekSepeti(CicekCategory cicekSepetiCategory)
+        {
+            foreach (var category in cicekSepetiCategory.subCategories)
+            {
+                ApiHelper.CicekSepetiSaveCategory(new CicekSepetiCategory()
+                {
+                    Id = category.id,
+                    Name = category.name,
+                    ParentCategoryId = (category.parentCategoryId == null ? 0 : Convert.ToInt32(category.parentCategoryId)),
+                });
+                if (category.subCategories != null)
+                {
+                    SaveCicekSepeti(category);
+                }
+            }
+        }
+        private void SaveCicekSepetiSubCategory(int categoryId,List<CicekSepetiCategory> cicekCategories)
+        {
+            CicekSepetiApi cicekSepetiApi = new CicekSepetiApi(textBoxCicekSepetiUrl.Text, textBoxCicekSepetiSupplierId.Text, textBoxCicekSepetiApiKey.Text);
+
+            var cicekSepetiCategoryAttribute = cicekSepetiApi.GetCategoryAttribute(categoryId);
+
+            List<CicekSepetiAttribute> cicekSepetiAttributes = new List<CicekSepetiAttribute>();
+            foreach (var categoryattribute in cicekSepetiCategoryAttribute.categoryAttributes)
+            {
+                CicekSepetiAttribute cicekSepetiCategory = new CicekSepetiAttribute()
+                {
+                    CategoryId = categoryId,
+                    Attributeid = categoryattribute.attributeId,
+                    DisplayName = categoryattribute.attributeName,
+                    Required = categoryattribute.required,
+                    Varianter = categoryattribute.varianter,
+                    Attributename = categoryattribute.type,
+                    Name = categoryattribute.attributeName,
+                    AttributeValues = categoryattribute.attributeValues.Select(s => new CicekSepetiAttributeValue()
+                    {
+                        AttributeValue = s.id.ToString(),
+                        AttributeText = s.name
+
+                    }).ToArray()
+                };
+                cicekSepetiAttributes.Add(cicekSepetiCategory);
+            }
+            ApiHelper.SaveCicekSepetiAttributes(cicekSepetiAttributes);
+
+            foreach (var item in cicekCategories.Where(s=>s.ParentCategoryId==categoryId))      
+            {
+                SaveCicekSepetiSubCategory(item.Id, cicekCategories);
+            }
+
+        }
+        private void buttonCicekSepetiGetCategory_Click(object sender, EventArgs e)
+        {
+            try
+            {
+               
+
+                var categoryList = ApiHelper.GetCicekSepetiCategories();
+                SaveCicekSepetiSubCategory(12455, categoryList);
+                 
+
+
             }
             catch (Exception ex)
             {

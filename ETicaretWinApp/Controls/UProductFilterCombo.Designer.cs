@@ -50,6 +50,8 @@
             this.comboBoxExportIdea = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.comboBoxDateFilterType = new System.Windows.Forms.ComboBox();
+            this.comboBoxExportTrend = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxInternetFiyat
@@ -286,10 +288,35 @@
             this.comboBoxDateFilterType.Size = new System.Drawing.Size(61, 21);
             this.comboBoxDateFilterType.TabIndex = 39;
             // 
+            // comboBoxExportTrend
+            // 
+            this.comboBoxExportTrend.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxExportTrend.FormattingEnabled = true;
+            this.comboBoxExportTrend.Items.AddRange(new object[] {
+            "Tümü",
+            "Evet",
+            "Hayır"});
+            this.comboBoxExportTrend.Location = new System.Drawing.Point(620, 133);
+            this.comboBoxExportTrend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxExportTrend.Name = "comboBoxExportTrend";
+            this.comboBoxExportTrend.Size = new System.Drawing.Size(78, 21);
+            this.comboBoxExportTrend.TabIndex = 41;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(531, 138);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(83, 13);
+            this.label10.TabIndex = 40;
+            this.label10.Text = "Export TrendYol";
+            // 
             // UProductFilterCombo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.comboBoxExportTrend);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBoxDateFilterType);
             this.Controls.Add(this.comboBoxExportIdea);
             this.Controls.Add(this.label9);
@@ -343,5 +370,7 @@
         private System.Windows.Forms.ComboBox comboBoxExportIdea;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.ComboBox comboBoxDateFilterType;
+        private System.Windows.Forms.ComboBox comboBoxExportTrend;
+        private System.Windows.Forms.Label label10;
     }
 }

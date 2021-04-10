@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.539
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EKirtasiye", "EKirtasiye\EKirtasiye.csproj", "{83B12583-95D9-44B1-9EDB-20ABE11DF776}"
 EndProject
@@ -22,6 +22,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EKirtasiye.N11", "EKirtasiye.N11\EKirtasiye.N11.csproj", "{A7C22121-00BD-41F6-89C5-5D1832B7FE5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EKirtasiye.Trendyol", "EKirtasiye.Trendyol\EKirtasiye.Trendyol.csproj", "{D17CE541-F3A4-4F56-A69D-9CBADAF8DEA1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EKirtasiye.CicekSepeti", "EKirtasiye.CicekSepeti\EKirtasiye.CicekSepeti.csproj", "{95FA3D55-AEA3-4922-8E88-79584EADDA8E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -109,6 +111,14 @@ Global
 		{D17CE541-F3A4-4F56-A69D-9CBADAF8DEA1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D17CE541-F3A4-4F56-A69D-9CBADAF8DEA1}.Release|x64.ActiveCfg = Release|Any CPU
 		{D17CE541-F3A4-4F56-A69D-9CBADAF8DEA1}.Release|x64.Build.0 = Release|Any CPU
+		{95FA3D55-AEA3-4922-8E88-79584EADDA8E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{95FA3D55-AEA3-4922-8E88-79584EADDA8E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{95FA3D55-AEA3-4922-8E88-79584EADDA8E}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{95FA3D55-AEA3-4922-8E88-79584EADDA8E}.Debug|x64.Build.0 = Debug|Any CPU
+		{95FA3D55-AEA3-4922-8E88-79584EADDA8E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{95FA3D55-AEA3-4922-8E88-79584EADDA8E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{95FA3D55-AEA3-4922-8E88-79584EADDA8E}.Release|x64.ActiveCfg = Release|Any CPU
+		{95FA3D55-AEA3-4922-8E88-79584EADDA8E}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

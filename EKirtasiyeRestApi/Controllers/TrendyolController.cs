@@ -22,11 +22,7 @@ namespace EKirtasiyeRestApi.Controllers
             return TrendyolCategoryRepository.GetCategory();
         }
 
-        // GET: api/N11/5
-        public string Get(int id)
-        {
-            return "value";
-        }
+       
 
         [Route("SaveCategory")]
         [HttpPost]

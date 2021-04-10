@@ -166,6 +166,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\ApplicationSettingController.cs" />
     <Compile Include="Controllers\CatalogCategoryMatchController.cs" />
+    <Compile Include="Controllers\CicekSepetiController.cs" />
     <Compile Include="Controllers\HepsiBuradaController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IdeaCatalogController.cs" />

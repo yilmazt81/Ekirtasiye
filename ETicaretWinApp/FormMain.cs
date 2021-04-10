@@ -449,15 +449,22 @@ namespace ETicaretWinApp
                 }
                 else if (exportTarget.Name == "N11")
                 {
-                    //N11 web servise gidecek
-                    UpdateN11Product(updateExport, exportTarget.Id, updateList);
+                    if (bool.Parse(ApplicationSettingHelper.ReadValue("N11", "UseN11", "false")))
+                    {
+                        //N11 web servise gidecek
+                        UpdateN11Product(updateExport, exportTarget.Id, updateList);
 
-                    UpdateExportList(updateList, exportTarget);
+                        UpdateExportList(updateList, exportTarget);
+                    }
                 }
                 else if (exportTarget.Name == "Trendyol")
                 {
-                    UpdateTrendYolProduct(updateExport, exportTarget.Id, updateList);
-                    UpdateExportList(updateList, exportTarget);
+                    if (bool.Parse(ApplicationSettingHelper.ReadValue("Trendyol", "UseTrend", "false")))
+                    {
+
+                        UpdateTrendYolProduct(updateExport, exportTarget.Id, updateList);
+                        UpdateExportList(updateList, exportTarget);
+                    }
                 }
             }
         }
@@ -1001,7 +1008,7 @@ namespace ETicaretWinApp
                                     {
 
                                         StokSource = "robotelektronik",
-                                        ProductStatus="Tümü",
+                                        ProductStatus = "Tümü",
                                         StokCodeList = new string[] { ideaCatalog.StockCode }
                                     });
 

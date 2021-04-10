@@ -49,7 +49,7 @@ namespace EKirtasiyeRestApi.Controllers
         [HttpPost]
         public ProductCategory Post(ProductCategory value)
         {
-            ProductCategoryRepository.InsertCategory(value);
+            ProductCategoryRepository.SaveCategory(value);
 
             return value;
         }

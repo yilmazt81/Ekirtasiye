@@ -33,8 +33,20 @@ namespace ETicaretWinApp
 
             try
             {
+                foreach (var item in lSearchCatalogList)
+                {
+                    try
+                    {
 
-                TrendyolHelper.ExportProduct(lSearchCatalogList.ToArray());
+                        TrendyolHelper.ExportProduct(new IdeaCatalog[] { item });
+                        System.Threading.Thread.Sleep(new TimeSpan(0, 0, 2));
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex);
+                    }
+                }
+                
 
             }
             catch (Exception ex)

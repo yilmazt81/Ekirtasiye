@@ -7,8 +7,8 @@ namespace EKirtasiye.Model
 {
     public class N11Category
     { 
-        public long Id { get; set; }
-        public long ParentCategoryId { get; set; }
+        public int Id { get; set; }
+        public int ParentCategoryId { get; set; }
         public string Name { get; set; }
         public bool TargetCategory { get; set; }
 

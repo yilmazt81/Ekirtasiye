@@ -198,8 +198,14 @@ namespace ETicaretWinApp
                 FormMain.ShowException(ex);
             }
         }
-        private bool ConvertStockState(string state, out int stock)
+        private bool ConvertStockState(string storage,string state, out int stock)
         {
+            if (_providerName=="Ceren" && storage.Trim() != "KARTAL")
+            {
+
+                stock = 0;
+                return false;
+            }
             if (state == "Var")
             {
                 stock = 5;
@@ -234,7 +240,7 @@ namespace ETicaretWinApp
                     if (ideaCatalog == null)
                     {
 
-                        if (!cerenProduct.StokDurumu.Any(s => ConvertStockState(s.StokState, out stockMount)))
+                        if (!cerenProduct.StokDurumu.Any(s => ConvertStockState(s.StorageName,s.StokState, out stockMount)))
                         {
                             continue;
                         }
@@ -244,12 +250,12 @@ namespace ETicaretWinApp
                             StockCode = cerenProduct.StockCode,
                             ProductLink = $"http://www.{_providerName}.com/product/show/" + cerenProduct.Id,
                             ProductSource = _providerName,
-                            StockState = cerenProduct.StokDurumu.Any(s => ConvertStockState(s.StokState, out stockMount))
+                            StockState = cerenProduct.StokDurumu.Any(s => ConvertStockState(s.StorageName,s.StokState, out stockMount))
                         });
                     }
                     else
                     {
-                        var status = cerenProduct.StokDurumu.Any(s => ConvertStockState(s.StokState, out stockMount));
+                        var status = cerenProduct.StokDurumu.Any(s => ConvertStockState(s.StorageName, s.StokState, out stockMount));
                         /*
                         if (!status && ideaCatalog.N11ProductId != 0 && ideaCatalog.ApprovalStatus != "2")
                         {   //Pasif yapılacak
@@ -424,7 +430,7 @@ namespace ETicaretWinApp
                             var taxRate = float.Parse("1," + ideaCatalog.Tax);
                             ideaCatalog.MarketPrice = (priceTemp * taxRate).ToString();
                             int stockMount = 0;
-                            ideaCatalog.Status = product.data.StokDurumu.Any(s => ConvertStockState(s.StokState, out stockMount));
+                            ideaCatalog.Status = product.data.StokDurumu.Any(s => ConvertStockState(s.StorageName, s.StokState, out stockMount));
                             ideaCatalog.StockAmount = (ideaCatalog.Status ? stockMount : 0);
                             var barcodeF = product.data.Barkodlar.FirstOrDefault(s => s.StokTuru == "ADT" || s.StokTuru == "ADET");
                             if (barcodeF != null)

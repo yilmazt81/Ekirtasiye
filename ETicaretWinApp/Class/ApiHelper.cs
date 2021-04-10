@@ -653,10 +653,26 @@ namespace ETicaretWinApp
             return (saveOk == "ok");
         }
 
+        public static bool CicekSepetiSaveCategory(CicekSepetiCategory cicekSepetiCategory)
+        {
+            string url = baseUrl + $"api/cicekSepeti/SaveCategory";
+            var saveOk = PostRequest<string, CicekSepetiCategory>(url, cicekSepetiCategory);
+            return (saveOk == "ok");
+        }
+
+
         public static bool SaveCategoryDefaultAttribute(List<TrendyolCategoryDefaultAttribute> trendyolCategoryDefaultAttributes)
         {
             string url = baseUrl + $"api/trendyol/SaveCategoryDefaultAttribute";
             var saveOk = PostRequest<string, List<TrendyolCategoryDefaultAttribute>>(url, trendyolCategoryDefaultAttributes);
+            return (saveOk == "ok");
+        }
+
+
+        public static bool SaveCategoryDefaultAttribute(List<CicekSepetiCategoryDefaultAttribute> cicekSepetiCategoryDefaultAttributes)
+        {
+            string url = baseUrl + $"api/CicekSepeti/SaveCategoryDefaultAttribute";
+            var saveOk = PostRequest<string, List<CicekSepetiCategoryDefaultAttribute>>(url, cicekSepetiCategoryDefaultAttributes);
             return (saveOk == "ok");
         }
         public static bool TrendyolSaveAttribute(TrendyolAttribute trendyolAttribute)
@@ -673,11 +689,26 @@ namespace ETicaretWinApp
             return (saveOk == "ok");
         }
 
+        public static bool SaveCicekSepetiAttributes(List<CicekSepetiAttribute> trendyolAttributes)
+        {
+            string url = baseUrl + $"api/cicekSepeti/SaveCicekSepetiAttributes";
+            var saveOk = PostRequest<string, List<CicekSepetiAttribute>>(url, trendyolAttributes);
+            return (saveOk == "ok");
+        }
+
         public static List<TrendyolCategory> GetTrendyolCategories()
         {
             string url = baseUrl + $"api/trendyol/";
 
             return GetRequest<List<TrendyolCategory>>(url);
+
+        }
+
+        public static List<CicekSepetiCategory> GetCicekSepetiCategories()
+        {
+            string url = baseUrl + $"api/ciceksepeti/";
+
+            return GetRequest<List<CicekSepetiCategory>>(url);
 
         }
         public static List<TrendyolAttribute> GetTrendyolCategorieAttributes(int categoryId)
@@ -688,6 +719,13 @@ namespace ETicaretWinApp
             //GetCategoryAttribute
         }
 
+        public static List<CicekSepetiAttribute> GetCicekSepetiCategorieAttributes(int categoryId)
+        {
+            string url = baseUrl + $"api/cicekSepeti/GetCategoryAttribute/{categoryId}";
+
+            return GetRequest<List<CicekSepetiAttribute>>(url);
+            //GetCategoryAttribute
+        }
         public static TrendyolCategoryDefaultAttribute GetTrendyolCategoryDefaultAttribute(int categoryId, int attributeId)
         {
             string url = baseUrl + $"api/trendyol/GetTrendyolCategoryDefaultAttribute/{categoryId}/{attributeId}";
