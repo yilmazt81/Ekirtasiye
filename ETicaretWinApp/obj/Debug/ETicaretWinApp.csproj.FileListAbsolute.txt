@@ -188,3 +188,6 @@ D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\bin\Debug\E
 D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\bin\Debug\EKirtasiye.CicekSepeti.pdb
 D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.Controls.UCicekSepetiAttribute.resources
 D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.FormCicekSepetidefaultAttribute.resources
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.Controls.UShowCategoryView.resources
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\obj\Debug\ETicaretWinApp.FormExportSingleCicekSepeti.resources
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\ETicaretWinApp\bin\Debug\CicekSepetiYasakliKelimeler.txt

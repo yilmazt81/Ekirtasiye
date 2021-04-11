@@ -6,68 +6,57 @@ using System.Threading.Tasks;
 
 namespace EKirtasiye.CicekSepeti
 {
-
-    public class CicekSepetiCreate
+    public class CicekSepetiBatchReturn
     {
 
-        public CicekSepetiProduct[] products { get; set; }
+        public string batchId { get; set; }
+        public int itemCount { get; set; }
+        public Item[] items { get; set; }
+
     }
 
-    public class CicekSepetiUpdateStock
+
+    
+
+    public class Item
     {
-        public UpdateStockPriceItem[] items { get; set; }
+        public DataProduct data { get; set; }
+        public string itemId { get; set; }
+        public string status { get; set; }
+        public Failurereason[] failureReasons { get; set; }
+        public DateTime lastModificationDate { get; set; }
     }
 
-    public class UpdateStockPriceItem
+    public class DataProduct
     {
-        public string stockCode { get; set; }
-        public int StockQuantity { get; set; }
-        public float listPrice { get; set; }
-
-        public float salesPrice { get; set; }
-
-    }
-    public class CicekSepetiProduct
-    {
-
+        public object siteCode { get; set; }
         public string productName { get; set; }
         public string mainProductCode { get; set; }
         public string stockCode { get; set; }
-
         public int categoryId { get; set; }
-
         public string description { get; set; }
         public string mediaLink { get; set; }
         public int deliveryMessageType { get; set; }
-
         public int deliveryType { get; set; }
-
         public int stockQuantity { get; set; }
-        public decimal salesPrice { get; set; }
-
-        public decimal listPrice { get; set; }
+        public float salesPrice { get; set; }
+        public float listPrice { get; set; }
         public string barcode { get; set; }
-
-        public CicekAttribute[] attributes { get; set; }
-
-
         public string[] images { get; set; }
-
-
+        public Attribute[] attributes { get; set; }
     }
 
-    public class CicekAttribute
+    public class Attribute
     {
         public int id { get; set; }
-
         public int valueId { get; set; }
-
         public int textLength { get; set; }
     }
 
-    public class CreateReturn
+    public class Failurereason
     {
-        public string batchId { get; set; }
-
+        public string message { get; set; }
+        public int code { get; set; }
     }
+
 }

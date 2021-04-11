@@ -1051,14 +1051,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.CicekSepeti.dll" size="9216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.CicekSepeti.dll" size="17408">
       <assemblyIdentity name="EKirtasiye.CicekSepeti" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>IV9R9/cmpkVlTv/+zh/E16fh1PDWEb3cK8eJcC393is=</dsig:DigestValue>
+        <dsig:DigestValue>W3uVX0XfZEyChvZa7+6kjaEmcSBU5/nTwciqiUIQZTE=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1099,14 +1099,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Model.dll" size="43008">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="EKirtasiye.Model.dll" size="45568">
       <assemblyIdentity name="EKirtasiye.Model" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>gLk+6q195oSpSUsgXqtxjbSnaDcrUPra/8hjbKu4IBc=</dsig:DigestValue>
+        <dsig:DigestValue>tm4uGDRYlCWFwSvvHHq+p4598NI/ZdimKVHvazMidtg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1135,14 +1135,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="521216">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="540672">
       <assemblyIdentity name="ETicaretWinApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>WSUo2qJjRK/8Of9YzLH4OjIU18VvdGhZH8GaIn2jWoE=</dsig:DigestValue>
+        <dsig:DigestValue>5fEAFiPdNtkBagAkUYXuk55DB8Nwj21kQ+XEJb1Tpwk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1266,6 +1266,15 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <file name="CicekSepetiYasakliKelimeler.txt" size="337">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>diIseTS3mkjTk96a2ezNQYdiDfl7z1jqc3JHgL4rLUQ=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Cryo64 Genesis 2 003.ico" size="142454">
     <hash>
       <dsig:Transforms>
@@ -1275,13 +1284,13 @@
       <dsig:DigestValue>rgxQyYPIGSqkaB9z7yJKFL0sAm6r/h/N7c3P4BIXCZI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="ETicaretWinApp.exe.config" size="1069">
+  <file name="ETicaretWinApp.exe.config" size="1081">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>aO2L9rmogsQX09vTV7y1cNuA24rHAUr9rG047yLj/SQ=</dsig:DigestValue>
+      <dsig:DigestValue>9SF1JywQLnU0wACRlhg4IqlqwU3aQR2gnob+LXI0Npc=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Files\Empty.png" size="12630">

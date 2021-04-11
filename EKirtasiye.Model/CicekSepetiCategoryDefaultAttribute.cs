@@ -7,5 +7,8 @@ namespace EKirtasiye.Model
 {
     public class CicekSepetiCategoryDefaultAttribute : TrendyolCategoryDefaultAttribute
     {
+
+        public string AttributeValueText { get; set; }
+
     }
 }

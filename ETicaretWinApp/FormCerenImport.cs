@@ -366,7 +366,8 @@ namespace ETicaretWinApp
 
                             var product = await cerenApi.GetProductDetail(int.Parse(productId));
 
-
+                            if (product.data == null)
+                                continue;
                             var productLt = ApiHelper.FilterCatalog(new EKirtasiye.Model.DocumentFilterRequest()
                             {
                                 StokSource = _providerName,
@@ -401,7 +402,7 @@ namespace ETicaretWinApp
 
                                 foreach (var oneNode in product.data.UrunResimleri)
                                 {
-                                    var filePath = (_providerName == "Ceren" ? "http://77.75.33.201/C03/" : "https://derya.natyazilim.com.tr/rsm/") + oneNode.DosyaAdi;
+                                    var filePath = (_providerName == "Ceren" ? "https://img.natyazilim.com.tr/C03/" : "https://derya.natyazilim.com.tr/rsm/") + oneNode.DosyaAdi;
                                     if (counterImage == 0)
                                     {
                                         ideaCatalog.Picture1Path = filePath;
@@ -432,7 +433,7 @@ namespace ETicaretWinApp
                             int stockMount = 0;
                             ideaCatalog.Status = product.data.StokDurumu.Any(s => ConvertStockState(s.StorageName, s.StokState, out stockMount));
                             ideaCatalog.StockAmount = (ideaCatalog.Status ? stockMount : 0);
-                            var barcodeF = product.data.Barkodlar.FirstOrDefault(s => s.StokTuru == "ADT" || s.StokTuru == "ADET");
+                            var barcodeF = product.data.Barkodlar.FirstOrDefault(s => s.StokTuru == "ADT" || s.StokTuru == "ADET" ||s.StokTuru== "Adet");
                             if (barcodeF != null)
                             {
                                 ideaCatalog.Barcode = barcodeF.Barkod;

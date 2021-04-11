@@ -29,6 +29,35 @@ namespace EKirtasiyeRestApi.Controllers
 
             return CicekSepetiCategoryRepository.GetCicekSepetiAttributes(categoryId);
 
+        }
+
+
+
+        [Route("GetCicekSepetiProductAttribute/{productId}")]
+        [HttpGet]
+        public List<CicekSepetiProductAttribute> GetCicekSepetiProductAttribute(int productId)
+        {
+
+            return CicekSepetiCategoryRepository.GetCicekSepetiProductAttribute(productId);
+
+        }
+
+
+        [Route("SaveCicekSepetiProductAttribute")]
+        [HttpPost]
+        public string SaveCicekSepetiProductAttribute(List<CicekSepetiProductAttribute> cicekSepetiProducts)
+        {
+
+            try
+            {
+                CicekSepetiCategoryRepository.SaveCicekSepetiProductAttributes(cicekSepetiProducts);
+
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
 
         }
 
@@ -66,6 +95,32 @@ namespace EKirtasiyeRestApi.Controllers
                 return ex.Message;
             }
         }
+
+        [Route("GetCategoryDefaultAttribute/{categoryId}/{attributeId}")]
+        [HttpGet]
+        public CicekSepetiCategoryDefaultAttribute GetCategoryDefaultAttribute(int categoryId, int attributeId)
+        {
+
+            return CicekSepetiCategoryRepository.GetDefaultAttribute(categoryId, attributeId);
+        }
+
+        [Route("SaveCicekSepetiCreateRequest")]
+        [HttpPost]
+        public string SaveCicekSepetiCreateRequest(CicekSepetiCreateRequest createRequest)
+        {
+            try
+            {
+                CicekSepetiCategoryRepository.SaveCreateRequest(createRequest);
+
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+
         [Route("SaveCicekSepetiAttributes")]
         [HttpPost]
         public string SaveTrendyolAttributes(List<CicekSepetiAttribute> trendyolAttributes)
@@ -81,6 +136,14 @@ namespace EKirtasiyeRestApi.Controllers
             {
                 return ex.Message;
             }
+        }
+
+        [Route("GetCreateRequestList")]
+        [HttpGet]
+        public CicekSepetiCreateRequest[] GetCreateRequestList()
+        {
+            return CicekSepetiCategoryRepository.GetCreateRequestList();
+
         }
     }
 }

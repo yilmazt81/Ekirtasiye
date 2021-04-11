@@ -43,7 +43,7 @@ namespace ETicaretWinApp
                 productEdit.ShowDialog();
             }
         }
-        private void ProductEdit_OnSaveAndNextDocument(IdeaCatalog ideaCatalog)
+        private void ProductEdit_OnSaveAndNextDocument(string formName,IdeaCatalog ideaCatalog)
         {
             try
             {

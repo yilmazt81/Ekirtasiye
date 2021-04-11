@@ -25,6 +25,7 @@ namespace ETicaretWinApp
     {
         List<IdeaCatalog> lSearchCatalogList = new List<IdeaCatalog>();
         FormProductEdit productEdit = null;
+        FormExportSingleCicekSepeti formExportSingleCicekSepeti = null;
         private string _localWorkFolder = string.Empty;
         public FormMain()
         {
@@ -360,14 +361,22 @@ namespace ETicaretWinApp
             }
         }
 
-        private void ProductEdit_OnSaveAndNextDocument(IdeaCatalog ideaCatalog)
+        private void ProductEdit_OnSaveAndNextDocument(string formName, IdeaCatalog ideaCatalog)
         {
             try
             {
                 var saveIndex = lSearchCatalogList.IndexOf(ideaCatalog);
                 lSearchCatalogList[saveIndex] = ideaCatalog;
                 var nextCatalog = lSearchCatalogList[saveIndex + 1];
-                productEdit.SelectedProduct = nextCatalog;
+                if (formName == "EditForm")
+                {
+
+                    productEdit.SelectedProduct = nextCatalog;
+                }
+                else if (formName == "CicekSepetiExport")
+                {
+                    formExportSingleCicekSepeti.SelectedProduct = nextCatalog;
+                }
                 gridControlProduct.RefreshDataSource();
             }
             catch (Exception ex)
@@ -466,7 +475,61 @@ namespace ETicaretWinApp
                         UpdateExportList(updateList, exportTarget);
                     }
                 }
+                else if (exportTarget.Name == "CicekSepeti")
+                {
+                    if (bool.Parse(ApplicationSettingHelper.ReadValue("CicekSepeti", "UseCicekSepeti", "false")))
+                    {
+                        UpdateCicekSepetiProduct(updateExport, exportTarget.Id, updateList);
+                        UpdateExportList(updateList, exportTarget);
+                    }
+                }
             }
+
+
+
+        }
+
+        private void CheckBatchStatusList()
+        {
+            var cicekSepetiCreateRequest = ApiHelper.CicekSepetiGetCreateRequestList();
+
+            foreach (var cicekSepeti in cicekSepetiCreateRequest.Where(s => string.IsNullOrEmpty(s.RequestStatus) || s.RequestStatus == "Processing"))
+            {
+                try
+                {
+                    var batchReturn = CicekSepetiHelper.GetBatchState(cicekSepeti.BatchRequest);
+                    if (batchReturn.items[0].status == "Failed")
+                    {
+                        if (cicekSepeti.RequestType == "Create")
+                        {
+                            var apiReturn = ApiHelper.UpdateProductShopId(new EKirtasiye.Model.UpdateProductShopRequest()
+                            {
+                                Exported = false,
+                                Id = cicekSepeti.ProductId,
+                                ShopName = "CicekSepeti",
+                                ShopPrice = ""
+                            });
+                        }
+
+
+                    }
+
+                    cicekSepeti.RequestStatus = batchReturn.items[0].status;
+                    cicekSepeti.ErrorMessages = "";
+                    foreach (var failurereason in batchReturn.items[0].failureReasons)
+                    {
+                        cicekSepeti.ErrorMessages += failurereason.message + "\n";
+                    }
+                    ApiHelper.SaveCicekSepetiCreateRequest(cicekSepeti);
+
+                }
+                catch (Exception ex)
+                {
+                    System.Diagnostics.Debug.WriteLine(ex);
+                }
+
+            }
+
         }
         private void UpdateExportList(UpdateProductStatusRequest updateList, IdeaExportTarget exportTarget)
         {
@@ -506,7 +569,23 @@ namespace ETicaretWinApp
             {
                 updateProductStatus.ProductIdList.Add(ideaCatalog);
             }
+        }
 
+        private void UpdateCicekSepetiProduct(IdeaCatalog[] ideaCatalogs, int exportTargetId, UpdateProductStatusRequest updateProductStatus)
+        {
+
+            var batchReturn = CicekSepetiHelper.UpdateProducStockAndPrice(ideaCatalogs.ToList());
+            foreach (var ideaCatalog in ideaCatalogs)
+            {
+                ApiHelper.SaveCicekSepetiCreateRequest(new CicekSepetiCreateRequest()
+                {
+                    BatchRequest = batchReturn,
+                    ProductId = ideaCatalog.Id,
+                    RequestType = "Update"
+                });
+                updateProductStatus.ProductIdList.Add(ideaCatalog);
+
+            }
 
         }
         private void UpdateN11Product(IdeaCatalog[] ideaCatalogs, int exportTargetId, UpdateProductStatusRequest updateProductStatus)
@@ -962,8 +1041,8 @@ namespace ETicaretWinApp
         {
             try
             {
-                CreateUpdateExport();
-
+                //CreateUpdateExport();
+                CheckBatchStatusList();
             }
             catch (Exception exception)
             {
@@ -1082,6 +1161,68 @@ namespace ETicaretWinApp
             FormCerenImport frFormCerenImport = new FormCerenImport("Derya");
 
             frFormCerenImport.Show();
+        }
+
+        private void MenuItemExportCicekSepeti_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                var exportProductList = ApiHelper.GetExportExternalShopExportProducts("CicekSepeti").ToList();
+
+                foreach (var catalog in exportProductList)
+                {
+
+                    try
+                    {
+                        var exportReturn = CicekSepetiHelper.ExportProduct(catalog);
+
+                        if (exportReturn == "ok")
+                        {
+                            var apiReturn = ApiHelper.UpdateProductShopId(new EKirtasiye.Model.UpdateProductShopRequest()
+                            {
+                                Exported = true,
+                                ProductId = catalog.Id,
+                                ShopName = "CicekSepeti"
+                            });
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        System.Diagnostics.Debug.WriteLine(ex);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+
+                ShowException(ex);
+            }
+
+        }
+
+        private void MenuItemExportSingleCicekSepeti_Click(object sender, EventArgs e)
+        {
+
+
+
+            IdeaCatalog ideaCatalog = null;
+            for (int i = 0; i < gridView1.SelectedRowsCount; i++)
+            {
+                int row = (gridView1.GetSelectedRows()[i]);
+                var obj = gridView1.GetRow(row) as IdeaCatalog;
+                ideaCatalog = obj;
+                break;
+
+            }
+
+            if (ideaCatalog != null)
+            {
+                formExportSingleCicekSepeti = new FormExportSingleCicekSepeti();
+                formExportSingleCicekSepeti.SelectedProduct = ideaCatalog;
+                formExportSingleCicekSepeti.OnSaveAndNextDocument += ProductEdit_OnSaveAndNextDocument;
+                formExportSingleCicekSepeti.ShowDialog();
+            }
         }
     }
 }

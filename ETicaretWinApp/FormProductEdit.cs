@@ -20,7 +20,7 @@ namespace ETicaretWinApp
         List<ProductCategory> productCategory = ApiHelper.GetAllProductCategories();
         IdeaCatalog ideaCatalog = null;
         private string _localDownloadPicture = string.Empty;
-        public delegate void SaveNextDocument(IdeaCatalog ideaCatalog);
+        public delegate void SaveNextDocument(string formName,IdeaCatalog ideaCatalog);
         public event SaveNextDocument OnSaveAndNextDocument = null;
         public FormProductEdit()
         {
@@ -194,7 +194,7 @@ namespace ETicaretWinApp
             Save();
 
             if (OnSaveAndNextDocument != null)
-                OnSaveAndNextDocument(SelectedProduct);
+                OnSaveAndNextDocument("EditForm",SelectedProduct);
         }
 
         private void buttonBack_Click(object sender, EventArgs e)
@@ -374,7 +374,7 @@ namespace ETicaretWinApp
 
 
                 if (OnSaveAndNextDocument != null)
-                    OnSaveAndNextDocument(SelectedProduct);
+                    OnSaveAndNextDocument("EditForm", SelectedProduct);
 
             }
             catch (Exception ex)

@@ -20,7 +20,8 @@ namespace ETicaretWinApp
         {
             InitializeComponent();
             _categoryId = categoryId;
-            
+            CicekSepetiHelper.SaveCicekSepetiAttribute(cicekSepetiCategoryId);
+
             var attributeList = ApiHelper.GetCicekSepetiCategorieAttributes(cicekSepetiCategoryId);
             foreach (var item in attributeList.Where(s=>s.Attributename!= "Dinamik Özellik"))
             {
@@ -36,10 +37,10 @@ namespace ETicaretWinApp
                 Attribute = trendyolAttribute
             };
 
-            var attributedefaultValue = ApiHelper.GetTrendyolCategoryDefaultAttribute(_categoryId, trendyolAttribute.Attributeid);
+            var attributedefaultValue = ApiHelper.GetCicekSepetiCategoryDefaultAttribute(_categoryId, trendyolAttribute.Id);
             if (attributedefaultValue != null)
             {
-                uTrendyol.AttributeValue = attributedefaultValue.AttributeValue;
+                uTrendyol.AttributeValue = attributedefaultValue.AttributeValue.ToString();
             }
             this.fLayoutPanelAttribute.Controls.Add(uTrendyol);
             uCicekSepetiAttributes.Add(uTrendyol);
@@ -59,10 +60,11 @@ namespace ETicaretWinApp
 
                 lCicekSepetiDefaultAttribute.Add(new CicekSepetiCategoryDefaultAttribute()
                 {
-                    AttributeId = uTrendyolAttribute.Attribute.Attributeid,
+                    AttributeId = uTrendyolAttribute.Attribute.Id,
                     CategoryId = _categoryId,
                     AttributeName = uTrendyolAttribute.Attribute.Name,
-                    AttributeValue = uTrendyolAttribute.AttributeValue
+                    AttributeValue = int.Parse(uTrendyolAttribute.AttributeValue),
+                    AttributeValueText = uTrendyolAttribute.AttributeValueText
                 });
 
             }

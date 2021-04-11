@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
-            ProductCategory productCategory1 = new ProductCategory();
-            ProductCategory productCategory2 = new ProductCategory();
-            ProductCategory productCategory3 = new ProductCategory();
+            ProductCategory productCategory4 = new ProductCategory();
+            ProductCategory productCategory5 = new ProductCategory();
+            ProductCategory productCategory6 = new ProductCategory();
             this.gridControlProduct = new DevExpress.XtraGrid.GridControl();
             this.cMenuStripProductList = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuItemProductImport = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,6 +41,7 @@
             this.MenuItemImportCeren = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemImportPDF = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemImportExcel = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemDerya = new System.Windows.Forms.ToolStripMenuItem();
             this.MenıItemExportExcel = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemUpdateGroup = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemUpdateMainC = new System.Windows.Forms.ToolStripMenuItem();
@@ -57,7 +58,10 @@
             this.MenuItemHepsiBurada = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemExportN11 = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemExportTrendYol = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemExportCicekSepeti = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemCreateUpdateExport = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemExportSingle = new System.Windows.Forms.ToolStripMenuItem();
+            this.MenuItemExportSingleCicekSepeti = new System.Windows.Forms.ToolStripMenuItem();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.colId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.colStockCode = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -93,7 +97,6 @@
             this.MenuItemShopSetting = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemTedarikciPasswords = new System.Windows.Forms.ToolStripMenuItem();
             this.sContainer1 = new System.Windows.Forms.SplitContainer();
-            this.MenuItemDerya = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlProduct)).BeginInit();
             this.cMenuStripProductList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
@@ -130,9 +133,10 @@
             this.MenuItemNewProduct,
             this.MenuItemIndexCatalog,
             this.MenuItemShareInstagram,
-            this.MenuItemExport});
+            this.MenuItemExport,
+            this.MenuItemExportSingle});
             this.cMenuStripProductList.Name = "cMenuStripProductList";
-            this.cMenuStripProductList.Size = new System.Drawing.Size(222, 224);
+            this.cMenuStripProductList.Size = new System.Drawing.Size(221, 224);
             // 
             // MenuItemProductImport
             // 
@@ -144,48 +148,55 @@
             this.MenuItemImportExcel,
             this.MenuItemDerya});
             this.MenuItemProductImport.Name = "MenuItemProductImport";
-            this.MenuItemProductImport.Size = new System.Drawing.Size(221, 22);
+            this.MenuItemProductImport.Size = new System.Drawing.Size(220, 22);
             this.MenuItemProductImport.Text = "Ürün İmport";
             // 
             // MenuItemMuhasebeImport
             // 
             this.MenuItemMuhasebeImport.Name = "MenuItemMuhasebeImport";
-            this.MenuItemMuhasebeImport.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemMuhasebeImport.Size = new System.Drawing.Size(174, 22);
             this.MenuItemMuhasebeImport.Text = "Muhasebe Çıktısı";
             this.MenuItemMuhasebeImport.Click += new System.EventHandler(this.MenuItemMuhasebeImport_Click);
             // 
             // MenuItemKadiogluImport
             // 
             this.MenuItemKadiogluImport.Name = "MenuItemKadiogluImport";
-            this.MenuItemKadiogluImport.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemKadiogluImport.Size = new System.Drawing.Size(174, 22);
             this.MenuItemKadiogluImport.Text = "Kadioglu Import";
             this.MenuItemKadiogluImport.Click += new System.EventHandler(this.MenuItemKadiogluImport_Click);
             // 
             // MenuItemImportCeren
             // 
             this.MenuItemImportCeren.Name = "MenuItemImportCeren";
-            this.MenuItemImportCeren.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemImportCeren.Size = new System.Drawing.Size(174, 22);
             this.MenuItemImportCeren.Text = "Ceren";
             this.MenuItemImportCeren.Click += new System.EventHandler(this.MenuItemImportCeren_Click);
             // 
             // MenuItemImportPDF
             // 
             this.MenuItemImportPDF.Name = "MenuItemImportPDF";
-            this.MenuItemImportPDF.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemImportPDF.Size = new System.Drawing.Size(174, 22);
             this.MenuItemImportPDF.Text = "Pdf Katalog Import";
             this.MenuItemImportPDF.Click += new System.EventHandler(this.MenuItemImportPDF_Click);
             // 
             // MenuItemImportExcel
             // 
             this.MenuItemImportExcel.Name = "MenuItemImportExcel";
-            this.MenuItemImportExcel.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemImportExcel.Size = new System.Drawing.Size(174, 22);
             this.MenuItemImportExcel.Text = "Excel Import";
             this.MenuItemImportExcel.Click += new System.EventHandler(this.MenuItemImportExcel_Click);
+            // 
+            // MenuItemDerya
+            // 
+            this.MenuItemDerya.Name = "MenuItemDerya";
+            this.MenuItemDerya.Size = new System.Drawing.Size(174, 22);
+            this.MenuItemDerya.Text = "Derya";
+            this.MenuItemDerya.Click += new System.EventHandler(this.MenuItemDerya_Click);
             // 
             // MenıItemExportExcel
             // 
             this.MenıItemExportExcel.Name = "MenıItemExportExcel";
-            this.MenıItemExportExcel.Size = new System.Drawing.Size(221, 22);
+            this.MenıItemExportExcel.Size = new System.Drawing.Size(220, 22);
             this.MenıItemExportExcel.Text = "Excel\'e Çıkar";
             this.MenıItemExportExcel.Click += new System.EventHandler(this.MenıItemExportExcel_Click);
             // 
@@ -197,7 +208,7 @@
             this.MenuItemSubSubU,
             this.MenuItemUpdateSelected});
             this.MenuItemUpdateGroup.Name = "MenuItemUpdateGroup";
-            this.MenuItemUpdateGroup.Size = new System.Drawing.Size(221, 22);
+            this.MenuItemUpdateGroup.Size = new System.Drawing.Size(220, 22);
             this.MenuItemUpdateGroup.Text = "Group Update";
             this.MenuItemUpdateGroup.Click += new System.EventHandler(this.MenuItemUpdateGroup_Click);
             // 
@@ -232,35 +243,35 @@
             // MenuItemGetInfoFromWeb
             // 
             this.MenuItemGetInfoFromWeb.Name = "MenuItemGetInfoFromWeb";
-            this.MenuItemGetInfoFromWeb.Size = new System.Drawing.Size(221, 22);
+            this.MenuItemGetInfoFromWeb.Size = new System.Drawing.Size(220, 22);
             this.MenuItemGetInfoFromWeb.Text = "Eksik Bilgileri Webden Topla";
             this.MenuItemGetInfoFromWeb.Click += new System.EventHandler(this.MenuItemGetInfoFromWeb_Click);
             // 
             // MenuItemProductProperty
             // 
             this.MenuItemProductProperty.Name = "MenuItemProductProperty";
-            this.MenuItemProductProperty.Size = new System.Drawing.Size(221, 22);
+            this.MenuItemProductProperty.Size = new System.Drawing.Size(220, 22);
             this.MenuItemProductProperty.Text = "Ürün Özellikleri";
             this.MenuItemProductProperty.Click += new System.EventHandler(this.MenuItemProductProperty_Click);
             // 
             // MenuItemNewProduct
             // 
             this.MenuItemNewProduct.Name = "MenuItemNewProduct";
-            this.MenuItemNewProduct.Size = new System.Drawing.Size(221, 22);
+            this.MenuItemNewProduct.Size = new System.Drawing.Size(220, 22);
             this.MenuItemNewProduct.Text = "Yeni Ürün";
             this.MenuItemNewProduct.Click += new System.EventHandler(this.MenuItemNewProduct_Click);
             // 
             // MenuItemIndexCatalog
             // 
             this.MenuItemIndexCatalog.Name = "MenuItemIndexCatalog";
-            this.MenuItemIndexCatalog.Size = new System.Drawing.Size(221, 22);
+            this.MenuItemIndexCatalog.Size = new System.Drawing.Size(220, 22);
             this.MenuItemIndexCatalog.Text = "Catalog indexle";
             this.MenuItemIndexCatalog.Click += new System.EventHandler(this.MenuItemIndexCatalog_Click);
             // 
             // MenuItemShareInstagram
             // 
             this.MenuItemShareInstagram.Name = "MenuItemShareInstagram";
-            this.MenuItemShareInstagram.Size = new System.Drawing.Size(221, 22);
+            this.MenuItemShareInstagram.Size = new System.Drawing.Size(220, 22);
             this.MenuItemShareInstagram.Text = "Intagramda Paylaş";
             this.MenuItemShareInstagram.Click += new System.EventHandler(this.MenuItemShareInstagram_Click);
             // 
@@ -271,45 +282,68 @@
             this.MenuItemHepsiBurada,
             this.MenuItemExportN11,
             this.MenuItemExportTrendYol,
+            this.MenuItemExportCicekSepeti,
             this.MenuItemCreateUpdateExport});
             this.MenuItemExport.Name = "MenuItemExport";
-            this.MenuItemExport.Size = new System.Drawing.Size(221, 22);
+            this.MenuItemExport.Size = new System.Drawing.Size(220, 22);
             this.MenuItemExport.Text = "Export";
             // 
             // MenuItemIdeaSoftExport
             // 
             this.MenuItemIdeaSoftExport.Name = "MenuItemIdeaSoftExport";
-            this.MenuItemIdeaSoftExport.Size = new System.Drawing.Size(189, 22);
+            this.MenuItemIdeaSoftExport.Size = new System.Drawing.Size(190, 22);
             this.MenuItemIdeaSoftExport.Text = "IdeaSoft Export";
             this.MenuItemIdeaSoftExport.Click += new System.EventHandler(this.MenuItemIdeaExport_Click);
             // 
             // MenuItemHepsiBurada
             // 
             this.MenuItemHepsiBurada.Name = "MenuItemHepsiBurada";
-            this.MenuItemHepsiBurada.Size = new System.Drawing.Size(189, 22);
+            this.MenuItemHepsiBurada.Size = new System.Drawing.Size(190, 22);
             this.MenuItemHepsiBurada.Text = "HepsiBurada Export";
             this.MenuItemHepsiBurada.Click += new System.EventHandler(this.MenuItemHepsiBurada_Click);
             // 
             // MenuItemExportN11
             // 
             this.MenuItemExportN11.Name = "MenuItemExportN11";
-            this.MenuItemExportN11.Size = new System.Drawing.Size(189, 22);
+            this.MenuItemExportN11.Size = new System.Drawing.Size(190, 22);
             this.MenuItemExportN11.Text = "N11 Export";
             this.MenuItemExportN11.Click += new System.EventHandler(this.MenuItemExportN11_Click);
             // 
             // MenuItemExportTrendYol
             // 
             this.MenuItemExportTrendYol.Name = "MenuItemExportTrendYol";
-            this.MenuItemExportTrendYol.Size = new System.Drawing.Size(189, 22);
+            this.MenuItemExportTrendYol.Size = new System.Drawing.Size(190, 22);
             this.MenuItemExportTrendYol.Text = "Export Trendyol";
             this.MenuItemExportTrendYol.Click += new System.EventHandler(this.MenuItemExportTrendYol_Click);
+            // 
+            // MenuItemExportCicekSepeti
+            // 
+            this.MenuItemExportCicekSepeti.Name = "MenuItemExportCicekSepeti";
+            this.MenuItemExportCicekSepeti.Size = new System.Drawing.Size(190, 22);
+            this.MenuItemExportCicekSepeti.Text = "Çiçek Sepeti";
+            this.MenuItemExportCicekSepeti.Click += new System.EventHandler(this.MenuItemExportCicekSepeti_Click);
             // 
             // MenuItemCreateUpdateExport
             // 
             this.MenuItemCreateUpdateExport.Name = "MenuItemCreateUpdateExport";
-            this.MenuItemCreateUpdateExport.Size = new System.Drawing.Size(189, 22);
+            this.MenuItemCreateUpdateExport.Size = new System.Drawing.Size(190, 22);
             this.MenuItemCreateUpdateExport.Text = "Update Export U Cikar";
             this.MenuItemCreateUpdateExport.Click += new System.EventHandler(this.MenuItemCreateUpdateExport_Click);
+            // 
+            // MenuItemExportSingle
+            // 
+            this.MenuItemExportSingle.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MenuItemExportSingleCicekSepeti});
+            this.MenuItemExportSingle.Name = "MenuItemExportSingle";
+            this.MenuItemExportSingle.Size = new System.Drawing.Size(220, 22);
+            this.MenuItemExportSingle.Text = "Tekil Ürün Export";
+            // 
+            // MenuItemExportSingleCicekSepeti
+            // 
+            this.MenuItemExportSingleCicekSepeti.Name = "MenuItemExportSingleCicekSepeti";
+            this.MenuItemExportSingleCicekSepeti.Size = new System.Drawing.Size(135, 22);
+            this.MenuItemExportSingleCicekSepeti.Text = "ÇiçekSepeti";
+            this.MenuItemExportSingleCicekSepeti.Click += new System.EventHandler(this.MenuItemExportSingleCicekSepeti_Click);
             // 
             // gridView1
             // 
@@ -559,7 +593,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(546, 167);
+            this.label2.Location = new System.Drawing.Point(558, 204);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(127, 15);
             this.label2.TabIndex = 14;
@@ -567,7 +601,7 @@
             // 
             // textBoxStokCode
             // 
-            this.textBoxStokCode.Location = new System.Drawing.Point(679, 164);
+            this.textBoxStokCode.Location = new System.Drawing.Point(691, 201);
             this.textBoxStokCode.Name = "textBoxStokCode";
             this.textBoxStokCode.Size = new System.Drawing.Size(275, 23);
             this.textBoxStokCode.TabIndex = 15;
@@ -605,51 +639,57 @@
             // 
             this.uCategoryView1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
-            productCategory1.CategoryName = "Tümü";
-            productCategory1.CategoryUrl = null;
-            productCategory1.HepsiBuradaCategoryId = 0;
-            productCategory1.HepsiBuradaCategoryName = null;
-            productCategory1.Id = 0;
-            productCategory1.N11CategoryId = 0;
-            productCategory1.N11CategoryName = null;
-            productCategory1.N11ExportTemplateId = 0;
-            productCategory1.N11ExportTemplateName = null;
-            productCategory1.TargetCategory = false;
-            productCategory1.TrendyolCategoryId = 0;
-            productCategory1.TrendyolCategoryName = null;
-            productCategory1.UpId = 0;
-            this.uCategoryView1.Category = productCategory1;
+            productCategory4.CategoryName = "Tümü";
+            productCategory4.CategoryUrl = null;
+            productCategory4.CicekSepetiCategoryId = 0;
+            productCategory4.CicekSepetiCategoryName = null;
+            productCategory4.HepsiBuradaCategoryId = 0;
+            productCategory4.HepsiBuradaCategoryName = null;
+            productCategory4.Id = 0;
+            productCategory4.N11CategoryId = 0;
+            productCategory4.N11CategoryName = null;
+            productCategory4.N11ExportTemplateId = 0;
+            productCategory4.N11ExportTemplateName = null;
+            productCategory4.TargetCategory = false;
+            productCategory4.TrendyolCategoryId = 0;
+            productCategory4.TrendyolCategoryName = null;
+            productCategory4.UpId = 0;
+            this.uCategoryView1.Category = productCategory4;
             this.uCategoryView1.Location = new System.Drawing.Point(12, 10);
-            productCategory2.CategoryName = "Tümü";
-            productCategory2.CategoryUrl = null;
-            productCategory2.HepsiBuradaCategoryId = 0;
-            productCategory2.HepsiBuradaCategoryName = null;
-            productCategory2.Id = 0;
-            productCategory2.N11CategoryId = 0;
-            productCategory2.N11CategoryName = null;
-            productCategory2.N11ExportTemplateId = 0;
-            productCategory2.N11ExportTemplateName = null;
-            productCategory2.TargetCategory = false;
-            productCategory2.TrendyolCategoryId = 0;
-            productCategory2.TrendyolCategoryName = null;
-            productCategory2.UpId = 0;
-            this.uCategoryView1.MainCategory = productCategory2;
+            productCategory5.CategoryName = "Tümü";
+            productCategory5.CategoryUrl = null;
+            productCategory5.CicekSepetiCategoryId = 0;
+            productCategory5.CicekSepetiCategoryName = null;
+            productCategory5.HepsiBuradaCategoryId = 0;
+            productCategory5.HepsiBuradaCategoryName = null;
+            productCategory5.Id = 0;
+            productCategory5.N11CategoryId = 0;
+            productCategory5.N11CategoryName = null;
+            productCategory5.N11ExportTemplateId = 0;
+            productCategory5.N11ExportTemplateName = null;
+            productCategory5.TargetCategory = false;
+            productCategory5.TrendyolCategoryId = 0;
+            productCategory5.TrendyolCategoryName = null;
+            productCategory5.UpId = 0;
+            this.uCategoryView1.MainCategory = productCategory5;
             this.uCategoryView1.Name = "uCategoryView1";
             this.uCategoryView1.Size = new System.Drawing.Size(528, 211);
-            productCategory3.CategoryName = "Tümü";
-            productCategory3.CategoryUrl = null;
-            productCategory3.HepsiBuradaCategoryId = 0;
-            productCategory3.HepsiBuradaCategoryName = null;
-            productCategory3.Id = 0;
-            productCategory3.N11CategoryId = 0;
-            productCategory3.N11CategoryName = null;
-            productCategory3.N11ExportTemplateId = 0;
-            productCategory3.N11ExportTemplateName = null;
-            productCategory3.TargetCategory = false;
-            productCategory3.TrendyolCategoryId = 0;
-            productCategory3.TrendyolCategoryName = null;
-            productCategory3.UpId = 0;
-            this.uCategoryView1.SubCategory = productCategory3;
+            productCategory6.CategoryName = "Tümü";
+            productCategory6.CategoryUrl = null;
+            productCategory6.CicekSepetiCategoryId = 0;
+            productCategory6.CicekSepetiCategoryName = null;
+            productCategory6.HepsiBuradaCategoryId = 0;
+            productCategory6.HepsiBuradaCategoryName = null;
+            productCategory6.Id = 0;
+            productCategory6.N11CategoryId = 0;
+            productCategory6.N11CategoryName = null;
+            productCategory6.N11ExportTemplateId = 0;
+            productCategory6.N11ExportTemplateName = null;
+            productCategory6.TargetCategory = false;
+            productCategory6.TrendyolCategoryId = 0;
+            productCategory6.TrendyolCategoryName = null;
+            productCategory6.UpId = 0;
+            this.uCategoryView1.SubCategory = productCategory6;
             this.uCategoryView1.TabIndex = 18;
             // 
             // menuStripMain
@@ -675,14 +715,14 @@
             // MenuItemN11Entegration
             // 
             this.MenuItemN11Entegration.Name = "MenuItemN11Entegration";
-            this.MenuItemN11Entegration.Size = new System.Drawing.Size(120, 22);
+            this.MenuItemN11Entegration.Size = new System.Drawing.Size(119, 22);
             this.MenuItemN11Entegration.Text = "N11";
             this.MenuItemN11Entegration.Click += new System.EventHandler(this.MenuItemN11Entegration_Click);
             // 
             // MenuItemTrendyol
             // 
             this.MenuItemTrendyol.Name = "MenuItemTrendyol";
-            this.MenuItemTrendyol.Size = new System.Drawing.Size(120, 22);
+            this.MenuItemTrendyol.Size = new System.Drawing.Size(119, 22);
             this.MenuItemTrendyol.Text = "Trendyol";
             this.MenuItemTrendyol.Click += new System.EventHandler(this.MenuItemTrendyol_Click);
             // 
@@ -698,14 +738,14 @@
             // MenuItemShopSetting
             // 
             this.MenuItemShopSetting.Name = "MenuItemShopSetting";
-            this.MenuItemShopSetting.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemShopSetting.Size = new System.Drawing.Size(163, 22);
             this.MenuItemShopSetting.Text = "Pazaryeri Şifreleri";
             this.MenuItemShopSetting.Click += new System.EventHandler(this.MenuItemShopSetting_Click);
             // 
             // MenuItemTedarikciPasswords
             // 
             this.MenuItemTedarikciPasswords.Name = "MenuItemTedarikciPasswords";
-            this.MenuItemTedarikciPasswords.Size = new System.Drawing.Size(180, 22);
+            this.MenuItemTedarikciPasswords.Size = new System.Drawing.Size(163, 22);
             this.MenuItemTedarikciPasswords.Text = "Tedarikçi Şifreleri";
             this.MenuItemTedarikciPasswords.Click += new System.EventHandler(this.MenuItemTedarikciPasswords_Click);
             // 
@@ -730,13 +770,6 @@
             this.sContainer1.Size = new System.Drawing.Size(1540, 458);
             this.sContainer1.SplitterDistance = 229;
             this.sContainer1.TabIndex = 20;
-            // 
-            // MenuItemDerya
-            // 
-            this.MenuItemDerya.Name = "MenuItemDerya";
-            this.MenuItemDerya.Size = new System.Drawing.Size(180, 22);
-            this.MenuItemDerya.Text = "Derya";
-            this.MenuItemDerya.Click += new System.EventHandler(this.MenuItemDerya_Click);
             // 
             // FormMain
             // 
@@ -835,6 +868,9 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemExportTrendYol;
         private System.Windows.Forms.ToolStripMenuItem MenuItemTedarikciPasswords;
         private System.Windows.Forms.ToolStripMenuItem MenuItemDerya;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemExportCicekSepeti;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemExportSingle;
+        private System.Windows.Forms.ToolStripMenuItem MenuItemExportSingleCicekSepeti;
     }
 }
 

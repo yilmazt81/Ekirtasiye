@@ -7,6 +7,10 @@ namespace EKirtasiye.Model
 {
     public class TrendyolCreateRequest
     {
+        public TrendyolCreateRequest()
+        {
+
+        }
         public int Id { get; set; }
         public int ProductId { get; set; }
         public string BatchRequest { get; set; }
@@ -15,6 +19,9 @@ namespace EKirtasiye.Model
 
         public string RequestType { get; set; }
 
+        public string RequestStatus { get; set; }
+
+        public  string ErrorMessages { get; set; }
 
     }
 }

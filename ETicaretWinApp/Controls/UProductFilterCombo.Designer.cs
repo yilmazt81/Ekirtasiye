@@ -52,6 +52,10 @@
             this.comboBoxDateFilterType = new System.Windows.Forms.ComboBox();
             this.comboBoxExportTrend = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.comboBoxExportCicekSepeti = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.comboBoxPicture = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // comboBoxInternetFiyat
@@ -259,7 +263,7 @@
             "Tümü",
             "Evet",
             "Hayır"});
-            this.comboBoxExportIdea.Location = new System.Drawing.Point(438, 133);
+            this.comboBoxExportIdea.Location = new System.Drawing.Point(93, 134);
             this.comboBoxExportIdea.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxExportIdea.Name = "comboBoxExportIdea";
             this.comboBoxExportIdea.Size = new System.Drawing.Size(78, 21);
@@ -268,7 +272,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(362, 138);
+            this.label9.Location = new System.Drawing.Point(17, 139);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(61, 13);
             this.label9.TabIndex = 37;
@@ -296,7 +300,7 @@
             "Tümü",
             "Evet",
             "Hayır"});
-            this.comboBoxExportTrend.Location = new System.Drawing.Point(620, 133);
+            this.comboBoxExportTrend.Location = new System.Drawing.Point(275, 134);
             this.comboBoxExportTrend.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.comboBoxExportTrend.Name = "comboBoxExportTrend";
             this.comboBoxExportTrend.Size = new System.Drawing.Size(78, 21);
@@ -305,16 +309,66 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(531, 138);
+            this.label10.Location = new System.Drawing.Point(186, 139);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(83, 13);
             this.label10.TabIndex = 40;
             this.label10.Text = "Export TrendYol";
             // 
+            // comboBoxExportCicekSepeti
+            // 
+            this.comboBoxExportCicekSepeti.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxExportCicekSepeti.FormattingEnabled = true;
+            this.comboBoxExportCicekSepeti.Items.AddRange(new object[] {
+            "Tümü",
+            "Evet",
+            "Hayır"});
+            this.comboBoxExportCicekSepeti.Location = new System.Drawing.Point(481, 132);
+            this.comboBoxExportCicekSepeti.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxExportCicekSepeti.Name = "comboBoxExportCicekSepeti";
+            this.comboBoxExportCicekSepeti.Size = new System.Drawing.Size(78, 21);
+            this.comboBoxExportCicekSepeti.TabIndex = 43;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(367, 137);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(100, 13);
+            this.label11.TabIndex = 42;
+            this.label11.Text = "Export Çiçek Sepeti";
+            // 
+            // comboBoxPicture
+            // 
+            this.comboBoxPicture.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.comboBoxPicture.FormattingEnabled = true;
+            this.comboBoxPicture.Items.AddRange(new object[] {
+            "Tümü",
+            "Evet",
+            "Hayır"});
+            this.comboBoxPicture.Location = new System.Drawing.Point(628, 131);
+            this.comboBoxPicture.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.comboBoxPicture.Name = "comboBoxPicture";
+            this.comboBoxPicture.Size = new System.Drawing.Size(78, 21);
+            this.comboBoxPicture.TabIndex = 45;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(584, 134);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(36, 13);
+            this.label12.TabIndex = 44;
+            this.label12.Text = "Resim";
+            // 
             // UProductFilterCombo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.comboBoxPicture);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.comboBoxExportCicekSepeti);
+            this.Controls.Add(this.label11);
             this.Controls.Add(this.comboBoxExportTrend);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.comboBoxDateFilterType);
@@ -372,5 +426,9 @@
         private System.Windows.Forms.ComboBox comboBoxDateFilterType;
         private System.Windows.Forms.ComboBox comboBoxExportTrend;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox comboBoxExportCicekSepeti;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox comboBoxPicture;
+        private System.Windows.Forms.Label label12;
     }
 }

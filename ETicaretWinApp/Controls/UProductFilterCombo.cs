@@ -29,6 +29,9 @@ namespace ETicaretWinApp.Controls
                 comboBoxDateFilterType.Text = "=";
                 comboBoxExportHB.Text = "Tümü";
                 comboBoxExportN11.Text = "Tümü";
+                comboBoxExportCicekSepeti.Text = "Tümü";
+                comboBoxPicture.Text = "Tümü";
+
             }
             catch (Exception ex)
             {
@@ -54,7 +57,9 @@ namespace ETicaretWinApp.Controls
                     CreatedDate = (!dTimePickerCreated.Checked ? null : (DateTime?)dTimePickerCreated.Value),
                     DateFilterType = comboBoxDateFilterType.Text,
                     IdeaExport = this.ExportIdea,
-                    ExportTrendyol=comboBoxExportTrend.Text
+                    ExportTrendyol=comboBoxExportTrend.Text,
+                    ExportCicekSepeti=comboBoxExportCicekSepeti.Text,
+                    HavePicture=comboBoxPicture.Text
                 };
                 return documentFilter;
             }

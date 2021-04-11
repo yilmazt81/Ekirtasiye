@@ -41,8 +41,7 @@ namespace EKirtasiye.Model
         public string PriceFilter { get; set; }
 
         public DateTime? CreatedDate { get; set; }
-
-
-
+        public string ExportCicekSepeti { get; set; }
+        public string HavePicture { get; set; }
     }
 }

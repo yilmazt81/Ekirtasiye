@@ -27,21 +27,28 @@ namespace ETicaretWinApp.Controls
             set {
                 cicekSepetiAttribute = value;
                 label1.Text = value.Name;
-                var arr = value.AttributeValues.ToList();
-                arr.Insert(0, new CicekSepetiAttributeValue() { AttributeText = "Seçiniz" });
+                var arr = value.AttributeValues.OrderBy(s=>s.AttributeText).ToList();
+                arr.Insert(0, new CicekSepetiAttributeValue() { AttributeText = "Seçiniz", AttributeValue = "0" });
                 comboBoxValues.DataSource = arr;
                 comboBoxValues.ValueMember = "AttributeValue";
                 comboBoxValues.DisplayMember = "AttributeText";
             }
         }
 
-        public int AttributeValue {
+        public string AttributeValue {
             get {
-               return Convert.ToInt32(comboBoxValues.SelectedValue);
+                return comboBoxValues.SelectedValue.ToString();
 
             }
             set {
                 comboBoxValues.SelectedValue = value;
+            }
+        }
+
+        public string AttributeValueText {
+            get {
+
+                return ((CicekSepetiAttributeValue)comboBoxValues.SelectedItem).AttributeText;
             }
         }
     }

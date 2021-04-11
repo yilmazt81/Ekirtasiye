@@ -144,6 +144,7 @@
     <Compile Include="Class\CateogryResult.cs" />
     <Compile Include="Class\CerenApi.cs" />
     <Compile Include="Class\CerenProduct.cs" />
+    <Compile Include="Class\eShop\CicekSepetiHelper.cs" />
     <Compile Include="Class\ExtentionMethods.cs" />
     <Compile Include="Class\FTPHelper.cs" />
     <Compile Include="Class\GoogleSearchHtmlExtractor.cs" />
@@ -185,6 +186,12 @@
     <Compile Include="Controls\UCicekSepetiAttribute.Designer.cs">
       <DependentUpon>UCicekSepetiAttribute.cs</DependentUpon>
     </Compile>
+    <Compile Include="Controls\UShowCategoryView.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\UShowCategoryView.Designer.cs">
+      <DependentUpon>UShowCategoryView.cs</DependentUpon>
+    </Compile>
     <Compile Include="Controls\UTrendyolAttribute.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -208,6 +215,12 @@
     </Compile>
     <Compile Include="FormEditSelectedProductGroup.Designer.cs">
       <DependentUpon>FormEditSelectedProductGroup.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormExportSingleCicekSepeti.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormExportSingleCicekSepeti.Designer.cs">
+      <DependentUpon>FormExportSingleCicekSepeti.cs</DependentUpon>
     </Compile>
     <Compile Include="FormImageCatalogIndex.cs">
       <SubType>Form</SubType>
@@ -352,6 +365,9 @@
     <EmbeddedResource Include="Controls\UCicekSepetiAttribute.resx">
       <DependentUpon>UCicekSepetiAttribute.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Controls\UShowCategoryView.resx">
+      <DependentUpon>UShowCategoryView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Controls\UTrendyolAttribute.resx">
       <DependentUpon>UTrendyolAttribute.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,6 +379,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormEditSelectedProductGroup.resx">
       <DependentUpon>FormEditSelectedProductGroup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormExportSingleCicekSepeti.resx">
+      <DependentUpon>FormExportSingleCicekSepeti.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormImageCatalogIndex.resx">
       <DependentUpon>FormImageCatalogIndex.cs</DependentUpon>
@@ -476,6 +495,9 @@
     <None Include="Resources\copy03.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="CicekSepetiYasakliKelimeler.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Files\Empty.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

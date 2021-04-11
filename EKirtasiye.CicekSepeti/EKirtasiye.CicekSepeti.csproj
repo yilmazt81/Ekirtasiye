@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CicekSepetiApi.cs" />
+    <Compile Include="CicekSepetiBatchReturn.cs" />
     <Compile Include="CicekSepetiCategoryAttribute.cs" />
     <Compile Include="CicekSepetiCategoryReturn.cs" />
     <Compile Include="CicekSepetiProduct.cs" />

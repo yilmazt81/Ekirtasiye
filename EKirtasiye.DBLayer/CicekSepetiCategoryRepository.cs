@@ -67,22 +67,24 @@ namespace EKirtasiye.DBLayer
                 AttributeName = datadefaultAttribute.Rows[0]["AttributeName"].ToString(),
                 AttributeValue = Convert.ToInt32(datadefaultAttribute.Rows[0]["AttributeValue"]),
                 CategoryId = Convert.ToInt32(datadefaultAttribute.Rows[0]["CategoryId"]),
-                Id = Convert.ToInt32(datadefaultAttribute.Rows[0]["Id"])
+                Id = Convert.ToInt32(datadefaultAttribute.Rows[0]["Id"]),
+                AttributeValueText = datadefaultAttribute.Rows[0]["AttributeValueText"].ToString()
             });
         }
 
-        public static List<TrendyolCategoryDefaultAttribute> GetCategoryDefaultAttributes(int categoryId)
+        public static List<CicekSepetiCategoryDefaultAttribute> GetCategoryDefaultAttributes(int categoryId)
         {
             var datadefaultAttribute = DBHelper.GetQuery($"SELECT * FROM CicekSepetiCategoryDefaultAttribute WHERE CategoryId={categoryId}  ");
 
 
-            return datadefaultAttribute.Rows.Cast<DataRow>().Select(row => new TrendyolCategoryDefaultAttribute()
+            return datadefaultAttribute.Rows.Cast<DataRow>().Select(row => new CicekSepetiCategoryDefaultAttribute()
             {
                 AttributeId = Convert.ToInt32(row["AttributeId"]),
                 AttributeName = row["AttributeName"].ToString(),
                 AttributeValue = Convert.ToInt32(row["AttributeValue"]),
                 CategoryId = Convert.ToInt32(row["CategoryId"]),
-                Id = Convert.ToInt32(row["Id"])
+                Id = Convert.ToInt32(row["Id"]),
+                AttributeValueText = row["AttributeValueText"].ToString()
 
             }).ToList();
 
@@ -100,10 +102,27 @@ namespace EKirtasiye.DBLayer
                 new SqlParameter("@CategoryId",defaultAttribute.CategoryId),
                 new SqlParameter("@AttributeId",defaultAttribute.AttributeId),
                 new SqlParameter("@AttributeName",defaultAttribute.AttributeName),
-                new SqlParameter("@AttributeValue",defaultAttribute.AttributeValue)
+                new SqlParameter("@AttributeValue",defaultAttribute.AttributeValue),
+                new SqlParameter("@AttributeValueText",defaultAttribute.AttributeValueText)
                 });
 
             }
+            return true;
+        }
+
+
+        public static bool SaveCreateRequest(CicekSepetiCreateRequest Create)
+        {
+            DBHelper.ExecuteCommand("pSaveCicekSepetiCreateRequest", new SqlParameter[]
+            {
+                new SqlParameter("@ProductId",Create.ProductId),
+                new SqlParameter("@BatchRequest",Create.BatchRequest),
+                new SqlParameter("@RequestType",Create.RequestType),
+                new SqlParameter("@RequestStatus",(string.IsNullOrEmpty(Create.RequestStatus)?DBNull.Value:(object)Create.RequestStatus)),
+                new SqlParameter("@ErrorMessage",(string.IsNullOrEmpty(Create.ErrorMessages)?DBNull.Value:(object)Create.ErrorMessages)),
+
+            });
+
             return true;
         }
 
@@ -121,6 +140,44 @@ namespace EKirtasiye.DBLayer
 
             return nCategories;
 
+        }
+
+        public static List<CicekSepetiProductAttribute> GetCicekSepetiProductAttribute(int productId)
+        {
+            var dtProduct = DBHelper.GetQuery($"select * from CicekSepetiProductAttribute where ProductId={productId}");
+
+
+            return dtProduct.Rows.Cast<DataRow>().Select(s => new CicekSepetiProductAttribute()
+            {
+                Id = Convert.ToInt32(s["Id"]),
+                Attributeid = Convert.ToInt32(s["Attributeid"]),
+                ProductId = Convert.ToInt32(s["ProductId"]),
+                AttributeValue = Convert.ToInt32(s["AttributeValue"]),
+                AttributeName = s["AttributeName"].ToString() 
+
+            }).ToList();
+
+        }
+
+
+        public static void SaveCicekSepetiProductAttributes(List<CicekSepetiProductAttribute> cicekSepetiProductAttributes)
+        {
+            var firstAttribute = cicekSepetiProductAttributes.FirstOrDefault();
+            DBHelper.ExecuteCommand($"DELETE FROM CicekSepetiProductAttribute WHERE ProductId={firstAttribute.ProductId}");
+
+            foreach (var trendyolProductAttribute in cicekSepetiProductAttributes)
+            {
+
+                DBHelper.ExecuteCommand("pSaveCicekSepetiProductAttribute", new SqlParameter[]
+                {
+                    new SqlParameter("@ProductId",trendyolProductAttribute.ProductId),
+                    new SqlParameter("@Attributeid",trendyolProductAttribute.Attributeid),
+                    new SqlParameter("@AttributeName",trendyolProductAttribute.AttributeName),
+                    new SqlParameter("@AttributeValue",trendyolProductAttribute.AttributeValue),
+                    new SqlParameter("@AttributeCustomeValue",(string.IsNullOrEmpty(trendyolProductAttribute.AttributeCustomeValue)?DBNull.Value:(object)trendyolProductAttribute.AttributeCustomeValue))
+
+                });
+            }
         }
         /*
         public static bool SaveTrendyolCreateRequest(TrendyolCreateRequest trendyolCreate)
@@ -175,6 +232,20 @@ namespace EKirtasiye.DBLayer
             }
         }
 
+
+        public static CicekSepetiCreateRequest[] GetCreateRequestList()
+        {
+            var dtRequest = DBHelper.GetQuery("SELECT * FROM CicekyolCreateRequest");
+
+            return dtRequest.Rows.Cast<DataRow>().Select(s => new CicekSepetiCreateRequest()
+            {
+                BatchRequest = s["BatchRequest"].ToString(),
+                Id = Convert.ToInt32(s["Id"]),
+                ProductId = Convert.ToInt32(s["ProductId"]),
+                RequestDate = (DateTime)s["RequestDate"],
+                RequestType = s["RequestType"].ToString()
+            }).ToArray();
+        }
         public static void SaveCicekSepetiAttribute(CicekSepetiAttribute cicekSepetiAttribute)
         {
             using (SqlConnection connection = DBHelper.GetOpenConnection())

@@ -96,18 +96,18 @@ namespace ETicaretWinApp
 
         private void Save11Category(EKirtasiye.N11.N11Category n11Category)
         {
-           /* ApiHelper.SaveN11Category(new N11Category()
-            {
-                Id = n11Category.Id,
-                Name = n11Category.Name,
-                ParentCategoryId = n11Category.ParentId
-            });
+            /* ApiHelper.SaveN11Category(new N11Category()
+             {
+                 Id = n11Category.Id,
+                 Name = n11Category.Name,
+                 ParentCategoryId = n11Category.ParentId
+             });
 
-            var subCategory = categoryHelper.GetSubCategories(n11Category.Id);
-            foreach (var item in subCategory)
-            {
-                Save11Category(item);
-            }*/
+             var subCategory = categoryHelper.GetSubCategories(n11Category.Id);
+             foreach (var item in subCategory)
+             {
+                 Save11Category(item);
+             }*/
 
         }
         private void buttonN11CategoryGet_Click(object sender, EventArgs e)
@@ -282,6 +282,14 @@ namespace ETicaretWinApp
 
         private void SaveCicekSepeti(CicekCategory cicekSepetiCategory)
         {
+
+            ApiHelper.CicekSepetiSaveCategory(new CicekSepetiCategory()
+            {
+                Id = cicekSepetiCategory.id,
+                Name = cicekSepetiCategory.name,
+                ParentCategoryId = (cicekSepetiCategory.parentCategoryId == null ? 0 : Convert.ToInt32(cicekSepetiCategory.parentCategoryId)),
+            });
+
             foreach (var category in cicekSepetiCategory.subCategories)
             {
                 ApiHelper.CicekSepetiSaveCategory(new CicekSepetiCategory()
@@ -296,7 +304,8 @@ namespace ETicaretWinApp
                 }
             }
         }
-        private void SaveCicekSepetiSubCategory(int categoryId,List<CicekSepetiCategory> cicekCategories)
+        /*
+        private void SaveCicekSepetiSubCategory(int categoryId, List<CicekSepetiCategory> cicekCategories)
         {
             CicekSepetiApi cicekSepetiApi = new CicekSepetiApi(textBoxCicekSepetiUrl.Text, textBoxCicekSepetiSupplierId.Text, textBoxCicekSepetiApiKey.Text);
 
@@ -325,21 +334,31 @@ namespace ETicaretWinApp
             }
             ApiHelper.SaveCicekSepetiAttributes(cicekSepetiAttributes);
 
-            foreach (var item in cicekCategories.Where(s=>s.ParentCategoryId==categoryId))      
+            foreach (var item in cicekCategories.Where(s => s.ParentCategoryId == categoryId))
             {
                 SaveCicekSepetiSubCategory(item.Id, cicekCategories);
             }
 
-        }
+        }*/
         private void buttonCicekSepetiGetCategory_Click(object sender, EventArgs e)
         {
             try
             {
-               
 
+
+                var productHelper = new CicekSepetiApi(textBoxCicekSepetiUrl.Text, textBoxCicekSepetiSupplierId.Text, textBoxCicekSepetiApiKey.Text);
+
+                var categoryList = productHelper.GetCategory();
+                foreach (var category in categoryList.categories)
+                {
+                    SaveCicekSepeti(category);
+                }
+
+
+                /*
                 var categoryList = ApiHelper.GetCicekSepetiCategories();
                 SaveCicekSepetiSubCategory(12455, categoryList);
-                 
+                 */
 
 
             }

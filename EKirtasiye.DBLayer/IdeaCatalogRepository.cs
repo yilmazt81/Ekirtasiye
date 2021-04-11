@@ -151,6 +151,24 @@ namespace EKirtasiye.DBLayer
                         }
                     }
 
+                    if (!string.IsNullOrEmpty(documentFilter.ExportCicekSepeti))
+                    {
+                        if (documentFilter.ExportCicekSepeti != "Tümü")
+                        {
+                            var status = (documentFilter.ExportCicekSepeti == "Evet" ? "1" : "0");
+                            query += $" isnull(ExportCicekSepeti,0) ={status} and ";
+                        }
+                    }
+
+                    if (!string.IsNullOrEmpty(documentFilter.HavePicture))
+                    {
+                        if (documentFilter.HavePicture != "Tümü")
+                        {
+                            var status = (documentFilter.HavePicture == "Evet" ? "ISNULL(Picture1Path,'')<>''" : "ISNULL(Picture1Path,'')=''");
+                             
+                            query += $"  {status} and ";
+                        }
+                    }
 
                     if (!string.IsNullOrEmpty(documentFilter.IdeaExport))
                     {
@@ -194,7 +212,7 @@ namespace EKirtasiye.DBLayer
 
                     if (documentFilter.CreatedDate != null)
                     {
-                        
+
                         query += $" CAST(CreatedDate AS DATE) {documentFilter.DateFilterType} CAST('{documentFilter.CreatedDate.Value.ToString("yyyyMMdd")} 00:00:00' AS DATE) and ";
                     }
 
@@ -247,6 +265,19 @@ namespace EKirtasiye.DBLayer
                     return ideaCatalogs;
                 }
             }
+        }
+
+        public static List<ProductAttribute> GetProductAttributes(int productId)
+        {
+            var dtAttribute = DBHelper.GetQuery($"SELECT * FROM ProductAttribute WHERE ProductId={productId}");
+
+
+            return dtAttribute.Rows.Cast<DataRow>().Select(s => new ProductAttribute()
+            {
+                AttributeName = s["AttributeName"].ToString(),
+                AttributeValue = s["AttributeValue"].ToString(),
+                ProductId = Convert.ToInt32(s["ProductId"])
+            }).ToList();
         }
 
         public static bool AddProductToShopExport(int productId)
@@ -415,7 +446,7 @@ namespace EKirtasiye.DBLayer
             var dtRows = DBHelper.GetQuery("select * from IdeaExportTarget");
 
 
-            return dtRows.Rows.Cast<DataRow>().Select(s => new IdeaExportTarget() { Id = Convert.ToInt32(s["Id"]), Name = s["Name"].ToString(), ExcelExport=(bool)s["ExcelExport"] }).ToArray();
+            return dtRows.Rows.Cast<DataRow>().Select(s => new IdeaExportTarget() { Id = Convert.ToInt32(s["Id"]), Name = s["Name"].ToString(), ExcelExport = (bool)s["ExcelExport"] }).ToArray();
         }
 
 
@@ -495,7 +526,9 @@ namespace EKirtasiye.DBLayer
             idep.ExportN11 = (row["ExportN11"] == DBNull.Value ? false : (bool)row["ExportN11"]);
             idep.LastStockCheckDate = (row["LastStockCheckDate"] == DBNull.Value ? DateTime.MinValue : (DateTime)row["LastStockCheckDate"]);
             idep.ApprovalStatus = row["ApprovalStatus"].ToString();
-           
+            idep.ProductAttributes = GetProductAttributes(idep.Id);
+
+
             return idep;
         }
         private static ProductCategory ProductCategory(int id)
@@ -684,7 +717,20 @@ namespace EKirtasiye.DBLayer
                     scom.CommandText = "delete from IdeaCatalog_Barcode where IdeaCatalogId=" + ideaCatalog.Id;
                     scom.ExecuteNonQuery();
                 }
+                if (ideaCatalog.ProductAttributes!=null)
+                {
+                    foreach (var productAttribute in ideaCatalog.ProductAttributes)
+                    {
+                        DBHelper.ExecuteCommand("pSaveProductAttribute", new SqlParameter[] {
 
+                        new SqlParameter("@ProductId",  ideaCatalog.Id),
+                        new SqlParameter("@AttributeName",productAttribute.AttributeName),
+                        new SqlParameter("@AttributeValue",productAttribute.AttributeValue),
+
+                    });
+                    }
+                }
+               
                 using (SqlCommand scom = scon.CreateCommand())
                 {
                     scom.CommandText = "delete from IdeaCatalog_Price where IdeaCatalogId=" + ideaCatalog.Id;

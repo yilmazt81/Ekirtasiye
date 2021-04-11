@@ -80,6 +80,28 @@ public class IdeaCatalog
 
     public int ApprovalStatusTrendYol { get; set; }
 
+    public List<ProductAttribute> ProductAttributes { get; set; }
+
+    public void AddAttribute(string name, string value)
+    {
+        var attrib = ProductAttributes.FirstOrDefault(s => s.AttributeName == name);
+        if (attrib == null)
+        {
+            ProductAttributes.Add(new ProductAttribute() { AttributeName = name, AttributeValue = value });
+        }
+        else
+        {
+            attrib.AttributeValue = value;
+        }
+    }
+
+    public string ReadAttribute(string name, string defaultValue="")
+    {
+        var attrib = ProductAttributes.FirstOrDefault(s => s.AttributeName == name);
+
+        return (attrib == null ? defaultValue : attrib.AttributeValue);
+    }
+
     public string MimimumPrice {
         get {
             try
@@ -88,17 +110,17 @@ public class IdeaCatalog
                 if (ProductSource == "Kadioglu")
                 {
 
-                    price = ((float.Parse(MarketPrice) * (float)1.18) * float.Parse("1,30") * float.Parse("1," + this.Tax));
+                    price = ((float.Parse(MarketPrice) * (float)1.18) * float.Parse("1,15") * float.Parse("1," + this.Tax));
                 }
                 else
                 {
 
-                    price =(float.Parse(MarketPrice) * float.Parse("1,30") * float.Parse("1," + this.Tax));
+                    price = (float.Parse(MarketPrice) * float.Parse("1,15") * float.Parse("1," + this.Tax));
                 }
 
-                if (price>150)
+                if (price > 150)
                 {
-                    price += 20;
+                    price += 10;
                 }
                 return price.ToString();
             }
@@ -139,5 +161,5 @@ public class IdeaCatalog
 
     public DateTime LastStockCheckDate { get; set; }
 
-      
+
 }

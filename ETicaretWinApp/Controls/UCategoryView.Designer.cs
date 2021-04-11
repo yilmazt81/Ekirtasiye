@@ -33,10 +33,11 @@
             this.treeListColumn1 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn2 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.treeListColumn3 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             this.cMenuStripCategory = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.MenuItemNew = new System.Windows.Forms.ToolStripMenuItem();
             this.MenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeListColumn4 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
+            this.treeListColumn5 = new DevExpress.XtraTreeList.Columns.TreeListColumn();
             ((System.ComponentModel.ISupportInitialize)(this.treeListCategory)).BeginInit();
             this.cMenuStripCategory.SuspendLayout();
             this.SuspendLayout();
@@ -49,7 +50,8 @@
             this.treeListColumn1,
             this.treeListColumn2,
             this.treeListColumn3,
-            this.treeListColumn4});
+            this.treeListColumn4,
+            this.treeListColumn5});
             this.treeListCategory.ContextMenuStrip = this.cMenuStripCategory;
             this.treeListCategory.Cursor = System.Windows.Forms.Cursors.Default;
             this.treeListCategory.DataSource = null;
@@ -84,6 +86,14 @@
             this.treeListColumn3.Visible = true;
             this.treeListColumn3.VisibleIndex = 2;
             // 
+            // treeListColumn4
+            // 
+            this.treeListColumn4.Caption = "N11 Export Template";
+            this.treeListColumn4.FieldName = "N11 Export Template";
+            this.treeListColumn4.Name = "treeListColumn4";
+            this.treeListColumn4.Visible = true;
+            this.treeListColumn4.VisibleIndex = 3;
+            // 
             // cMenuStripCategory
             // 
             this.cMenuStripCategory.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -108,13 +118,13 @@
             this.MenuItemEdit.Text = "Değiştir";
             this.MenuItemEdit.Click += new System.EventHandler(this.MenuItemEdit_Click);
             // 
-            // treeListColumn4
+            // treeListColumn5
             // 
-            this.treeListColumn4.Caption = "N11 Export Template";
-            this.treeListColumn4.FieldName = "N11 Export Template";
-            this.treeListColumn4.Name = "treeListColumn4";
-            this.treeListColumn4.Visible = true;
-            this.treeListColumn4.VisibleIndex = 3;
+            this.treeListColumn5.Caption = "ÇiçekSepeti Group Adı";
+            this.treeListColumn5.FieldName = "CicekSepetiCategoryName";
+            this.treeListColumn5.Name = "treeListColumn5";
+            this.treeListColumn5.Visible = true;
+            this.treeListColumn5.VisibleIndex = 4;
             // 
             // UCategoryView
             // 
@@ -138,5 +148,6 @@
         private System.Windows.Forms.ToolStripMenuItem MenuItemNew;
         private System.Windows.Forms.ToolStripMenuItem MenuItemEdit;
         private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn4;
+        private DevExpress.XtraTreeList.Columns.TreeListColumn treeListColumn5;
     }
 }

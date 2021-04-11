@@ -711,6 +711,22 @@ namespace ETicaretWinApp
             return GetRequest<List<CicekSepetiCategory>>(url);
 
         }
+
+        public static List<CicekSepetiProductAttribute> GetCicekSepetiProductAttribute(int productId)
+        {
+            string url = baseUrl + $"api/ciceksepeti/GetCicekSepetiProductAttribute/{productId}";
+
+            return GetRequest<List<CicekSepetiProductAttribute>>(url);
+
+        }
+
+        public static bool SaveCicekSepetiProductAttribute(List<CicekSepetiProductAttribute> cicekSepetiProductAttributes)
+        {
+            string url = baseUrl + $"api/ciceksepeti/SaveCicekSepetiProductAttribute";
+            var reV = PostRequest<string, List<CicekSepetiProductAttribute>>(url, cicekSepetiProductAttributes);
+
+            return (reV == "ok");
+        }
         public static List<TrendyolAttribute> GetTrendyolCategorieAttributes(int categoryId)
         {
             string url = baseUrl + $"api/trendyol/GetCategoryAttribute/{categoryId}";
@@ -731,6 +747,26 @@ namespace ETicaretWinApp
             string url = baseUrl + $"api/trendyol/GetTrendyolCategoryDefaultAttribute/{categoryId}/{attributeId}";
 
             return GetRequest<TrendyolCategoryDefaultAttribute>(url);
+        }
+
+        public static CicekSepetiCreateRequest[] CicekSepetiGetCreateRequestList()
+        {
+            string url = baseUrl + $"api/cicekSepeti/GetCreateRequestList";
+
+            return GetRequest<CicekSepetiCreateRequest[]>(url);
+        }
+        public static string SaveCicekSepetiCreateRequest(CicekSepetiCreateRequest cicekSepetiCreateRequest)
+        {
+            string url = baseUrl + $"api/cicekSepeti/SaveCicekSepetiCreateRequest";
+
+            return PostRequest<string, CicekSepetiCreateRequest>(url, cicekSepetiCreateRequest);
+
+        }
+        public static CicekSepetiCategoryDefaultAttribute GetCicekSepetiCategoryDefaultAttribute(int categoryId, int attributeId)
+        {
+            string url = baseUrl + $"api/cicekSepeti/GetCategoryDefaultAttribute/{categoryId}/{attributeId}";
+
+            return GetRequest<CicekSepetiCategoryDefaultAttribute>(url);
         }
 
         public static List<TrendyolCategoryDefaultAttribute> GetCategoryDefaultAttributes(int categoryId)

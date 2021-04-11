@@ -39,11 +39,28 @@ namespace EKirtasiye.CicekSepeti
 
         public CreateReturn CreateProduct(List<CicekSepetiProduct> cicekSepetiProducts)
         {
-            string url = baseUrl + $" /api/v1/Products";
+            string url = baseUrl + $"api/v1/Products";
 
+            CicekSepetiCreate cicekSepetiCreate = new CicekSepetiCreate()
+            {
+                products = cicekSepetiProducts.ToArray()
+            };
+            return PostRequest<CreateReturn, CicekSepetiCreate>(url, cicekSepetiCreate);
 
-            return PostRequest<CreateReturn, List<CicekSepetiProduct>>(url, cicekSepetiProducts);
+        }
 
+        public CreateReturn UpdateProductStockAndPrice(CicekSepetiUpdateStock sepetiUpdateStock)
+        {
+            string url = baseUrl + $"api/v1/Products/price-and-stock";
+
+            return PostRequest<CreateReturn, CicekSepetiUpdateStock>(url, sepetiUpdateStock);
+        }
+
+        public CicekSepetiBatchReturn CheckBatchStatus(string batchId)
+        {
+            string url = baseUrl + $"api/v1/Products/batch-status/{batchId}";
+
+            return GetRequest<CicekSepetiBatchReturn>(url);
         }
 
         public T PostRequest<T, K>(string url, K obj)
