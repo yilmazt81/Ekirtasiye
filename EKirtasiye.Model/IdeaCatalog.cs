@@ -12,6 +12,8 @@ public class IdeaCatalog
     {
         Barcodes = new IdeaCatalog_Barcode[0];
         ProductPrices = new ProductPrice[0];
+        ShopCreateImages = new ShopCreateImage[0];
+
     }
     public int Id { get; set; }
     public string StockCode { get; set; }
@@ -101,6 +103,10 @@ public class IdeaCatalog
 
         return (attrib == null ? defaultValue : attrib.AttributeValue);
     }
+
+
+    public ShopCreateImage[] ShopCreateImages { get; set; }
+
 
     public string MimimumPrice {
         get {

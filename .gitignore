@@ -15,6 +15,8 @@ bin-release/
 *.exe
 *.dll
 *.jpg
+*.pdb
+
  
 
 

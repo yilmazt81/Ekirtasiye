@@ -483,9 +483,7 @@ namespace ETicaretWinApp
                         UpdateExportList(updateList, exportTarget);
                     }
                 }
-            }
-
-
+            } 
 
         }
 

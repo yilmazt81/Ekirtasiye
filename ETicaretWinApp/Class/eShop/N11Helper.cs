@@ -2,9 +2,13 @@
 using EKirtasiye.N11;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ETicaretWinApp
 {
@@ -12,6 +16,7 @@ namespace ETicaretWinApp
     {
 
 
+      
 
         public static string ExportProduct(IdeaCatalog ideaCatalog)
         {
@@ -82,7 +87,7 @@ namespace ETicaretWinApp
                 }
                 float price = 0;
                 price = float.Parse(ideaCatalog.MimimumPrice) * (float)1.15;
-                if (price>150)
+                if (price > 150)
                 {
                     price = price + 20;
                 }
@@ -105,7 +110,7 @@ namespace ETicaretWinApp
                     ProductImages = n11Images.ToArray(),
                     Price = (decimal)price,
                     ProductBrand = ideaCatalog.Brand,
-                    Barcode=ideaCatalog.Barcode
+                    Barcode = ideaCatalog.Barcode
 
                 };
                 productHelper.SaveProduct(n11Product);
@@ -116,7 +121,7 @@ namespace ETicaretWinApp
                     Id = ideaCatalog.Id,
                     ProductId = n11Product.Id,
                     ShopName = "N11",
-                    ShopPrice= price.ToString()
+                    ShopPrice = price.ToString()
                 });
                 if (!updateDB)
                 {

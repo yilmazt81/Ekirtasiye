@@ -1,8 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using EKirtasiye.CicekSepeti;
 using EKirtasiye.Model;
 
@@ -11,6 +15,80 @@ namespace ETicaretWinApp
     public class CicekSepetiHelper
     {
 
+        public static ShopCreateImage ConvertShopImage(int productId, string picturePath)
+        {
+
+            ShopCreateImage shopCreateImage = new ShopCreateImage()
+            {
+                ProductId = productId,
+                ShopName = "CicekSepeti"
+            };
+            string tmpPath = Path.Combine(Application.StartupPath, $@"ImageTemp\{productId}_{Path.GetFileName(picturePath)}");
+
+            string ftpUploadPath = string.Empty;
+
+            if (picturePath.StartsWith("http"))
+            {
+
+                if (!Directory.Exists(Path.GetDirectoryName(tmpPath)))
+                    Directory.CreateDirectory(Path.GetDirectoryName(tmpPath));
+
+                if (!File.Exists(tmpPath))
+                {
+                    using (WebClient webClient = new WebClient())
+                    {
+                        System.Net.Http.Headers.ProductHeaderValue productInfoHeaderValue = new System.Net.Http.Headers.ProductHeaderValue("EKirtasiye", "1.0.0.1");
+
+                        webClient.Headers.Add(HttpRequestHeader.UserAgent, "EKirtasiye");
+
+
+                        webClient.DownloadFile(picturePath, tmpPath);
+
+                    }
+                }
+            }
+
+            Image image = Image.FromFile(tmpPath);
+
+            var imageW = image.Width;
+            var imageH = image.Height;
+
+            //Cicek sepeti için image oran 10x11 olması gerekli.
+            var mustW = imageH * 0.90909;
+            var mustH = 0;
+            if (mustW < imageW)
+            {
+                mustH = (int)(imageW * 1.1);
+                mustW = imageW;
+            }
+            else
+            {
+                mustH = imageH;
+            }
+            Bitmap bitmap = new Bitmap((int)mustW, (int)mustH);
+            var leftSize = (mustW - imageW) / 2;
+            var upSize = (mustH - imageH) / 2;
+            var destRectagle = new Rectangle((int)leftSize, (int)upSize, imageW, imageH);
+
+            CopyRegionIntoImage((Bitmap)image, new Rectangle(0, 0, imageW, imageH), ref bitmap, destRectagle);
+            string localTempFile = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("N") + ".jpg");
+            bitmap.Save(localTempFile);
+            image = null;
+            bitmap = null;
+            FTPHelper.UploadFile(localTempFile, @"/httpdocs/CicekSepeti/" + Path.GetFileName(localTempFile));
+            shopCreateImage.PictureRemotePath = "http://turkyilmazozkan.xyz/CicekSepeti/" + Path.GetFileName(picturePath);
+            File.Delete(localTempFile);
+            return shopCreateImage;
+
+        }
+
+        public static void CopyRegionIntoImage(Bitmap srcBitmap, Rectangle srcRegion, ref Bitmap destBitmap, Rectangle destRegion)
+        {
+            using (Graphics grD = Graphics.FromImage(destBitmap))
+            {
+                grD.DrawImage(srcBitmap, destRegion, srcRegion, GraphicsUnit.Pixel);
+            }
+        }
 
         public static string ExportProduct(IdeaCatalog ideaCatalog)
         {
@@ -83,26 +161,36 @@ namespace ETicaretWinApp
                 var productHelper = new CicekSepetiApi(_endPoint, _suplierId, _apiKey);
 
 
-
-
-
                 List<string> productImages = new List<string>();
-                if (!string.IsNullOrEmpty(ideaCatalog.Picture1Path))
+                var shopImageList = ideaCatalog.ShopCreateImages.Where(s => s.ShopName == "CicekSepeti").ToList();
+                if (shopImageList.Count > 0)
                 {
-                    productImages.Add(ideaCatalog.Picture1Path);
+                    productImages = shopImageList.Select(s => s.PictureRemotePath).ToList();
                 }
-                if (!string.IsNullOrEmpty(ideaCatalog.Picture2Path))
+                else
                 {
-                    productImages.Add(ideaCatalog.Picture2Path);
+                    //Image Hazirla
+
+                    if (!string.IsNullOrEmpty(ideaCatalog.Picture1Path))
+                    {
+                        shopImageList.Add(ConvertShopImage(ideaCatalog.Id, ideaCatalog.Picture1Path));
+
+                    }
+                    if (!string.IsNullOrEmpty(ideaCatalog.Picture2Path))
+                    {
+                        shopImageList.Add(ConvertShopImage(ideaCatalog.Id, ideaCatalog.Picture2Path));
+                    }
+                    if (!string.IsNullOrEmpty(ideaCatalog.Picture3Path))
+                    {
+                        shopImageList.Add(ConvertShopImage(ideaCatalog.Id, ideaCatalog.Picture3Path));
+                    }
+                    if (!string.IsNullOrEmpty(ideaCatalog.Picture4Path))
+                    {
+                        shopImageList.Add(ConvertShopImage(ideaCatalog.Id, ideaCatalog.Picture4Path));
+                    }
+                    productImages = shopImageList.Select(s => s.PictureRemotePath).ToList();
                 }
-                if (!string.IsNullOrEmpty(ideaCatalog.Picture3Path))
-                {
-                    productImages.Add(ideaCatalog.Picture3Path);
-                }
-                if (!string.IsNullOrEmpty(ideaCatalog.Picture4Path))
-                {
-                    productImages.Add(ideaCatalog.Picture4Path);
-                }
+
                 float price = 0;
                 price = float.Parse(ideaCatalog.MimimumPrice) * (float)1.15;
 

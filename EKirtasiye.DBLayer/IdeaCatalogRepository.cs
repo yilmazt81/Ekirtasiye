@@ -165,7 +165,7 @@ namespace EKirtasiye.DBLayer
                         if (documentFilter.HavePicture != "Tümü")
                         {
                             var status = (documentFilter.HavePicture == "Evet" ? "ISNULL(Picture1Path,'')<>''" : "ISNULL(Picture1Path,'')=''");
-                             
+
                             query += $"  {status} and ";
                         }
                     }
@@ -278,6 +278,21 @@ namespace EKirtasiye.DBLayer
                 AttributeValue = s["AttributeValue"].ToString(),
                 ProductId = Convert.ToInt32(s["ProductId"])
             }).ToList();
+        }
+
+        public static ShopCreateImage[] GetShopCreateImage(int productId)
+        {
+            var dtAttribute = DBHelper.GetQuery($"SELECT * FROM ShopCreateImage WHERE ProductId={productId}");
+
+
+            return dtAttribute.Rows.Cast<DataRow>().Select(s => new ShopCreateImage()
+            {
+                 
+                ProductId = Convert.ToInt32(s["ProductId"]),
+                Id=Convert.ToInt32(s["Id"]),
+                PictureRemotePath=s["PictureRemotePath"].ToString(),
+                ShopName=s["ShopName"].ToString()
+            }).ToArray();
         }
 
         public static bool AddProductToShopExport(int productId)
@@ -527,6 +542,7 @@ namespace EKirtasiye.DBLayer
             idep.LastStockCheckDate = (row["LastStockCheckDate"] == DBNull.Value ? DateTime.MinValue : (DateTime)row["LastStockCheckDate"]);
             idep.ApprovalStatus = row["ApprovalStatus"].ToString();
             idep.ProductAttributes = GetProductAttributes(idep.Id);
+            idep.ShopCreateImages = GetShopCreateImage(idep.Id);
 
 
             return idep;
