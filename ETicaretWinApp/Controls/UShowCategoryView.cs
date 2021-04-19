@@ -37,6 +37,40 @@ namespace ETicaretWinApp.Controls
             }
         }
 
+        public void SelectCategory(int productCategoryId)
+        {
+            foreach (TreeListNode node in treeListCategory.Nodes)
+            {
+                if (((ProductCategory)node.Tag).Id == productCategoryId)
+                {
+                    node.Selected = true;
+                    break;
+                }
+                if (SelectSubCategory(node,productCategoryId))
+                {
+                    return;
+                    
+                }
+            }
+        }
+        private bool SelectSubCategory(TreeListNode treeNode,int categoryId)
+        {
+            foreach (TreeListNode node in treeNode.Nodes)
+            {
+                if (((ProductCategory)node.Tag).Id == categoryId)
+                {
+                    node.Selected = true;
+                    return true;
+                    
+                }
+                SelectSubCategory(node, categoryId);
+
+            }
+
+            return false;
+
+        }
+
         public bool ShowCheckBoxes {
             set {
 

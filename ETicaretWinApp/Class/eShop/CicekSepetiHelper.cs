@@ -23,6 +23,8 @@ namespace ETicaretWinApp
                 ProductId = productId,
                 ShopName = "CicekSepeti"
             };
+            //shopCreateImage.PictureRemotePath = picturePath;
+
             string tmpPath = Path.Combine(Application.StartupPath, $@"ImageTemp\{productId}_{Path.GetFileName(picturePath)}");
 
             string ftpUploadPath = string.Empty;
@@ -50,24 +52,33 @@ namespace ETicaretWinApp
 
             Image image = Image.FromFile(tmpPath);
 
-            var imageW = image.Width;
-            var imageH = image.Height;
+            var imageW = (image.Width < 500 ? 500 : image.Width);
+            var imageH = (image.Height < 500 ? 500 : image.Height);
 
             //Cicek sepeti için image oran 10x11 olması gerekli.
             var mustW = imageH * 0.90909;
             var mustH = 0;
+
             if (mustW < imageW)
             {
-                mustH = (int)(imageW * 1.1);
+                mustH = (int)(imageW * 1.1  );
                 mustW = imageW;
             }
             else
             {
                 mustH = imageH;
             }
-            Bitmap bitmap = new Bitmap((int)mustW, (int)mustH);
-            var leftSize = (mustW - imageW) / 2;
-            var upSize = (mustH - imageH) / 2;
+            Bitmap bitmap = new Bitmap((int)mustW, (int)mustH, System.Drawing.Imaging.PixelFormat.Format24bppRgb);
+
+            using (Graphics grp = Graphics.FromImage(bitmap))
+            {
+                grp.FillRectangle(
+                    Brushes.White, 0, 0, bitmap.Width, bitmap.Height);
+                bitmap = new Bitmap(bitmap.Width, bitmap.Height, grp);
+            }
+
+            var leftSize = (mustW - image.Width) / 2;
+            var upSize = (mustH - image.Height) / 2;
             var destRectagle = new Rectangle((int)leftSize, (int)upSize, imageW, imageH);
 
             CopyRegionIntoImage((Bitmap)image, new Rectangle(0, 0, imageW, imageH), ref bitmap, destRectagle);
@@ -76,8 +87,9 @@ namespace ETicaretWinApp
             image = null;
             bitmap = null;
             FTPHelper.UploadFile(localTempFile, @"/httpdocs/CicekSepeti/" + Path.GetFileName(localTempFile));
-            shopCreateImage.PictureRemotePath = "http://turkyilmazozkan.xyz/CicekSepeti/" + Path.GetFileName(picturePath);
+            shopCreateImage.PictureRemotePath = "https://www.turkyilmazozkan.xyz/CicekSepeti/" + Path.GetFileName(localTempFile);
             File.Delete(localTempFile);
+
             return shopCreateImage;
 
         }

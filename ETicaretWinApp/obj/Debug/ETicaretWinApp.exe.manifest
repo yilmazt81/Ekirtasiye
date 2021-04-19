@@ -1058,7 +1058,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>W3uVX0XfZEyChvZa7+6kjaEmcSBU5/nTwciqiUIQZTE=</dsig:DigestValue>
+        <dsig:DigestValue>2spxtqP0K0EymspsnIjso6IXXdRdkOly1qc1QNCm+AM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1070,7 +1070,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>UdludCtbfuxhWhKRBGZsWzLr2ohrmYkUA8CVj2wpEO8=</dsig:DigestValue>
+        <dsig:DigestValue>aoK19n9weH1dPc8B2N+u3BnkYKGc95xu4HNMcQN35+4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1082,7 +1082,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>2a/FniL1E6gMjisE5OBfKY/FzcRAD3o13oi/10d+pU8=</dsig:DigestValue>
+        <dsig:DigestValue>kIN86ng4YJsVPbQ++qNTylHw1Sm+aXjxZ3LMIpf0Uo0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1094,7 +1094,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>CFNtrBnYV1gK6uZBgKbvqHvijQXOaEqfgMF2P0WHs64=</dsig:DigestValue>
+        <dsig:DigestValue>61iSWhFOrVb50CqZJV4QHuQPEqeRixO2QuM0CIyKhZ4=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1106,7 +1106,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>BXnuXJIS/skA3dJY/+w/RYuUpgv4A/PG3so82zJT+cw=</dsig:DigestValue>
+        <dsig:DigestValue>qK9+A8LIp27JNrrPBCgVe9RXsPsMzkBPp7+hVdMH6CM=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1118,7 +1118,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>pfQhq0+A8bvP3qSrymNf2D1i5r61XgdrxIhYr7YvNGw=</dsig:DigestValue>
+        <dsig:DigestValue>BcbvOTxXAgUce/X144b23YE2ilzvF5b2cleFbtMBBuU=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1130,19 +1130,19 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LAhthZOunWWOfyRrDfv7aP7qHBo4KbkXRiM+eFP3cGE=</dsig:DigestValue>
+        <dsig:DigestValue>Cnv+bWoq7Lbs2kJ+nOq76oSL5sFlVhyLXTNxVs5EhTk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="542208">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="ETicaretWinApp.exe" size="544256">
       <assemblyIdentity name="ETicaretWinApp" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>lUVjMW4cRfUx5KrHYKAnhXyh/N14Kq4eEGWvgCIzNIs=</dsig:DigestValue>
+        <dsig:DigestValue>/cRKJQD4BL5XTRtMGHisi/R9dGeDwNH7If33x0OYIcQ=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -1266,13 +1266,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="CicekSepetiYasakliKelimeler.txt" size="337">
+  <file name="CicekSepetiYasakliKelimeler.txt" size="347">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>diIseTS3mkjTk96a2ezNQYdiDfl7z1jqc3JHgL4rLUQ=</dsig:DigestValue>
+      <dsig:DigestValue>jIe5zt6TREzyKffPAXxazQHvQv9BwRgIfktXAUrr4k4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Cryo64 Genesis 2 003.ico" size="142454">

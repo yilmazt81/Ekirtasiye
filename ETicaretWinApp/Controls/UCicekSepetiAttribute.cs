@@ -27,6 +27,13 @@ namespace ETicaretWinApp.Controls
             set {
                 cicekSepetiAttribute = value;
                 label1.Text = value.Name;
+                if (cicekSepetiAttribute.Required)
+                {
+                    label1.ForeColor = Color.Red;
+                }else
+                {
+                    label1.ForeColor = Color.Black;
+                }
                 var arr = value.AttributeValues.OrderBy(s=>s.AttributeText).ToList();
                 arr.Insert(0, new CicekSepetiAttributeValue() { AttributeText = "Seçiniz", AttributeValue = "0" });
                 comboBoxValues.DataSource = arr;
@@ -44,6 +51,7 @@ namespace ETicaretWinApp.Controls
                 comboBoxValues.SelectedValue = value;
             }
         }
+        
 
         public string AttributeValueText {
             get {

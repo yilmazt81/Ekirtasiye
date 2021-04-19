@@ -491,7 +491,7 @@ namespace ETicaretWinApp
         {
             var cicekSepetiCreateRequest = ApiHelper.CicekSepetiGetCreateRequestList();
 
-            foreach (var cicekSepeti in cicekSepetiCreateRequest.Where(s => string.IsNullOrEmpty(s.RequestStatus) || s.RequestStatus == "Processing"))
+            foreach (var cicekSepeti in cicekSepetiCreateRequest.Where(s => string.IsNullOrEmpty(s.RequestStatus) || s.RequestStatus == "Processing" ||s.RequestStatus== "Pending"))
             {
                 try
                 {
@@ -508,8 +508,6 @@ namespace ETicaretWinApp
                                 ShopPrice = ""
                             });
                         }
-
-
                     }
 
                     cicekSepeti.RequestStatus = batchReturn.items[0].status;
@@ -1219,7 +1217,7 @@ namespace ETicaretWinApp
                 formExportSingleCicekSepeti = new FormExportSingleCicekSepeti();
                 formExportSingleCicekSepeti.SelectedProduct = ideaCatalog;
                 formExportSingleCicekSepeti.OnSaveAndNextDocument += ProductEdit_OnSaveAndNextDocument;
-                formExportSingleCicekSepeti.ShowDialog();
+                formExportSingleCicekSepeti.Show();
             }
         }
     }

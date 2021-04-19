@@ -243,7 +243,9 @@ namespace EKirtasiye.DBLayer
                 Id = Convert.ToInt32(s["Id"]),
                 ProductId = Convert.ToInt32(s["ProductId"]),
                 RequestDate = (DateTime)s["RequestDate"],
-                RequestType = s["RequestType"].ToString()
+                RequestType = s["RequestType"].ToString(),
+                RequestStatus = s["RequestStatus"].ToString(),
+                ErrorMessages = s["ErrorMessages"].ToString()
             }).ToArray();
         }
         public static void SaveCicekSepetiAttribute(CicekSepetiAttribute cicekSepetiAttribute)

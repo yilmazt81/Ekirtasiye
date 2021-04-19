@@ -21,7 +21,7 @@ namespace ETicaretWinApp
         Controls.UShowCategoryView categoryView = null;
         public event SaveNextDocument OnSaveAndNextDocument = null;
         List<UCicekSepetiAttribute> uCicekSepetiAttributes = new List<UCicekSepetiAttribute>();
-
+        List<CicekSepetiProductAttribute> cicekSepetiProductAttributes = new List<CicekSepetiProductAttribute>();
         string[] yasakKelimeler = null;
         public FormExportSingleCicekSepeti()
         {
@@ -69,11 +69,34 @@ namespace ETicaretWinApp
                 Attribute = trendyolAttribute
             };
 
-            var attributedefaultValue = ApiHelper.GetCicekSepetiCategoryDefaultAttribute(_categoryId, trendyolAttribute.Id);
-            if (attributedefaultValue != null)
+            var productAttribute = cicekSepetiProductAttributes.FirstOrDefault(s => s.Attributeid == trendyolAttribute.Attributeid);
+            if (productAttribute != null)
             {
-                uTrendyol.AttributeValue = attributedefaultValue.AttributeValue.ToString();
+                uTrendyol.AttributeValue = productAttribute.AttributeValue.ToString();
             }
+            else
+            {
+                var attributedefaultValue = ApiHelper.GetCicekSepetiCategoryDefaultAttribute(_categoryId, trendyolAttribute.Id);
+                if (attributedefaultValue != null)
+                {
+                    uTrendyol.AttributeValue = attributedefaultValue.AttributeValue.ToString();
+                }else if (trendyolAttribute.Name == "Renk")
+                {
+                    var color = trendyolAttribute.AttributeValues.FirstOrDefault(s => s.AttributeText == "Çok Renkli");
+                    if (color != null)
+                    {
+                        uTrendyol.AttributeValue = color.AttributeValue;
+                    }
+                }else if (trendyolAttribute.Name == "Marka")
+                {
+                    var marka = trendyolAttribute.AttributeValues.FirstOrDefault(s => s.AttributeText == ideaCatalog.Brand);
+                    if (marka != null)
+                    {
+                        uTrendyol.AttributeValue = marka.AttributeValue;
+                    }
+                }
+            }
+           
             this.fLayoutPanelAttribute.Controls.Add(uTrendyol);
             uCicekSepetiAttributes.Add(uTrendyol);
         }
@@ -142,6 +165,13 @@ namespace ETicaretWinApp
 
                     webBrowserProduct.Navigate(pageUrl);
                 }
+                var cicekSepetiCategory = ideaCatalog.ProductAttributes.SingleOrDefault(s => s.AttributeName == "CicekSepetiCategory");
+
+                cicekSepetiProductAttributes = ApiHelper.GetCicekSepetiProductAttribute(ideaCatalog.Id);
+                if (cicekSepetiCategory != null)
+                {
+                    categoryView.SelectCategory(int.Parse(cicekSepetiCategory.AttributeValue));
+                }
 
             }
             get {
@@ -164,7 +194,7 @@ namespace ETicaretWinApp
 
         private void MenuItemSaveExport_Click(object sender, EventArgs e)
         {
-           var textList= htmlTextboxDescription.PlainText;
+            var textList = htmlTextboxDescription.PlainText;
             foreach (var yasak in yasakKelimeler)
             {
                 if (textList.Contains(yasak))
