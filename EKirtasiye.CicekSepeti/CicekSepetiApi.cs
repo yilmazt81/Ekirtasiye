@@ -53,7 +53,7 @@ namespace EKirtasiye.CicekSepeti
         {
             string url = baseUrl + $"api/v1/Products/price-and-stock";
 
-            return PostRequest<CreateReturn, CicekSepetiUpdateStock>(url, sepetiUpdateStock);
+            return PutRequest<CreateReturn, CicekSepetiUpdateStock>(url, sepetiUpdateStock);
         }
 
         public CicekSepetiBatchReturn CheckBatchStatus(string batchId)
@@ -83,6 +83,27 @@ namespace EKirtasiye.CicekSepeti
 
             }
         }
+        public T PutRequest<T, K>(string url, K obj)
+        {
+
+            var jsonClass = JsonConvert.SerializeObject(obj);
+            var content = new StringContent(jsonClass, Encoding.UTF8, "application/json");
+            T requestReturn;
+            var result = client.PutAsync(url, content).Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var str = result.Content.ReadAsStringAsync().Result;
+                requestReturn = JsonConvert.DeserializeObject<T>(str);
+
+                return requestReturn;
+            }
+            else
+            {
+                throw new Exception("Request Return Code : " + result.StatusCode);
+
+            }
+        }
+
 
         public T GetRequest<T>(string url)
         {

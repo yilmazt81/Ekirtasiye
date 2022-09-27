@@ -38,12 +38,15 @@ namespace ETicaretWinApp
             {
                 price = price + 20;
             }*/
+
+            var profit = ApplicationSettingHelper.ReadValue("Trendyol", "MinimumProfit", "15");
+
             var updateProduct = ideaCatalog.Select(s => new UpdatePriceAndInventor()
             {
                 barcode = s.Barcode,
                 quantity = (s.Status ? s.StockAmount : 0),
-                listPrice = float.Parse(s.MimimumPrice) * (float)1.16,
-                salePrice = float.Parse(s.MimimumPrice) * (float)1.15
+                listPrice = float.Parse(s.MimimumPrice(profit)) * (float)1.16,
+                salePrice = float.Parse(s.MimimumPrice(profit)) * (float)1.15
             }).ToArray();
 
             /*
@@ -76,13 +79,14 @@ namespace ETicaretWinApp
 
         public static string CloseProductAccepted(IdeaCatalog[] ideaCatalog)
         {
+            var profit = ApplicationSettingHelper.ReadValue("Trendyol", "MinimumProfit", "15");
 
             var updateProduct = ideaCatalog.Select(s => new UpdatePriceAndInventor()
             {
                 barcode = s.Barcode,
                 quantity = 0,
-                listPrice = float.Parse(s.MimimumPrice) * (float)1.16,
-                salePrice = float.Parse(s.MimimumPrice) * (float)1.15
+                listPrice = float.Parse(s.MimimumPrice(profit)) * (float)1.16,
+                salePrice = float.Parse(s.MimimumPrice(profit)) * (float)1.15
             }).ToArray();
 
             var updatePrice = UpdatePriceAndEnvantor(updateProduct);
@@ -134,9 +138,10 @@ namespace ETicaretWinApp
                     return null;
 
                 }
+                var profit = ApplicationSettingHelper.ReadValue("Trendyol", "MinimumProfit", "15");
 
                 float price = 0;
-                price = float.Parse(ideaCatalog.MimimumPrice) * (float)1.15;
+                price = float.Parse(ideaCatalog.MimimumPrice(profit)) * (float)1.15;
 
 
                 var categoryAttributes = ApiHelper.GetTrendyolCategorieAttributes(productCategory.TrendyolCategoryId);

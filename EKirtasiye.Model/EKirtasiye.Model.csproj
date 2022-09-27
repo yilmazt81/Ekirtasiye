@@ -59,6 +59,7 @@
     <Compile Include="N11Category.cs" />
     <Compile Include="N11ExportTemplate.cs" />
     <Compile Include="ProductAttribute.cs" />
+    <Compile Include="ProductCategoryAttribute.cs" />
     <Compile Include="ProductWebSearchResult.cs" />
     <Compile Include="Request\DocumentFilterRequest.cs" />
     <Compile Include="IdeaCatalog.cs" />

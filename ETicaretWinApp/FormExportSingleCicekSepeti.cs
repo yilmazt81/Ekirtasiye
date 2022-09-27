@@ -80,14 +80,16 @@ namespace ETicaretWinApp
                 if (attributedefaultValue != null)
                 {
                     uTrendyol.AttributeValue = attributedefaultValue.AttributeValue.ToString();
-                }else if (trendyolAttribute.Name == "Renk")
+                }
+                else if (trendyolAttribute.Name == "Renk")
                 {
                     var color = trendyolAttribute.AttributeValues.FirstOrDefault(s => s.AttributeText == "Çok Renkli");
                     if (color != null)
                     {
                         uTrendyol.AttributeValue = color.AttributeValue;
                     }
-                }else if (trendyolAttribute.Name == "Marka")
+                }
+                else if (trendyolAttribute.Name == "Marka")
                 {
                     var marka = trendyolAttribute.AttributeValues.FirstOrDefault(s => s.AttributeText == ideaCatalog.Brand);
                     if (marka != null)
@@ -96,20 +98,23 @@ namespace ETicaretWinApp
                     }
                 }
             }
-           
+
             this.fLayoutPanelAttribute.Controls.Add(uTrendyol);
             uCicekSepetiAttributes.Add(uTrendyol);
         }
 
-        public IdeaCatalog SelectedProduct {
-            set {
+        public IdeaCatalog SelectedProduct
+        {
+            set
+            {
                 ideaCatalog = value;
 
                 textBoxProductName.Text = HelperXmlRead.ConvertHtmlCodesToTurkish(ideaCatalog.Label);
 
+                var profit = ApplicationSettingHelper.ReadValue("CicekSepeti", "MinimumProfit", "15");
 
                 textBoxWebPrice.Text = ideaCatalog.WebPrice;
-                textBoxMimPrice.Text = ideaCatalog.MimimumPrice;
+                textBoxMimPrice.Text = ideaCatalog.MimimumPrice(profit);
                 textBoxBarkod.Text = ideaCatalog.Barcode;
 
 
@@ -174,7 +179,8 @@ namespace ETicaretWinApp
                 }
 
             }
-            get {
+            get
+            {
                 if (ideaCatalog == null)
                 {
                     ideaCatalog = new IdeaCatalog();
@@ -195,12 +201,17 @@ namespace ETicaretWinApp
         private void MenuItemSaveExport_Click(object sender, EventArgs e)
         {
             var textList = htmlTextboxDescription.PlainText;
-            foreach (var yasak in yasakKelimeler)
+            if (textList != null)
             {
-                if (textList.Contains(yasak))
+
+
+                foreach (var yasak in yasakKelimeler)
                 {
-                    MessageBox.Show(yasak + " Kelimesi yasaklı", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
+                    if (textList.Contains(yasak))
+                    {
+                        MessageBox.Show(yasak + " Kelimesi yasaklı", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
             }
             ideaCatalog.AddAttribute("CicekSepetiCategory", categoryView.SelectedCategory.Id.ToString());
@@ -248,13 +259,13 @@ namespace ETicaretWinApp
                 // ClickDescriptionMoreClick();
 
                 var selectedProduct = GoogleSearchHtmlExtractor.GetSelectedProduct(webBrowserProduct.Document.Body.InnerHtml);
-                if (selectedProduct.ProductImages == null)
+                /*if (selectedProduct.ProductImages == null)
                     return;
-
+                
                 ideaCatalog.Picture1Path = "";
                 ideaCatalog.Picture2Path = "";
                 ideaCatalog.Picture3Path = "";
-                ideaCatalog.Picture4Path = "";
+                ideaCatalog.Picture4Path = "";*/
 
                 if (!string.IsNullOrEmpty(selectedProduct.Description))
                 {
@@ -262,7 +273,7 @@ namespace ETicaretWinApp
                 }
 
                 textBoxWebPrice.Text = selectedProduct.ProductPrice;
-                uProductPictures.ClearImages();
+                /*uProductPictures.ClearImages();
                 int counter = 1;
                 foreach (var oneImage in selectedProduct.ProductImages.Take(4))
                 {
@@ -281,7 +292,7 @@ namespace ETicaretWinApp
 
                     counter++;
 
-                }
+                }*/
             }
             catch (Exception ex)
             {

@@ -256,7 +256,7 @@ namespace ETicaretWinApp
             document.LoadHtml(fullPageHtml);
 
             var selectedDiv = document.DocumentNode.SelectNodes("//div").Where(s => s.Attributes.Contains("class") && (s.Attributes["class"].Value.Contains("sh-dp__sc"))).ToArray();
-            var productDescription = document.DocumentNode.SelectNodes("//span").Where(s => s.Attributes.Contains("class") && s.Attributes["class"].Value.Contains("full-txt")).ToArray();
+            var productDescription = document.DocumentNode.SelectNodes("//span").Where(s => s.Attributes.Contains("class") && s.Attributes["class"].Value.Contains("content")).ToArray();
             if (selectedDiv.Length != 0)
             {
                 var currentDiv = selectedDiv.FirstOrDefault();
@@ -313,7 +313,7 @@ namespace ETicaretWinApp
                      }
                  }
                  */
-                webPagePRoductSelected.Description = productDescription.Length == 0 ? "" : HelperXmlRead.ConvertHtmlCodesToTurkish(productDescription[0].InnerHtml);
+                webPagePRoductSelected.Description = productDescription.Length == 0 ? "" : HelperXmlRead.ConvertHtmlCodesToTurkish(productDescription[1].InnerHtml);
 
                 var divPrice = GetElementByName(currentDiv, "div", " _-dp _-do");
                 if (divPrice != null)

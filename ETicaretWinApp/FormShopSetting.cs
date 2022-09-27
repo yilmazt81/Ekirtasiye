@@ -25,22 +25,31 @@ namespace ETicaretWinApp
             textBoxHBMerchandId.Text = ApplicationSettingHelper.ReadValue("HepsiBurada", "HBMerchandId");
             textBoxHBPassword.Text = ApplicationSettingHelper.ReadValue("HepsiBurada", "HBPassword");
             textBoxHBUserName.Text = ApplicationSettingHelper.ReadValue("HepsiBurada", "HBUserName");
+            numDownHepsiMinProfit.Value= int.Parse(ApplicationSettingHelper.ReadValue("HepsiBurada", "MinimumProfit", "10"));
+
             textBoxN11AppKey.Text = ApplicationSettingHelper.ReadValue("N11", "N11AppKey");
             textBoxN11SecretKey.Text = ApplicationSettingHelper.ReadValue("N11", "N11SecretKey");
+            numUpDownN11Profit.Value =int.Parse(ApplicationSettingHelper.ReadValue("N11", "MinimumProfit", "10"));
 
             textBoxTyEndPoint.Text = ApplicationSettingHelper.ReadValue("Trendyol", "EndPoint");
             textBoxTyPassword.Text = ApplicationSettingHelper.ReadValue("Trendyol", "Password");
             textBoxTySupplierId.Text = ApplicationSettingHelper.ReadValue("Trendyol", "SupplierId");
             textBoxTyUserName.Text = ApplicationSettingHelper.ReadValue("Trendyol", "UserName");
+            numUpDownTrendyolMinProfit.Value = int.Parse(ApplicationSettingHelper.ReadValue("Trendyol", "MinimumProfit", "10"));
+
 
             checkBoxUseTrend.Checked = bool.Parse(ApplicationSettingHelper.ReadValue("Trendyol", "UseTrend", "false"));
             checkBoxUseN11.Checked = bool.Parse(ApplicationSettingHelper.ReadValue("N11", "UseN11", "false"));
             checkBoxUseHb.Checked = bool.Parse(ApplicationSettingHelper.ReadValue("HepsiBurada", "HepsiBurada", "false"));
             checkBoxUseCicekSepeti.Checked = bool.Parse(ApplicationSettingHelper.ReadValue("CicekSepeti", "UseCicekSepeti", "false"));
+            numUpDownMinCicekProfit.Value = int.Parse(ApplicationSettingHelper.ReadValue("CicekSepeti", "MinimumProfit", "10"));
 
             textBoxCicekSepetiSupplierId.Text = ApplicationSettingHelper.ReadValue("CicekSepeti", "SupplierId");
             textBoxCicekSepetiApiKey.Text = ApplicationSettingHelper.ReadValue("CicekSepeti", "ApiKey");
             textBoxCicekSepetiUrl.Text = ApplicationSettingHelper.ReadValue("CicekSepeti", "EndPoint");
+
+            numUpDownN11Magazam.Value= int.Parse(ApplicationSettingHelper.ReadValue("N11Magazam", "MinimumProfit", "10"));
+   
 
 
             buttonTrendyolRefresh_Click(null, null);
@@ -88,8 +97,12 @@ namespace ETicaretWinApp
             ApplicationSettingHelper.AddValue("CicekSepeti", "SupplierId", textBoxCicekSepetiSupplierId.Text);
             ApplicationSettingHelper.AddValue("CicekSepeti", "ApiKey", textBoxCicekSepetiApiKey.Text);
             ApplicationSettingHelper.AddValue("CicekSepeti", "EndPoint", textBoxCicekSepetiUrl.Text);
+            ApplicationSettingHelper.AddValue("N11", "MinimumProfit", numUpDownN11Profit.Value.ToString());
+            ApplicationSettingHelper.AddValue("CicekSepeti", "MinimumProfit", numUpDownMinCicekProfit.Value.ToString());
+            ApplicationSettingHelper.AddValue("Trendyol", "MinimumProfit", numUpDownTrendyolMinProfit.Value.ToString());
 
-
+            ApplicationSettingHelper.AddValue("HepsiBurada", "MinimumProfit", numDownHepsiMinProfit.Value.ToString());
+            ApplicationSettingHelper.AddValue("N11Magazam", "MinimumProfit", numUpDownN11Magazam.Value.ToString());
 
             DialogResult = DialogResult.OK;
         }

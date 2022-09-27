@@ -83,10 +83,14 @@ namespace EKirtasiye.DBLayer
                         query += $" ( StockCode  like N'%{documentFilter.StokCode}%'  or Barcode  like N'%{documentFilter.StokCode}%' or Label  like N'%{documentFilter.StokCode}%') and ";
                     }
 
-                    if (documentFilter.ProductStatus != "Tümü")
+                    if (!string.IsNullOrEmpty(documentFilter.ProductStatus))
                     {
-                        var status = (documentFilter.ProductStatus == "Aktif" ? "1" : "0");
-                        query += $" Status ={status} and ";
+
+                        if (documentFilter.ProductStatus != "Tümü")
+                        {
+                            var status = (documentFilter.ProductStatus == "Aktif" ? "1" : "0");
+                            query += $" Status ={status} and ";
+                        }
                     }
 
                     if (!string.IsNullOrEmpty(documentFilter.N11Export))
@@ -139,6 +143,16 @@ namespace EKirtasiye.DBLayer
                             var status = (documentFilter.HepsiBuradaExport == "Evet" ? "1" : "0");
                             query += $" ExportHepsiBurada ={status} and ";
                         }
+                    }
+
+                    if (!string.IsNullOrEmpty(documentFilter.ExportN11Magazam))
+                    {
+                        if (documentFilter.ExportN11Magazam != "Tümü")
+                        {
+                            var status = (documentFilter.ExportN11Magazam == "Evet" ? "1" : "0");
+                            query += $" isnull(ExportN11Magazam,0) ={status} and ";
+                        }
+
                     }
 
 
@@ -287,11 +301,11 @@ namespace EKirtasiye.DBLayer
 
             return dtAttribute.Rows.Cast<DataRow>().Select(s => new ShopCreateImage()
             {
-                 
+
                 ProductId = Convert.ToInt32(s["ProductId"]),
-                Id=Convert.ToInt32(s["Id"]),
-                PictureRemotePath=s["PictureRemotePath"].ToString(),
-                ShopName=s["ShopName"].ToString()
+                Id = Convert.ToInt32(s["Id"]),
+                PictureRemotePath = s["PictureRemotePath"].ToString(),
+                ShopName = s["ShopName"].ToString()
             }).ToArray();
         }
 
@@ -733,7 +747,7 @@ namespace EKirtasiye.DBLayer
                     scom.CommandText = "delete from IdeaCatalog_Barcode where IdeaCatalogId=" + ideaCatalog.Id;
                     scom.ExecuteNonQuery();
                 }
-                if (ideaCatalog.ProductAttributes!=null)
+                if (ideaCatalog.ProductAttributes != null)
                 {
                     foreach (var productAttribute in ideaCatalog.ProductAttributes)
                     {
@@ -746,7 +760,7 @@ namespace EKirtasiye.DBLayer
                     });
                     }
                 }
-               
+
                 using (SqlCommand scom = scon.CreateCommand())
                 {
                     scom.CommandText = "delete from IdeaCatalog_Price where IdeaCatalogId=" + ideaCatalog.Id;

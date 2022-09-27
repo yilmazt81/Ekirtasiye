@@ -29,6 +29,8 @@ namespace EKirtasiye.Model
 
         public string ProductStatus { get; set; }
 
+        public string ExportN11Magazam { get; set; }
+
         public string N11Export { get; set; } 
         public string HepsiBuradaExport { get; set; }
 

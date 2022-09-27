@@ -25,7 +25,7 @@ namespace EKirtasiye.DBLayer
 
         private static ProductCategory ConvertCategory(DataRow reader)
         {
-            return new ProductCategory()
+            var pc = new ProductCategory()
             {
                 CategoryName = reader["CategoryName"].ToString(),
                 CategoryUrl = reader["CategoryUrl"].ToString(),
@@ -40,8 +40,11 @@ namespace EKirtasiye.DBLayer
                 TrendyolCategoryId = reader["TrendyolCategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["TrendyolCategoryId"]),
                 TrendyolCategoryName = reader["TrendyolCategoryName"].ToString(),
                 CicekSepetiCategoryId = reader["CicekSepetiCategoryId"] == DBNull.Value ? 0 : Convert.ToInt32(reader["CicekSepetiCategoryId"]),
-                CicekSepetiCategoryName=reader["CicekSepetiCategoryName"].ToString()
+                CicekSepetiCategoryName = reader["CicekSepetiCategoryName"].ToString(),
+                Attributes = GetProductCategoryAttributes(Convert.ToInt32(reader["Id"])),
             };
+            return pc;
+
         }
         public static List<ProductCategory> GetProductCategoriesAll()
         {
@@ -52,6 +55,24 @@ namespace EKirtasiye.DBLayer
 
 
         }
+
+        public static List<ProductCategoryAttribute> GetProductCategoryAttributes(int categoryId)
+        {
+            var dtTable = DBHelper.GetQuery($"SELECT * FROM  ProductCategoryAttribute where CategoryId={categoryId} ");
+
+            if (dtTable.Rows.Count != 0)
+            {
+                System.Diagnostics.Debug.WriteLine("sss");
+            }
+            return dtTable.Rows.Cast<DataRow>().Select(s => new ProductCategoryAttribute()
+            {
+                Id = Convert.ToInt32(s["Id"]),
+                CategoryId = Convert.ToInt32(s["CategoryId"]),
+                AttributeName = s["AttributeName"].ToString(),
+                AttributeValue = s["AttributeValue"].ToString()
+            }).ToList();
+        }
+
         public static ProductCategory GetProductCategori(int id)
         {
             var dtTable = DBHelper.GetQuery("SELECT * FROM dbo.ProductCategory where Id={id}");

@@ -2,8 +2,8 @@ D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\bin\Rel
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\bin\Release\EKirtasiye.DBLayer.pdb
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\bin\Release\EKirtasiye.Model.dll
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\bin\Release\EKirtasiye.Model.pdb
-D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Release\EKirtasiye.DBLayer.csprojAssemblyReference.cache
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Release\EKirtasiye.DBLayer.csproj.CoreCompileInputs.cache
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Release\EKirtasiye.DBLayer.csproj.CopyComplete
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Release\EKirtasiye.DBLayer.dll
 D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.DBLayer\obj\Release\EKirtasiye.DBLayer.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\EKirtasiye.DBLayer\obj\Release\EKirtasiye.DBLayer.csproj.AssemblyReference.cache

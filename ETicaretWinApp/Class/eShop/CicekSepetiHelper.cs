@@ -23,8 +23,8 @@ namespace ETicaretWinApp
                 ProductId = productId,
                 ShopName = "CicekSepeti"
             };
-            //shopCreateImage.PictureRemotePath = picturePath;
-
+            shopCreateImage.PictureRemotePath = picturePath;
+            /*
             string tmpPath = Path.Combine(Application.StartupPath, $@"ImageTemp\{productId}_{Path.GetFileName(picturePath)}");
 
             string ftpUploadPath = string.Empty;
@@ -89,6 +89,7 @@ namespace ETicaretWinApp
             FTPHelper.UploadFile(localTempFile, @"/httpdocs/CicekSepeti/" + Path.GetFileName(localTempFile));
             shopCreateImage.PictureRemotePath = "https://www.turkyilmazozkan.xyz/CicekSepeti/" + Path.GetFileName(localTempFile);
             File.Delete(localTempFile);
+            */
 
             return shopCreateImage;
 
@@ -203,8 +204,7 @@ namespace ETicaretWinApp
                     productImages = shopImageList.Select(s => s.PictureRemotePath).ToList();
                 }
 
-                float price = 0;
-                price = float.Parse(ideaCatalog.MimimumPrice) * (float)1.15;
+                float price = GetPRice(ideaCatalog);
 
                 var listPrice = price * 1.1;
                 CicekSepetiProduct cicekSepetiProduct = new CicekSepetiProduct()
@@ -262,6 +262,16 @@ namespace ETicaretWinApp
                 throw ex;
             }
 
+        }
+
+        private static float GetPRice(IdeaCatalog ideaCatalog)
+        {
+            float price = 0;
+            var profit = ApplicationSettingHelper.ReadValue("CicekSepeti", "MinimumProfit", "15");
+
+            price = float.Parse(ideaCatalog.MimimumPrice(profit)) * (float)1.15;
+
+            return price + 10;
         }
 
         public static void SaveCicekSepetiAttribute(int cicekSepeticategoryId)
@@ -324,17 +334,34 @@ namespace ETicaretWinApp
             {
                 stockCode = s.StockCode,
                 listPrice = (calculateListPrice(s)),
-                salesPrice = float.Parse(s.MimimumPrice) * (float)1.18,
+                salesPrice = GetPRice(s),
                 StockQuantity = (!s.Status ? 0 : s.StockAmount)
             }).ToArray();
-            var returnC = productHelper.UpdateProductStockAndPrice(cicekSepetiUpdateStock);
-
             float calculateListPrice(IdeaCatalog s)
             {
-                return (float)((float.Parse(s.MimimumPrice) * (float)1.18) * 1.1);
+                var p = GetPRice(s);
+                return ((float)((float)p * 1.1));
             }
+            /*
+            List<string> lFiles = new List<string>();
+            foreach (UpdateStockPriceItem oneItem in cicekSepetiUpdateStock.items)
+            {
+                var stockCode = ideaCatalogs.FirstOrDefault(s => s.StockCode == oneItem.stockCode);
+                var siteCode = stockCode.ProductAttributes.FirstOrDefault(s => s.AttributeName == "CicekSepetiSiteCode");
+                string oneLine = (siteCode == null ? "" : siteCode.AttributeValue) + ";" + oneItem.stockCode + ";" + oneItem.listPrice.ToString() + ";" + oneItem.salesPrice.ToString() + ";";
+                lFiles.Add(oneLine);
+            }*/
+
+
+            //File.WriteAllLines(@"D:\update.txt", lFiles.ToArray());
+
+
+            var returnC = productHelper.UpdateProductStockAndPrice(cicekSepetiUpdateStock);
+
+
 
             return returnC.batchId;
+
         }
     }
 }

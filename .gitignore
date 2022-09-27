@@ -16,6 +16,8 @@ bin-release/
 *.dll
 *.jpg
 *.pdb
+*.mdf
+*.ldf
 
  
 

@@ -1,6 +1,5 @@
-D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\bin\Release\EKirtasiye.Model.dll
-D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\bin\Release\EKirtasiye.Model.pdb
-D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\obj\Release\EKirtasiye.Model.csproj.CoreCompileInputs.cache
-D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\obj\Release\EKirtasiye.Model.dll
-D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\obj\Release\EKirtasiye.Model.pdb
-D:\Personel\PersonelProject\PanelKirtasiye\EKirtasiye\EKirtasiye.Model\obj\Release\EKirtasiye.Model.csprojAssemblyReference.cache
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\EKirtasiye.Model\bin\Release\EKirtasiye.Model.dll
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\EKirtasiye.Model\bin\Release\EKirtasiye.Model.pdb
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\EKirtasiye.Model\obj\Release\EKirtasiye.Model.csproj.CoreCompileInputs.cache
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\EKirtasiye.Model\obj\Release\EKirtasiye.Model.dll
+D:\Personel\PersonelProject\PanelKirtasiye\Ekirtasiye\EKirtasiye.Model\obj\Release\EKirtasiye.Model.pdb

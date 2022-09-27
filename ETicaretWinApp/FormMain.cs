@@ -429,17 +429,12 @@ namespace ETicaretWinApp
 
         private void CreateUpdateExport()
         {
+            //CheckBatchStatusList();
             var exportTargets = ApiHelper.GetIdeaExportTargets();
-
-            FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
-            if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
-                return;
 
             foreach (var exportTarget in exportTargets)
             {
-                var updateExport = ApiHelper.GetUpdatedExportCatalog(exportTarget.Id);
-                if (updateExport.Length == 0)
-                    continue;
+
                 var updateList = new UpdateProductStatusRequest()
                 {
                     ProductIdList = new List<IdeaCatalog>(),
@@ -448,6 +443,15 @@ namespace ETicaretWinApp
 
                 if (exportTarget.ExcelExport)
                 {
+
+
+                    var updateExport = ApiHelper.GetUpdatedExportCatalog(exportTarget.Id);
+                    if (updateExport.Length == 0)
+                        continue;
+                    FolderBrowserDialog folderBrowserDialog = new FolderBrowserDialog();
+                    if (folderBrowserDialog.ShowDialog() != DialogResult.OK)
+                        return;
+
                     var files = Directory.GetFiles(folderBrowserDialog.SelectedPath, exportTarget.Name + "*.xls");
                     string saveFileName = Path.Combine(folderBrowserDialog.SelectedPath, exportTarget.Name + "_" + (files.Length + 1) + ".xls");
 
@@ -460,6 +464,9 @@ namespace ETicaretWinApp
                 {
                     if (bool.Parse(ApplicationSettingHelper.ReadValue("N11", "UseN11", "false")))
                     {
+                        var updateExport = ApiHelper.GetUpdatedExportCatalog(exportTarget.Id);
+                        if (updateExport.Length == 0)
+                            continue;
                         //N11 web servise gidecek
                         UpdateN11Product(updateExport, exportTarget.Id, updateList);
 
@@ -470,7 +477,9 @@ namespace ETicaretWinApp
                 {
                     if (bool.Parse(ApplicationSettingHelper.ReadValue("Trendyol", "UseTrend", "false")))
                     {
-
+                        var updateExport = ApiHelper.GetUpdatedExportCatalog(exportTarget.Id);
+                        if (updateExport.Length == 0)
+                            continue;
                         UpdateTrendYolProduct(updateExport, exportTarget.Id, updateList);
                         UpdateExportList(updateList, exportTarget);
                     }
@@ -479,11 +488,29 @@ namespace ETicaretWinApp
                 {
                     if (bool.Parse(ApplicationSettingHelper.ReadValue("CicekSepeti", "UseCicekSepeti", "false")))
                     {
+                        var updateExport = ApiHelper.GetUpdatedExportCatalog(exportTarget.Id);
+                        if (updateExport.Length == 0)
+                            continue;
                         UpdateCicekSepetiProduct(updateExport, exportTarget.Id, updateList);
-                        UpdateExportList(updateList, exportTarget);
+                        //UpdateExportList(updateList, exportTarget);
                     }
                 }
-            } 
+                else if (exportTarget.Name == "N11 Magazam")
+                {
+                    var updateExport = ApiHelper.GetUpdatedExportCatalog(exportTarget.Id);
+                    if (updateExport.Length == 0)
+                        continue;
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "csv File|*.csv";
+                    if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                        return;
+                    string saveFileName = saveFileDialog.FileName;
+
+
+                    CreateIdeaCsvFile(updateExport.ToArray(), exportTarget.Id, saveFileName, updateList);
+                    UpdateExportList(updateList, exportTarget);
+                }
+            }
 
         }
 
@@ -491,11 +518,34 @@ namespace ETicaretWinApp
         {
             var cicekSepetiCreateRequest = ApiHelper.CicekSepetiGetCreateRequestList();
 
-            foreach (var cicekSepeti in cicekSepetiCreateRequest.Where(s => string.IsNullOrEmpty(s.RequestStatus) || s.RequestStatus == "Processing" ||s.RequestStatus== "Pending"))
+            foreach (var cicekSepeti in cicekSepetiCreateRequest.Where(s => string.IsNullOrEmpty(s.RequestStatus) || s.RequestStatus == "Processing" || s.RequestStatus == "Pending"))
             {
                 try
                 {
                     var batchReturn = CicekSepetiHelper.GetBatchState(cicekSepeti.BatchRequest);
+                    if (batchReturn.items.Length == 0)
+                        continue;
+
+                    foreach (var product in batchReturn.items)
+                    {
+                        var filterR = ApiHelper.FilterCatalog(new DocumentFilterRequest()
+                        {
+                            StokCodeList = new string[] { product.data.stockCode },
+                            StokSource = "Ceren", 
+                        });
+                        if (filterR.Count==1)
+                        {
+                            var siteCode = product.data.siteCode;
+                            if (siteCode == null)
+                                continue;
+                            var ideaC = filterR[0];
+
+                            ideaC.AddAttribute("CicekSepetiSiteCode", siteCode.ToString());
+                            ApiHelper.InsertIdeaCatalog(ideaC);
+                        }
+
+                    }
+                    /*
                     if (batchReturn.items[0].status == "Failed")
                     {
                         if (cicekSepeti.RequestType == "Create")
@@ -508,8 +558,8 @@ namespace ETicaretWinApp
                                 ShopPrice = ""
                             });
                         }
-                    }
-
+                    }*/
+                    /*
                     cicekSepeti.RequestStatus = batchReturn.items[0].status;
                     cicekSepeti.ErrorMessages = "";
                     foreach (var failurereason in batchReturn.items[0].failureReasons)
@@ -517,7 +567,7 @@ namespace ETicaretWinApp
                         cicekSepeti.ErrorMessages += failurereason.message + "\n";
                     }
                     ApiHelper.SaveCicekSepetiCreateRequest(cicekSepeti);
-
+                    */
                 }
                 catch (Exception ex)
                 {
@@ -628,7 +678,9 @@ namespace ETicaretWinApp
                 }
                 else
                 {
-                    float price = float.Parse(product.MimimumPrice) * (float)1.15;
+                    var profit = ApplicationSettingHelper.ReadValue("N11", "MinimumProfit", "15");
+
+                    float price = float.Parse(product.MimimumPrice(profit)) * (float)1.15;
                     /*if (price > 150)
                     {
                         price = price + 20;
@@ -729,9 +781,10 @@ namespace ETicaretWinApp
                                 CreateCellWithValue(row, cellFormatting, ideaCatalog.RootProductStockCode);
                                 if (exportTargetId == 1)
                                 {
+                                    var profit = ApplicationSettingHelper.ReadValue("N11Magazam", "MinimumProfit", "15");
 
                                     CreateCellWithValue(row, cellFormatting, ideaCatalog.MarketPrice);
-                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.MimimumPrice);
+                                    CreateCellWithValue(row, cellFormatting, ideaCatalog.MimimumPrice(profit));
                                 }
                                 else
                                 {
@@ -769,6 +822,122 @@ namespace ETicaretWinApp
 
         }
 
+        private void CreateIdeaCsvFile(IdeaCatalog[] ideaCatalogs, int exportTargetId, string saveFileName, UpdateProductStatusRequest updateProductStatus)
+        {
+
+
+
+            var allCategory = ApiHelper.GetAllProductCategories();
+
+            var delimiter = ",";
+            var columnHeaders = $"wscode{delimiter}title{delimiter}shortdescription{delimiter}metatitle{delimiter}metakeywords{delimiter}metadescription{delimiter}content{delimiter}barcode{delimiter}sku" +
+                $"{delimiter}stocktype{delimiter}stock{delimiter}height{delimiter}weight{delimiter}width{delimiter}depth{delimiter}cbm{delimiter}listprice{delimiter}discounted{delimiter}currency{delimiter}vat{delimiter}categorycode{delimiter}brandcode" +
+                $"{delimiter}variantwscode{delimiter}variant1name{delimiter}variant1value{delimiter}variant2name" +
+                $"{delimiter}variant2value{delimiter}variantstock{delimiter}variantprice{delimiter}variantdiscounted" +
+                $"{delimiter}variantactive{delimiter}variantbarcode{delimiter}active{delimiter}" +
+                $"recommended{delimiter}promotion{delimiter}images";
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.AppendLine(columnHeaders);
+
+            var brandListText = File.ReadAllLines(Path.Combine(Application.StartupPath, @"Files\N11magazamMarka.csv"), Encoding.UTF8);
+            var profit = ApplicationSettingHelper.ReadValue("N11Magazam", "MinimumProfit", "15");
+
+            var brandList = brandListText.Select(s => new N11MagazamBrand(s));
+            foreach (var ideaCatalog in ideaCatalogs)
+            {
+                var productPrice = (float.Parse(ideaCatalog.MarketPrice) * float.Parse("1,"+ profit));
+                var productPriceDisc = (float.Parse(ideaCatalog.MarketPrice) * float.Parse("1,"+ profit));
+
+                ProductCategory productCategory = null;
+
+                if (ideaCatalog.CategoryId != 0)
+                {
+                    productCategory = allCategory.FirstOrDefault(s => s.Id == ideaCatalog.CategoryId);
+
+                }
+                if (ideaCatalog.SubCategoryId != 0)
+                {
+                    productCategory = allCategory.FirstOrDefault(s => s.Id == ideaCatalog.SubCategoryId);
+                }
+
+                if (productCategory == null)
+                {
+                    continue;
+                }
+
+                var magazamCategoryId = productCategory.Attributes.FirstOrDefault(s => s.AttributeName == "N11MagazamId");
+                if (magazamCategoryId == null)
+                    continue;
+
+                string categorycode = magazamCategoryId.AttributeValue;
+                var brand = brandList.FirstOrDefault(s => s.Name == ideaCatalog.Brand);
+                string brandcode = (brand == null ? string.Empty : brand.Code);
+
+                string images = "";
+                if (!string.IsNullOrEmpty(ideaCatalog.Picture1Path))
+                {
+                    images = ideaCatalog.Picture1Path;
+                }
+                if (!string.IsNullOrEmpty(ideaCatalog.Picture2Path))
+                {
+                    images += "||" + ideaCatalog.Picture2Path;
+                }
+
+                if (!string.IsNullOrEmpty(ideaCatalog.Picture3Path))
+                {
+                    images += "||" + ideaCatalog.Picture3Path;
+                }
+                if (!string.IsNullOrEmpty(ideaCatalog.Picture4Path))
+                {
+                    images += "||" + ideaCatalog.Picture4Path;
+                }
+
+                var lineStr = ideaCatalog.StockCode + delimiter;
+                lineStr += ideaCatalog.Title.Replace(",", " ") + delimiter;
+                lineStr += "" + delimiter;//shortdescription
+                lineStr += "" + delimiter;//metatitle
+                lineStr += "" + delimiter;//metakeywords
+                lineStr += "" + delimiter;//metadescription
+                lineStr += "\"" + ideaCatalog.Details.Replace(",", "").Replace('\n', ' ') + "\"" + delimiter;//content
+                lineStr += ideaCatalog.Barcode + delimiter;//barkod
+                lineStr += ideaCatalog.StockCode + delimiter;//sku
+                lineStr += "1" + delimiter;//stocktype //1 takipli 0 takisiz
+                lineStr += ideaCatalog.StockAmount.ToString() + delimiter;//stock  
+                lineStr += "0" + delimiter;//height  
+                lineStr += "0" + delimiter;//weight  
+                lineStr += "0" + delimiter;//width  
+                lineStr += "0" + delimiter;//depth  
+                lineStr += "0" + delimiter;//cbm  //desi
+                lineStr += productPrice.ToString().Replace(',', '.') + delimiter;//listprice
+                lineStr += productPriceDisc.ToString().Replace(',', '.') + delimiter;//discounted
+                lineStr += "TRY" + delimiter;//currency
+                lineStr += "KDV %18" + delimiter;//vat
+                lineStr += categorycode + delimiter;//vat
+                lineStr += brandcode + delimiter;//brandcode
+                lineStr += "" + delimiter;//variantwscode
+                lineStr += "" + delimiter;//variant1name
+                lineStr += "" + delimiter;//variant1value
+                lineStr += "" + delimiter;//variant2name
+                lineStr += "" + delimiter;//variant2value
+                lineStr += "" + delimiter;//variantstock
+                lineStr += "" + delimiter;//variantprice
+                lineStr += "" + delimiter;//variantdiscounted
+                lineStr += "" + delimiter;//variantactive
+                lineStr += "" + delimiter;//variantbarcode
+                lineStr += (ideaCatalog.Status ? "1" : "0") + delimiter;//active
+
+                lineStr += "0" + delimiter;//recommended
+                lineStr += "0" + delimiter;//promotion
+                lineStr += images;
+                stringBuilder.AppendLine(lineStr);
+                updateProductStatus.ProductIdList.Add(ideaCatalog);
+            }
+
+            File.WriteAllText(saveFileName, stringBuilder.ToString(), Encoding.UTF8);
+
+        }
+
         private void MenuItemIdeaExport_Click(object sender, EventArgs e)
         {
 
@@ -798,10 +967,7 @@ namespace ETicaretWinApp
                     ideaCatalogs = catalog;
                 }
 
-
-
-                //FileInfo fileInfo = new FileInfo(Path.Combine(Application.StartupPath, "STANDART_KATALOG.xltx"));
-                //string sourceFile = Path.Combine(Application.StartupPath, "STANDART_KATALOG.xltx");
+                 
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                 saveFileDialog.Filter = "xls File|*.xls";
                 if (saveFileDialog.ShowDialog() != DialogResult.OK)
@@ -838,18 +1004,7 @@ namespace ETicaretWinApp
 
                 UpdateExportList(updateList, formSelectProductSource.ExportTarget);
 
-                /*
-                ApiHelper.UpdateProductWebExportState(updatePriceListCheck);
 
-                if (!ApiHelper.UpdateProductWebExportState(updateList))
-                {
-                    MessageBox.Show("Idea Excel Dokümü Sırasında hata oluştu", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                else
-                {
-                    MessageBox.Show($"Veriler Export Edildi {updateList.ProductIdList.Count} Adet Ürün ", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-                */
             }
             catch (Exception ex)
             {
@@ -1037,8 +1192,8 @@ namespace ETicaretWinApp
         {
             try
             {
-                //CreateUpdateExport();
-                CheckBatchStatusList();
+                CreateUpdateExport();
+                // CheckBatchStatusList();
             }
             catch (Exception exception)
             {
@@ -1219,6 +1374,69 @@ namespace ETicaretWinApp
                 formExportSingleCicekSepeti.OnSaveAndNextDocument += ProductEdit_OnSaveAndNextDocument;
                 formExportSingleCicekSepeti.Show();
             }
+        }
+
+        private void MenuItemExportN11Magazam_Click(object sender, EventArgs e)
+        {
+            FormSelectProductSource formSelectProductSource = new FormSelectProductSource();
+            if (formSelectProductSource.ShowDialog() == DialogResult.Cancel)
+                return;
+
+            var catalog = ApiHelper.FilterCatalog(formSelectProductSource.FilterRequest);
+
+            if (catalog.Count == 0)
+            {
+                MessageBox.Show("Export edilecek kayit bulunamadı", "Bilgi", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+            List<IdeaCatalog> ideaCatalogs = new List<IdeaCatalog>();
+            if (!formSelectProductSource.WorkAllRecord)
+            {
+                ideaCatalogs = catalog.Where(s => !string.IsNullOrEmpty(s.Picture1Path) && s.MainCategoryId > 0).ToList();
+            }
+            else
+            {
+                ideaCatalogs = catalog;
+            }
+
+
+
+            //FileInfo fileInfo = new FileInfo(Path.Combine(Application.StartupPath, "STANDART_KATALOG.xltx"));
+            //string sourceFile = Path.Combine(Application.StartupPath, "STANDART_KATALOG.xltx");
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "csv File|*.csv";
+            if (saveFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+            string saveFileName = saveFileDialog.FileName;
+            var updateList = new UpdateProductStatusRequest()
+            {
+                ProductIdList = new List<IdeaCatalog>(),
+                WebStatus = "Export Edildi"
+            };
+            var updatePriceListCheck = new UpdateProductStatusRequest()
+            {
+                ProductIdList = new List<IdeaCatalog>(),
+                WebStatus = "Fiyat Kontrol"
+            };
+
+            //
+
+            CreateIdeaCsvFile(ideaCatalogs.ToArray(), formSelectProductSource.ExportTarget.Id, saveFileName, updateList);
+
+
+            foreach (var ideaCatalog in updateList.ProductIdList)
+            {
+                var updateDB = ApiHelper.UpdateProductShopId(new EKirtasiye.Model.UpdateProductShopRequest()
+                {
+                    Exported = true,
+                    Id = ideaCatalog.Id,
+                    ShopName = "N11Magazam",
+                    ShopPrice = ""
+                });
+
+            }
+
+            UpdateExportList(updateList, formSelectProductSource.ExportTarget);
         }
     }
 }

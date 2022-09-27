@@ -86,7 +86,9 @@ namespace ETicaretWinApp
                     });
                 }
                 float price = 0;
-                price = float.Parse(ideaCatalog.MimimumPrice) * (float)1.15;
+                var profit = ApplicationSettingHelper.ReadValue("N11", "MinimumProfit", "15");
+
+                price = float.Parse(ideaCatalog.MimimumPrice(profit)) * (float)1.15;
                 if (price > 150)
                 {
                     price = price + 20;

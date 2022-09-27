@@ -38,6 +38,7 @@ namespace ETicaretWinApp
             textBoxProductSource.ReadOnly = false;
             checkBoxStatus.Checked = true;
             comboBoxBrand.DataSource = ApiHelper.GetProductBrands();
+          
 
         }
 
@@ -53,11 +54,12 @@ namespace ETicaretWinApp
                 uCategoryViewProduct.MainCategory = (ideaCatalog.MainCategoryId != 0 ? productCategory.FirstOrDefault(s => s.Id == ideaCatalog.MainCategoryId) : null);
                 uCategoryViewProduct.Category = (ideaCatalog.CategoryId != 0 ? productCategory.FirstOrDefault(s => s.Id == ideaCatalog.CategoryId) : null);
                 uCategoryViewProduct.SubCategory = (ideaCatalog.SubCategoryId != 0 ? productCategory.FirstOrDefault(s => s.Id == ideaCatalog.SubCategoryId) : null);
+                var profit = ApplicationSettingHelper.ReadValue("N11Magazam", "MinimumProfit", "15");
 
                 textBoxProductSource.Text = ideaCatalog.ProductSource;
                 textBoxStokCode.Text = ideaCatalog.StockCode;
                 textBoxWebPrice.Text = ideaCatalog.WebPrice;
-                textBoxMimPrice.Text = ideaCatalog.MimimumPrice;
+                textBoxMimPrice.Text = ideaCatalog.MimimumPrice(profit);
                 textBoxMarketPrice.Text = ideaCatalog.MarketPrice;
                 checkBoxStatus.Checked = ideaCatalog.Status;
                 textBoxBarkod.Text = ideaCatalog.Barcode;
@@ -224,9 +226,9 @@ namespace ETicaretWinApp
                 }
                 if (webBrowserProduct.Document.Body == null)
                     return;
-                var productLinks = GoogleSearchHtmlExtractor.GetProductLinks(webBrowserProduct.Document.Body.InnerHtml, ideaCatalog.Title).OrderBy(s => s.PageOrder).ToArray();
+                //var productLinks = GoogleSearchHtmlExtractor.GetProductLinks(webBrowserProduct.Document.Body.InnerHtml, ideaCatalog.Title).OrderBy(s => s.PageOrder).ToArray();
                 //gridControlWebSource.DataSource = productLinks;
-
+                //webBrowserProduct.po
             }
             catch (Exception ex)
             {

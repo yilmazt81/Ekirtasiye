@@ -97,7 +97,7 @@ public class IdeaCatalog
         }
     }
 
-    public string ReadAttribute(string name, string defaultValue="")
+    public string ReadAttribute(string name, string defaultValue = "")
     {
         var attrib = ProductAttributes.FirstOrDefault(s => s.AttributeName == name);
 
@@ -108,36 +108,27 @@ public class IdeaCatalog
     public ShopCreateImage[] ShopCreateImages { get; set; }
 
 
-    public string MimimumPrice {
-        get {
-            try
-            {
-                float price = 0;
-                if (ProductSource == "Kadioglu")
-                {
+    public string MimimumPrice(string minimumProfit)
+    {
 
-                    price = ((float.Parse(MarketPrice) * (float)1.18) * float.Parse("1,15") * float.Parse("1," + this.Tax));
-                }
-                else
-                {
+        float price = 0;
 
-                    price = (float.Parse(MarketPrice) * float.Parse("1,15") * float.Parse("1," + this.Tax));
-                }
 
-                if (price > 150)
-                {
-                    price += 10;
-                }
-                return price.ToString();
-            }
-            catch (Exception)
-            {
-                return string.Empty;
-            }
+        price = ((float.Parse(MarketPrice) * (float)1.18) * float.Parse("1," + minimumProfit) * (float)1.18);
+
+
+        if (price > 150)
+        {
+            price += 20;
         }
+        return price.ToString();
+
     }
-    public string MimimumSellerPrice {
-        get {
+
+    public string MimimumSellerPrice
+    {
+        get
+        {
             try
             {
                 if (ProductSource == "Kadioglu")

@@ -26,14 +26,18 @@ namespace ETicaretWinApp
             comboBoxN11ExportTemplate.DataSource = ApiHelper.GetN11ExportTemplate();
         }
 
-        public string UpCategoryName {
-            set {
+        public string UpCategoryName
+        {
+            set
+            {
                 labelMainGroup.Text = value;
             }
         }
 
-        public ProductCategory ProductCategory {
-            get {
+        public ProductCategory ProductCategory
+        {
+            get
+            {
                 if (productCategory == null)
                 {
                     productCategory = new ProductCategory();
@@ -59,7 +63,8 @@ namespace ETicaretWinApp
 
                 return productCategory;
             }
-            set {
+            set
+            {
                 productCategory = value;
                 textBoxCategoryName.Text = productCategory.CategoryName;
                 textBoxHepsiBuradaCategory.Text = productCategory.HepsiBuradaCategoryName;
@@ -72,7 +77,20 @@ namespace ETicaretWinApp
 
 
                 textBoxCicekSepetiCategoryName.Text = productCategory.CicekSepetiCategoryName;
-                textBoxCicekSepetiCategoryName.Tag =  productCategory.CicekSepetiCategoryId;
+                textBoxCicekSepetiCategoryName.Tag = productCategory.CicekSepetiCategoryId;
+
+                foreach (var attribute in productCategory.Attributes)
+                {
+                    ListViewItem listViewItem = new ListViewItem()
+                    {
+                        Text = attribute.AttributeName,
+                        Tag = attribute,
+
+                    };
+                    listViewItem.SubItems.Add(attribute.AttributeValue);
+                    listViewAttributes.Items.Add(listViewItem);
+
+                }
 
 
             }

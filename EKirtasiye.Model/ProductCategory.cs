@@ -1,4 +1,5 @@
-﻿using System;
+﻿ 
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,7 +8,11 @@ using System.Threading.Tasks;
 
 public class ProductCategory
 {
+    public ProductCategory()
+    {
+        Attributes = new List<ProductCategoryAttribute>();
 
+    }
 
     public int Id { get; set; }
     public int UpId { get; set; }
@@ -32,7 +37,7 @@ public class ProductCategory
 
     public string CicekSepetiCategoryName { get; set; }
 
-
+    public List<ProductCategoryAttribute>  Attributes { get; set; }
 
     public override string ToString()
     {

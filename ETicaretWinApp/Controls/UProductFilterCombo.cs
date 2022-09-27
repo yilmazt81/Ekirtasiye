@@ -32,6 +32,8 @@ namespace ETicaretWinApp.Controls
                 comboBoxExportCicekSepeti.Text = "Tümü";
                 comboBoxPicture.Text = "Tümü";
 
+                comboBoxExportN11Magazam.Text = "Tümü";
+
             }
             catch (Exception ex)
             {
@@ -59,7 +61,8 @@ namespace ETicaretWinApp.Controls
                     IdeaExport = this.ExportIdea,
                     ExportTrendyol=comboBoxExportTrend.Text,
                     ExportCicekSepeti=comboBoxExportCicekSepeti.Text,
-                    HavePicture=comboBoxPicture.Text
+                    HavePicture=comboBoxPicture.Text,
+                    ExportN11Magazam=comboBoxExportN11Magazam.Text
                 };
                 return documentFilter;
             }
